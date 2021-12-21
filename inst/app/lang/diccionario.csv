@@ -1,0 +1,20 @@
+key;es;en
+idio;Idioma;Language
+data;Datos;Data
+subi;Subir;Upload
+carg;Cargar;Load
+espa;Español;Spanish
+rena;Renombrar;Rename
+tran;Transformar;Transform
+elim;Eliminar;Remove
+impu;Imputar;Impute
+selhead;Nombre de Variables;Variables names
+selrow;Nombre de Individuos;Row names
+selsep;Separador de Datos;Data Separator
+seldec;Separador de Decimales;Decimal Separator
+selna;Acción para Datos Ausentes (NAs);Action for Missing Data (NAs)
+selfile;Cargar archivo;Load archive
+selidioma;Seleccionar Idioma:;Select Language
+num;Numérica;Numerical
+cat;Categórica;Categorical
+dis;Disyuntiva;Disyunctive
