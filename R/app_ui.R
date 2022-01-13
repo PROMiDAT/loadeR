@@ -6,6 +6,7 @@
 #' @import shinyAce
 #' @import echarts4r
 #' @import data.table
+#' @import colourpicker
 #' @import shinycustomloader
 #' @import shinydashboardPlus
 #' @importFrom stats na.omit

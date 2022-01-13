@@ -34,7 +34,7 @@ mod_carga_datos_ui <- function(id){
         ),
         radioSwitch(ns("deleteNA"), label = "selna", c("elim", "impu")),
         hr(),
-        wellPanel(style = "height: 30vh; overflow: auto;",
+        wellPanel(style = "height: 25vh; overflow: auto;",
                   withLoader(DT::dataTableOutput(ns('previewdatos')), 
                              type = "html", loader = "loader4")),
         hr()
@@ -79,7 +79,7 @@ mod_carga_datos_ui <- function(id){
       open = "tab-content box-option-open-left",
       tabPanel(
         title = labelInput("data"),
-        div(style = "height: 72vh;",
+        div(style = "height: 72vh; overflow: auto;",
             withLoader(DT::dataTableOutput(ns('tabladatos')), 
                        type = "html", loader = "loader4")))
     )
@@ -93,6 +93,7 @@ mod_carga_datos_ui <- function(id){
 #'
 #' @author Diego Jimenez <diego.jimenez@promidat.com>
 #' @return shiny server
+#' @import caret
 #' @export mod_carga_datos_server
 #' 
 mod_carga_datos_server <- function(id, updateData) {
@@ -320,7 +321,7 @@ mod_carga_datos_server <- function(id, updateData) {
             formatStyle(columns = nombres, color = 'black', background = '#CAC9C9')
           
           if(tr("part", idioma) %in% colnames(datos.tabla)) {
-            colores <- alpha(gg_color_hue(length(unique(datos.tabla[[tr("part", idioma)]]))), 0.6)
+            colores <- gg_color_hue(length(unique(datos.tabla[[tr("part", idioma)]])))
             
             if(tr("train", idioma) %in% unique(datos.tabla[[tr("part", idioma)]])) {
               res <- res |> formatStyle(
@@ -387,11 +388,13 @@ mod_carga_datos_server <- function(id, updateData) {
             colnames(aux) <- tr("part", idioma)
             tabla.aux     <- cbind(aux, tabla.aux)
             updateData$indices     <- res$indices
-            updateData$datos.tabla <-  tabla.aux
+            updateData$datos.tabla <- tabla.aux
+            
           } else {
             num.grupos <- isolate(input$numGrupos)
             num.valC   <- isolate(input$numVC)
             grupos     <- vector(mode = "list", length = num.valC)
+            tabla.aux <- updateData$datos.tabla
             nom.grupo  <- vector(mode = "character", length = nrow(tabla.aux))
             
             for(i in 1:num.valC) {

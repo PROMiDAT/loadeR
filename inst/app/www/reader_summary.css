@@ -1,8 +1,8 @@
 .open>.dropdown-menu {
-    display: contents;
+  display: contents;
 }
 a {
-    color: #cbb051;
+  color: #cbb051;
 }
 
 .btn-primary {
@@ -10,16 +10,18 @@ a {
 }
 
 .summ-row{
-  overflow-y: scroll !important; 
+  overflow-y: auto !important; 
   max-height: 200px !important;
   min-height: 200px !important;
 }
+
 .summ-hr{
   margin-top: 10px; 
   margin-bottom: 10px;
   border-top: 1px solid #cbb051;
 }
+
 .col-sm-3 > .col-sm-12 > .box {
-    background-color: #ffffff;
-    color: #777777;
+  background-color: #ffffff;
+  color: #777777;
 }

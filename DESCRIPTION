@@ -16,6 +16,7 @@ Imports:
     echarts4r,
     htmltools,
     data.table,
+    colourpicker,
     shinydashboard,
     shinycustomloader,
     shinydashboardPlus

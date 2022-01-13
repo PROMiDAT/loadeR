@@ -39,7 +39,7 @@ table.dataTable, table.dataTable th, table.dataTable td {
 
 .dataTables_wrapper {
   position: relative;
-  overflow: scroll;
+  /*overflow: auto;*/
   clear: both;
 }
 
@@ -145,7 +145,6 @@ table.dataTable, table.dataTable th, table.dataTable td {
 		-webkit-text-fill-color: transparent;
 		animation: textclip 1.5s linear infinite;
 		display: inline-block;
-	
 }
 
 @keyframes textclip {

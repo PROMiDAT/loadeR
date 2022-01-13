@@ -66,18 +66,18 @@
 }
 
 .box-header .box-title, .box-header > .fa, .box-header > .glyphicon, .box-header > .ion {
-    display: inline-block;
-    font-size: 18px;
-    margin: 0;
-    line-height: 1;
-    right: 10px;
-    position: absolute;
+  display: inline-block;
+  font-size: 18px;
+  margin: 0;
+  line-height: 1;
+  right: 10px;
+  position: absolute;
 }
 
 .box-header > .box-tools {
-    position: absolute;
-    left: 10px;
-    top: 5px;
+  position: absolute;
+  left: 10px;
+  top: 5px;
 }
 
 /* Caja de información */  
@@ -143,20 +143,20 @@
 }
 
 .direct-chat-contacts {
-    transform: translate(-720px) !important;
-    background: #555 !important;
+  transform: translate(-720px) !important;
+  background: #555 !important;
 }
 
 .direct-chat-contacts-open .direct-chat-contacts {
-    transform: translate(-10px) !important;
+  transform: translate(-10px) !important;
 }
 
 /* Slider Input */
 .irs--shiny .irs-line {
-    background: #91cc75;
+  background: #91cc75;
 }
 
 /* Width label slider */
 #carga_datos_ui_1-n_tt-label {
-    width: 100%;
+  width: 100%;
 }
