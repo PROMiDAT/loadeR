@@ -155,6 +155,12 @@ sketch <- function(data.tabla, datos, originales, idioma, part, tipo.columnas) {
   ))
 }
 
+# Genera colores al azar
+gg_color_hue <- function(n) {
+  hues = seq(15, 375, length = n + 1)
+  hcl(h = hues, l = 65, c = 100)[1:n]
+}
+
 ############################### Generar Código ################################
 code.carga <- function(nombre.filas = T, ruta = NULL, separador = ";",
                        sep.decimal = ",", encabezado = T, incluir.NA = F) {

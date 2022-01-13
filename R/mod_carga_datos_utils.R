@@ -51,3 +51,30 @@ datos.disyuntivos <- function(data, var) {
   
   return(data)
 }
+
+# Obtiene los nombres de columnas o regresa un string vacio
+colnames.empty <- function(res){
+  res <- colnames(res)
+  if(is.null(res))
+    return("")
+  return(res)
+}
+
+# Segmenta los datos
+segmentar.datos <- function(datos, variable.predecir, porcentaje = 30, semilla = 5, perm.semilla = F) {
+  semilla <- ifelse(is.numeric(semilla), semilla, 5)
+  
+  if (perm.semilla) {
+    set.seed(semilla)
+  } else {
+    rm(.Random.seed, envir = globalenv())
+  }
+  particion      <- createDataPartition(y = datos[, variable.predecir], p = porcentaje/100, list = F)
+  indices        <- particion[, 1]
+  test  <- datos[-particion, ]
+  train <- datos[particion, ]
+  if (perm.semilla) 
+    set.seed(semilla)
+  
+  return(list(test = test, train = train, indices = indices))
+}

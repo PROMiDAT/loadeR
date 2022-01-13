@@ -11,12 +11,12 @@
 mod_carga_datos_ui <- function(id){
   ns <- NS(id)
   
-  tagList(
-    box(
-      width = 12, title = labelInput("data"), closable = F,
-      status = "primary", solidHeader = TRUE, collapsible = F,
-      sidebar = boxSidebar(
-        id = "boxdata", width = 40, startOpen = TRUE,
+  opc_load <- tabsOptions(
+    botones = list(icon("database"), icon("cog")),
+    widths = c(50, 50), heights = c(100, 100),
+    tabs.content = list(
+      list(
+        options.run(ns("run_data")), tags$hr(style = "margin-top: 0px;"),
         fileInput(
           ns('archivo'), labelInput("selfile"), width = "100%",
           placeholder = "", buttonLabel = labelInput("subi"),
@@ -34,15 +34,54 @@ mod_carga_datos_ui <- function(id){
         ),
         radioSwitch(ns("deleteNA"), label = "selna", c("elim", "impu")),
         hr(),
-        wellPanel(style = "height: 30vh;overflow: auto;",
-            withLoader(DT::dataTableOutput(ns('previewdatos')), 
-                       type = "html", loader = "loader4")),
-        hr(),
-        actionButton(ns("loadButton"), labelInput("carg"), width = "100%")
+        wellPanel(style = "height: 30vh; overflow: auto;",
+                  withLoader(DT::dataTableOutput(ns('previewdatos')), 
+                             type = "html", loader = "loader4")),
+        hr()
       ),
-      div(style = "height: 80vh;",
-          withLoader(DT::dataTableOutput(ns('tabladatos')), 
-                     type = "html", loader = "loader4"))
+      list(
+        options.run(ns("run_pred")), tags$hr(style = "margin-top: 0px;"),
+        selectInput(ns("sel.predic.var"), label = labelInput("selpred"), choices = ""),
+        tabsetPanel(
+          type = "tabs", id = ns("part_metodo"),
+          tabPanel(
+            labelInput("tt"),
+            numericInput(ns("seed"), labelInput("seed"), 
+                         value = 5, width = "100%"),
+            # div(
+            #   col_6(numericInput(ns("seed"), labelInput("seed"), 
+            #                      value = 5, width = "100%")), 
+            #   col_6(radioSwitch(ns("aseed"), NULL, 
+            #                     c("habilitada", "deshabilitada"), val.def = F))
+            # ),
+            sliderInput(ns("n_tt"), label = div(
+              div(style = 'float: left; color: #428bca;', labelInput('train')),
+              div(style = 'float: right; color: #91cc75;', labelInput('test'))),
+              5, 95, 80, 5)
+          ),
+          tabPanel(
+            labelInput("cros"),
+            div(
+              col_6(numericInput(ns("numGrupos"), labelInput("ngr"), 5, 
+                                 width = "100%", min = 1)),
+              col_6(numericInput(ns("numVC"), labelInput("nvc"), 5, 
+                                 width = "100%", min = 1))
+            )
+          )
+        )
+      )
+    )
+  )
+  
+  tagList(
+    tabBoxPrmdt(
+      id = "data", title = NULL, opciones = opc_load,
+      open = "tab-content box-option-open-left",
+      tabPanel(
+        title = labelInput("data"),
+        div(style = "height: 72vh;",
+            withLoader(DT::dataTableOutput(ns('tabladatos')), 
+                       type = "html", loader = "loader4")))
     )
   )
 }
@@ -189,7 +228,7 @@ mod_carga_datos_server <- function(id, updateData) {
     })
     
     # Load Button Function
-    observeEvent(input$loadButton, {
+    observeEvent(input$run_data, {
       updateData$datos       <- NULL
       updateData$datos.tabla <- NULL
       updateData$originales  <- NULL
@@ -300,6 +339,87 @@ mod_carga_datos_server <- function(id, updateData) {
         return(NULL)
       })
     }, server = T)
+    
+    # Update Predict Variable
+    observeEvent(updateData$datos, {
+      datos <- updateData$datos
+      vars  <- rev(colnames.empty(var.categoricas(datos)))
+      updateSelectInput(session, "sel.predic.var", choices = vars)
+    })
+    
+    # Segment Button Function
+    observeEvent(input$run_pred, {
+      # for (nom in names(modelos)) {
+      #   modelos[[nom]] <- NULL
+      # }
+      # restaurar.segmentacion()
+      # restaurar.validacion()
+      
+      variable <- isolate(input$sel.predic.var)
+      datos    <- updateData$datos
+      idioma   <- isolate(updateData$idioma)
+      tryCatch({
+        if(variable != "") {
+          # codigo.editor <- code.segment(porcentaje,
+          #                               variable,
+          #                               semilla,
+          #                               permitir.semilla)
+          # updateAceEditor(session, "fieldCodeSegment", value = codigo.editor)
+          
+          if(input$part_metodo == "<span data-id=\"tt\"></span>") {
+            porcentaje <- isolate(input$n_tt)
+            variable   <- isolate(input$sel.predic.var)
+            semilla    <- isolate(input$seed)
+            permitir.semilla <- F
+            #permitir.semilla <- isolate(input$permitir.semilla)
+            
+            res <- segmentar.datos(datos, variable, porcentaje, semilla, permitir.semilla)
+            updateData$datos.prueba      <- res$test
+            updateData$datos.aprendizaje <- res$train
+            nom.part <- vector(mode = "character", length = nrow(datos))
+            nom.part[res$indices]  <- tr("train", idioma)
+            nom.part[-res$indices] <- tr("test", idioma)
+            tabla.aux <- updateData$datos.tabla
+            updateData$datos.tabla <- NULL
+            if(tr("part", idioma) %in% colnames(tabla.aux))
+              tabla.aux[[tr("part", idioma)]] <- NULL
+            aux           <- data.frame(as.factor(nom.part))
+            colnames(aux) <- tr("part", idioma)
+            tabla.aux     <- cbind(aux, tabla.aux)
+            updateData$indices     <- res$indices
+            updateData$datos.tabla <-  tabla.aux
+          } else {
+            num.grupos <- isolate(input$numGrupos)
+            num.valC   <- isolate(input$numVC)
+            grupos     <- vector(mode = "list", length = num.valC)
+            nom.grupo  <- vector(mode = "character", length = nrow(tabla.aux))
+            
+            for(i in 1:num.valC) {
+              grupo     <- createFolds(datos[, variable], num.grupos)  
+              grupos[i] <- list(grupo)
+            }
+            updateData$variable.predecir <- variable
+            updateData$numGrupos         <- num.grupos
+            updateData$grupos            <- grupos
+            
+            grupos <- updateData$grupos[[1]]
+            for (grupo in 1:length(grupos)) {
+              nom.grupo[grupos[[grupo]]] <- paste0("Gr_", grupo)
+            }
+            if(tr("part", idioma) %in% colnames(tabla.aux))
+              tabla.aux[[tr("part", idioma)]] <- NULL
+            
+            aux           <- data.frame(as.factor(nom.grupo))
+            colnames(aux) <- tr("part", idioma)
+            tabla.aux     <- cbind(aux, tabla.aux)
+            updateData$datos.tabla <-  tabla.aux
+          }
+        }
+      }, error = function(e) {
+        #borrar.modelos(updateData)
+        showNotification(paste0("ERROR al segmentar los datos: ", e), type = "error")
+      })
+    })
     
     # Descarga tabla de datos
     output$downloaDatos <- downloadHandler(

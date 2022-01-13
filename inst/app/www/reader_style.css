@@ -150,3 +150,13 @@
 .direct-chat-contacts-open .direct-chat-contacts {
     transform: translate(-10px) !important;
 }
+
+/* Slider Input */
+.irs--shiny .irs-line {
+    background: #91cc75;
+}
+
+/* Width label slider */
+#carga_datos_ui_1-n_tt-label {
+    width: 100%;
+}

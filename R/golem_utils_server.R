@@ -79,7 +79,11 @@ tr <- function(text, idioma = "es") {
 cambiar.labels <- function() {
   x <- c("idio", "data", "subi", "carg", "espa", "selhead", "selrow",
          "selsep", "seldec", "selna", "selfile", "selidioma", "num", "cat",
-         "rena", "tran", "elim", "impu")
+         "nums", "cats", "rena", "tran", "elim", "impu", "opts", "run",
+         "selcolbar", "selcolline", "selcolpoint", "alfa", "basi", "resu",
+         "norm", "disp", "dist", "corr", "pnorm", "asim", "tasim", "pvalue",
+         "sigue", "nres", "selcolor", "acerca", "selpred", "train", "test", 
+         "tt", "seed", "cros", "ngr", "nvc", "part")
   return(x)
 }
 

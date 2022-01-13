@@ -1,0 +1,25 @@
+.open>.dropdown-menu {
+    display: contents;
+}
+a {
+    color: #cbb051;
+}
+
+.btn-primary {
+  background-color: #cbb051;
+}
+
+.summ-row{
+  overflow-y: scroll !important; 
+  max-height: 200px !important;
+  min-height: 200px !important;
+}
+.summ-hr{
+  margin-top: 10px; 
+  margin-bottom: 10px;
+  border-top: 1px solid #cbb051;
+}
+.col-sm-3 > .col-sm-12 > .box {
+    background-color: #ffffff;
+    color: #777777;
+}

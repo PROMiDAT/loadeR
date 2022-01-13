@@ -18,3 +18,34 @@ selidioma;Seleccionar Idioma:;Select Language
 num;Numérica;Numerical
 cat;Categórica;Categorical
 dis;Disyuntiva;Disyunctive
+nums;Numéricas;Numericals
+cats;Categóricas;Categoricals
+opts;Opciones;Options
+run;Ejecutar;Run
+selcolbar;Seleccione el color de la barra:;Select the bar color:
+selcolline;Seleccione el color de la linea:;Select the line color:
+selcolpoint;Seleccione el color del punto:;Select the point color:
+alfa;Alfa;Alpha
+basi;Estadísticas Básicas;Basic Statistics
+resu;Resumen Numérico;Numeric Summary
+norm;Test de Normalidad;Normality Test
+disp;Dispersión;Scatter Plot
+dist;Distribución;Distribution
+corr;Correlación;Correlation
+pnorm;Gráfico Normalidad;Normal Plot
+asim;Asimetría;Asymmetry
+tasim;Valor del test;Test value
+pvalue;P-valor (Shapiro);P-value (Shapiro)
+sigue;¿Sigue la normal?;is normally distributed?
+nres;Resultados Numéricos;Numerical Results
+selcolor;Seleccionar color:;Select color:
+acerca;Acerca De;About
+selpred;Seleccionar la variable a predecir:;Select the variable to be predicted:
+train;Aprendizaje;Train
+test;Prueba;Test
+tt;Aprendizaje - Prueba;Train - Test
+seed;Semilla Aleatoria:;Random Seed:
+part;Partición;Partition
+cros;Validación Cruzada;Cross Validation
+ngr;Número de Grupos;Number of Groups
+nvc;Número de Validaciones;Number of Cross Validations

@@ -4,11 +4,12 @@
 #'     DO NOT REMOVE.
 #' @import shiny
 #' @import shinyAce
+#' @import echarts4r
 #' @import data.table
 #' @import shinycustomloader
 #' @import shinydashboardPlus
 #' @importFrom stats na.omit
-#' @importFrom DT tableHeader formatStyle
+#' @importFrom DT tableHeader formatStyle styleEqual
 #' @importFrom shinydashboard dashboardBody menuItem menuSubItem sidebarMenu tabBox tabItem tabItems infoBox
 #' @noRd
 app_ui <- function(request) {
@@ -33,11 +34,28 @@ app_ui <- function(request) {
           tags$div(style = "padding-top:10px;"),
           menuItem(labelInput("data"), icon = icon("database"),
                    tabName = "cargar"),
+          menuItem(labelInput("basi"), tabName = "parte1",
+                   icon = icon("th-list"),
+                   menuSubItem(labelInput("resu"), "resumen",
+                               icon = icon("sort-numeric-down")),
+                   menuSubItem(labelInput("norm"), "normalidad",
+                               icon = icon("chart-bar")),
+                   menuSubItem(labelInput("disp"), "dispersion",
+                               icon = icon("chart-line")),
+                   menuSubItem(labelInput("dist"), "distribucion",
+                               icon = icon("chart-area")),
+                   menuSubItem(labelInput("corr"), "correlacion",
+                               icon = icon("table"))
+          ),
+          menuItem(labelInput("acerca"), tabName = "acercaDe",
+                   icon = icon("info")),
           hr(),
           menu.idioma(),
           tags$div(style = "display:none;",
                    sliderInput(inputId = "aux", min = 2, value = 2,
-                               label = "Cantidad de Clusters", max = 10)
+                               label = "Cantidad de Clusters", max = 10),
+                   colourpicker::colourInput(
+                     "auxColor", NULL, value = "red", allowTransparent = T)
                    #radioSwitch("deleteNAaux", "eliminanaaux", c("eliminarai", "impsutar")),
           )
         )
@@ -46,7 +64,28 @@ app_ui <- function(request) {
         
         tabItems(
           # Carga de Datos
-          tabItem(tabName = "cargar", mod_carga_datos_ui("carga_datos_ui_1"))
+          tabItem(tabName = "cargar", mod_carga_datos_ui("carga_datos_ui_1")),
+          
+          # Resumen Numérico
+          tabItem(tabName = "resumen", mod_r_numerico_ui("r_numerico_ui_1")),
+          
+          # Test de Normalidad
+          tabItem(tabName = "normalidad", mod_normal_ui("normal_ui_1")),
+          
+          # Dispersión
+          tabItem(tabName = "dispersion",
+                  mod_dispersion_ui("dispersion_ui_1")),
+          
+          # Distribuciones
+          tabItem(tabName = "distribucion", 
+                  mod_distribuciones_ui("distribuciones_ui_1")),
+          
+          # Correlaciones
+          tabItem(tabName = "correlacion", 
+                  mod_correlacion_ui("correlacion_ui_1")),
+          
+          # Acerca De
+          tabItem(tabName = "acercaDe", mod_acercade_ui("acercade_ui_1"))
         )
       ),
       
