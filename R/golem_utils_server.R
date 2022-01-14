@@ -83,7 +83,8 @@ cambiar.labels <- function() {
          "selcolbar", "selcolline", "selcolpoint", "alfa", "basi", "resu",
          "norm", "disp", "dist", "corr", "pnorm", "asim", "tasim", "pvalue",
          "sigue", "nres", "selcolor", "acerca", "selpred", "train", "test", 
-         "tt", "seed", "cros", "ngr", "nvc", "part")
+         "tt", "seed", "cros", "ngr", "nvc", "part", "info", "copyright", 
+         "version")
   return(x)
 }
 

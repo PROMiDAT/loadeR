@@ -101,6 +101,31 @@ mod_carga_datos_server <- function(id, updateData) {
     ns <- session$ns
     disyuntivas <- rv(valor = list(), nombre = NULL)
     
+    observeEvent(updateData$idioma, {
+      datos.tabla <- updateData$datos.tabla
+      idioma      <- updateData$idioma
+      if(!is.null(datos.tabla) && (!is.null(updateData$grupos) || !is.null(updateData$indices))){
+        updateData$datos.tabla <- NULL
+        colnames(datos.tabla)[1] <- tr("part", idioma)
+        nom.part <- vector(mode   = "character", 
+                           length = nrow(datos.tabla))
+        
+        if("Aprendizaje" %in% unique(datos.tabla[[tr("part", idioma)]]) || "Train" %in% unique(datos.tabla[[tr("part", idioma)]])){
+          nom.part[updateData$indices]  <- tr("train", idioma)
+          nom.part[-updateData$indices] <- tr("test", idioma)
+        }
+        else{
+          num.valC <- isolate(input$selValC)
+          grupos   <- updateData$grupos[[num.valC]]
+          for (grupo in 1:length(grupos)) {
+            nom.part[grupos[[grupo]]] <- paste0("Gr_", grupo)
+          }
+        }
+        datos.tabla[[1]]       <- as.factor(nom.part)
+        updateData$datos.tabla <- datos.tabla
+      }
+    })
+    
     # Renombrar columna tabla de datos.
     renombrar <- function(indice, nuevo_nombre) {
       nom.column <- colnames(updateData$datos.tabla)[indice]
