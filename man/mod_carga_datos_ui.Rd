@@ -18,5 +18,5 @@ shiny ui
 carga_datos UI Function
 }
 \author{
-Diego Jimenez <diego.jimenez@promidat.com>
+Joseline Quiros <joseline.quiros@promidat.com>
 }

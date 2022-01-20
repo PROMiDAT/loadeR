@@ -66,6 +66,18 @@ rvtl <- shiny::reactiveValuesToList
 
 load("inst/app/lang/translation.bin")
 
+#' Returns a translate text (user defined).
+#' 
+#' @param text text to translate.
+#' @param idioma language to use. For example: "en".
+#'
+#' @author Diego Jimenez <diego.jimenez@promidat.com>
+#' @return HTML
+#' @import shiny
+#' @export tr
+#' @examples
+#' tr("data", "en")
+#'
 tr <- function(text, idioma = "es") {
   sapply(text, function(s) {
     elem <- ifelse(is.null(translation[[s]][[idioma]]), s,

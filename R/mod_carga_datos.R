@@ -3,7 +3,7 @@
 #' @param id Internal parameters for {shiny}.
 #' @param paquete indicates if the data is going to be used for exploratory, predictive, or regression analysis.
 #' 
-#' @author Diego Jimenez <diego.jimenez@promidat.com>
+#' @author Joseline Quiros <joseline.quiros@promidat.com>
 #' @return shiny ui
 #' @export mod_carga_datos_ui
 #' @import shiny
@@ -150,7 +150,7 @@ mod_carga_datos_ui <- function(id, paquete = "predictoR") {
 #' @param modelos shiny reactive values.
 #' @param paquete indicates if the data is going to be used for exploratory, predictive, or regression analysis.
 #'
-#' @author Diego Jimenez <diego.jimenez@promidat.com>
+#' @author Joseline Quiros <joseline.quiros@promidat.com>
 #' @return shiny server
 #' @import caret
 #' @import XLConnect

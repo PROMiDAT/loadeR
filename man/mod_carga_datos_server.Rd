@@ -22,5 +22,5 @@ shiny server
 carga_datos Server Functions
 }
 \author{
-Diego Jimenez <diego.jimenez@promidat.com>
+Joseline Quiros <joseline.quiros@promidat.com>
 }

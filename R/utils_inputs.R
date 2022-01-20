@@ -51,10 +51,33 @@ radioSwitch <- function(id, label = NULL, names, values = NULL, val.def = T) {
   )
 }
 
+#' Create a label that can be used to show text.
+#' 
+#' @param inputId The input slot that will be used to access the value.
+#' @param value Initial value.
+#'
+#' @author Diego Jimenez <diego.jimenez@promidat.com>
+#' @return HTML
+#' @import shiny
+#' @export labelInput
+#' @examples
+#' labelInput("id", "data")
+#'
 labelInput <- function(inputId, value = "") {
   tags$span(`data-id` = inputId, value)
 }
 
+#' Change the value of a label input on the client.
+#' 
+#' @param session The session object passed to function given to shinyServer. Default is getDefaultReactiveDomain().
+#' @param labelid The id of the input object.
+#' @param value Initial value.
+#'
+#' @author Diego Jimenez <diego.jimenez@promidat.com>
+#' @return HTML
+#' @import shiny
+#' @export updateLabelInput
+#'
 updateLabelInput <- function (session, labelid, value = NULL) {
   message <- dropNulls(list(labelid = labelid))
   if(length(labelid) == 1) {
