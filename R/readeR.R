@@ -11,7 +11,7 @@
 #' Package: \tab readeR\cr
 #' Type: \tab Package\cr
 #' Version: \tab 0.1.0\cr
-#' Date: \tab 2021-10-19\cr
+#' Date: \tab 2022-01-20\cr
 #' License: \tab GPL (>=2)\cr
 #' }
 #' @keywords package
@@ -19,5 +19,6 @@
 
 NULL
 utils::globalVariables(c(
-  "alpha", "gg_color_hue", "styleEqual", "fwrite", "thead", "th"
+  "alpha", "gg_color_hue", "styleEqual", "fwrite", "thead", "th", "x", "n", 
+  "z", "hcl", "cor", "y", "label", "value", "median", "paquete"
 ))

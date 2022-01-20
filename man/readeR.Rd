@@ -12,7 +12,7 @@ System to read data and show it.
 Package: \tab readeR\cr
 Type: \tab Package\cr
 Version: \tab 0.1.0\cr
-Date: \tab 2021-10-19\cr
+Date: \tab 2022-01-20\cr
 License: \tab GPL (>=2)\cr
 }
 }

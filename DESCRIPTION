@@ -1,9 +1,11 @@
 Package: readeR
-Title: PKG_TITLE
-Version: 0.0.0.9000
-Authors@R: person('AUTHOR_FIRST', 'AUTHOR_LAST', email = 'AUTHOR@MAIL.COM', role = c('cre', 'aut'))
-Description: PKG_DESC.
-License: MIT + file LICENSE
+Title: Read Data for Analysis System
+Version: 0.1.0
+Authors@R: c(person(given = "Oldemar", family = "Rodriguez", role = c("aut", "cre"), email = "oldemar.rodriguez@ucr.ac.cr"),
+            person(given = "Diego", family = "Jiménez", role = c("ctb", "prg")),
+            person(given = "Joseline", family = "Quirós", role = c("ctb", "prg")))
+Description: Provides a framework for a database through a 'shiny' graphical interface.
+License: GPL (>=2)
 Imports: 
     DT,
     caret,
@@ -11,16 +13,20 @@ Imports:
     golem,
     rlang,
     config,
+    shinyjs,
     processx,
     shinyAce,
+    XLConnect,
     echarts4r,
     htmltools,
     data.table,
+    htmlwidgets,
     colourpicker,
     shinydashboard,
     shinycustomloader,
     shinydashboardPlus
+Depends: R (>= 4.0)
 Encoding: UTF-8
-LazyData: true
+URL: https://www.promidat.com
 RoxygenNote: 7.1.2
 Language: en-US

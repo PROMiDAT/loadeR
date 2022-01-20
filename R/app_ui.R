@@ -6,10 +6,13 @@
 #' @import shinyAce
 #' @import echarts4r
 #' @import data.table
-#' @import colourpicker
+#' @import htmlwidgets
 #' @import shinycustomloader
 #' @import shinydashboardPlus
+#' @importFrom grDevices hcl
 #' @importFrom stats na.omit
+#' @importFrom colourpicker colourInput
+#' @importFrom shinyjs useShinyjs enable disable
 #' @importFrom DT tableHeader formatStyle styleEqual
 #' @importFrom shinydashboard dashboardBody menuItem menuSubItem sidebarMenu tabBox tabItem tabItems infoBox
 #' @noRd
@@ -65,7 +68,8 @@ app_ui <- function(request) {
         
         tabItems(
           # Carga de Datos
-          tabItem(tabName = "cargar", mod_carga_datos_ui("carga_datos_ui_1")),
+          tabItem(tabName = "cargar", 
+                  mod_carga_datos_ui("carga_datos_ui_1", paquete = paquete)),
           
           # Resumen Numérico
           tabItem(tabName = "resumen", mod_r_numerico_ui("r_numerico_ui_1")),
@@ -122,6 +126,7 @@ golem_add_external_resources <- function(){
     bundle_resources(
       path = app_sys('app/www'),
       app_title = 'readeR'
-    )
+    ),
+    shinyjs::useShinyjs()
   )
 }

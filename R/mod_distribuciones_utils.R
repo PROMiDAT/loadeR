@@ -107,11 +107,3 @@ code.dist.cat <- function(var) {
     "  e_tooltip() |> e_datazoom(show = F) |> e_show_loading()\n"
   )
 }
-
-
-
-
-
-
-
-

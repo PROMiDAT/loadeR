@@ -1,12 +1,13 @@
 #' normal UI Function
 #'
-#' @description A shiny Module.
+#' @param id Internal parameters for {shiny}.
 #'
-#' @param id,input,output,session Internal parameters for {shiny}.
-#'
-#' @noRd 
-#'
-#' @importFrom shiny NS tagList 
+#' @author Diego Jimenez <diego.jimenez@promidat.com>
+#' @return shiny ui
+#' @export mod_normal_ui
+#' @import shiny
+#' @import shinydashboardPlus
+#' 
 mod_normal_ui <- function(id) {
   ns <- NS(id)
   
@@ -72,12 +73,20 @@ mod_normal_ui <- function(id) {
 }
     
 #' normal Server Function
-#' @keywords internal
+#'
+#' @param id Internal parameters for {shiny}.
+#' @param updateData shiny reactive values.
+#'
+#' @author Diego Jimenez <diego.jimenez@promidat.com>
+#' @return shiny server
+#' @import shiny
+#' @export mod_normal_server
+#' 
 mod_normal_server <- function(id, updateData) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
     
-    #' Update on load data
+    # Update on load data
     observeEvent(updateData$datos, {
       datos       <- updateData$datos
       numericos   <- var.numericas(datos)
@@ -85,7 +94,7 @@ mod_normal_server <- function(id, updateData) {
       updateSelectInput(session, "sel_normal", choices = colnames(numericos))
     })
     
-    #' Grafico Test de normalidad
+    # Grafico Test de normalidad
     output$plot_normal <- renderEcharts4r({
       input$run_normal
       var       <- input$sel_normal
@@ -107,7 +116,7 @@ mod_normal_server <- function(id, updateData) {
       })
     })
     
-    #' Grafico qqplot + qqline
+    # Grafico qqplot + qqline
     output$plot_qq <- renderEcharts4r({
       input$run_normal
       var        <- input$sel_normal
@@ -127,7 +136,7 @@ mod_normal_server <- function(id, updateData) {
       })
     })
     
-    #' Resumen Test de normalidad
+    # Resumen Test de normalidad
     output$calc_normal <- DT::renderDT({
       input$run_normal
       datos <- updateData$datos

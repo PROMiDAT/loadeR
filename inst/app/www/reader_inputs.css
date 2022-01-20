@@ -32,6 +32,10 @@
   display: block;
 }
 
+.dropdown-content:focus{
+  display: block;
+}
+
 table.dataTable, table.dataTable th, table.dataTable td {
     text-align: right;
     position: relative;
@@ -151,4 +155,10 @@ table.dataTable, table.dataTable th, table.dataTable td {
 	to {
 		background-position: 200% center;
 	}
+}
+
+/* Input Progress */
+
+.progress {
+  margin-bottom: -15px;
 }

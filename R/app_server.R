@@ -4,7 +4,7 @@
 #'     DO NOT REMOVE.
 #' @import shiny
 #' @noRd
-app_server <- function( input, output, session ) {
+app_server <- function(input, output, session) {
   
   ##################################  Options  ################################
   options(shiny.maxRequestSize = 200*1024^2)
@@ -32,6 +32,10 @@ app_server <- function( input, output, session ) {
     variable.predecir = NULL, indices = NULL, numGrupos = NULL, 
     numValC = NULL, grupos = NULL)
   
+  modelos <-  rv(
+    svm = NULL, knn = NULL, bayes = NULL, rl = NULL, rlr = NULL, xgb = NULL,
+    boosting = NULL, rf = NULL, nn = NULL, dt = NULL)
+  
   ###################################  Update  ################################
   
   # Update on Language
@@ -40,7 +44,7 @@ app_server <- function( input, output, session ) {
     updateLabelInput(session, cambiar.labels(), tr(cambiar.labels(), input$idioma))
   })
   
-  mod_carga_datos_server("carga_datos_ui_1", updateData)
+  mod_carga_datos_server("carga_datos_ui_1", updateData, modelos, paquete)
   
   mod_r_numerico_server("r_numerico_ui_1", updateData)
   

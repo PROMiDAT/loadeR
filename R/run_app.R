@@ -1,28 +1,25 @@
 #' Run the Shiny Application
 #'
-#' @param ... arguments to pass to golem_opts. 
-#' See `?golem::get_golem_options` for more details.
-#' @inheritParams shiny::shinyApp
+#' @param paquete indicates if the data is going to be used for exploratory, predictive, or regression analysis.
+#' @param ... A series of options to be used inside the app.
 #'
 #' @export
 #' @importFrom shiny shinyApp
-#' @importFrom golem with_golem_options 
-run_app <- function(
-  onStart = NULL,
-  options = list(), 
-  enableBookmarking = NULL,
-  uiPattern = "/",
-  ...
-) {
+#' @importFrom golem with_golem_options
+run_app <- function(paquete = "predictoR", ...) {
+  Sys.setenv("LANGUAGE" = "ES")
+  if(toupper(.Platform$OS.type) != "WINDOWS") {
+    options(encoding = "utf8")
+  } else {
+    options(encoding = "UTF-8")
+  }
+  paquete <<- paquete
   with_golem_options(
     app = shinyApp(
       ui = app_ui,
       server = app_server,
-      onStart = onStart,
-      options = options, 
-      enableBookmarking = enableBookmarking, 
-      uiPattern = uiPattern
-    ), 
+      options = list(launch.browser = T)
+    ),
     golem_opts = list(...)
   )
 }

@@ -1,12 +1,13 @@
 #' distribuciones UI Function
 #'
-#' @description A shiny Module.
+#' @param id Internal parameters for {shiny}.
 #'
-#' @param id,input,output,session Internal parameters for {shiny}.
-#'
-#' @noRd 
-#'
-#' @importFrom shiny NS tagList 
+#' @author Diego Jimenez <diego.jimenez@promidat.com>
+#' @return shiny ui
+#' @export mod_distribuciones_ui
+#' @import shiny
+#' @import shinydashboardPlus
+#' 
 mod_distribuciones_ui <- function(id){
   ns <- NS(id)
   
@@ -59,7 +60,15 @@ mod_distribuciones_ui <- function(id){
 }
     
 #' distribuciones Server Function
-#' @keywords internal
+#'
+#' @param id Internal parameters for {shiny}.
+#' @param updateData shiny reactive values.
+#'
+#' @author Diego Jimenez <diego.jimenez@promidat.com>
+#' @return shiny server
+#' @import shiny
+#' @export mod_distribuciones_server
+#' 
 mod_distribuciones_server <- function(id, updateData) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns

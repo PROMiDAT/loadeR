@@ -17,11 +17,13 @@ accion.NAs <- function(datos, deleteNA = T) {
   }
 }
 
-carga.datos <- function(nombre.filas = T, ruta = NULL, separador = ";",
-                        sep.decimal = ",", encabezado = T, deleteNA = T, preview = F) {
+carga.datos <- function(
+  nombre.filas = T, ruta = NULL, separador = ";", sep.decimal = ",", 
+  encabezado = T, deleteNA = T, preview = F) {
   if(!is.null(ruta)) {
     ruta <- gsub("\\", "/", ruta, fixed = T)
   }
+  
   if(preview) {
     res <- fread(
       ruta, sep = separador, dec = sep.decimal, header = encabezado, 
@@ -33,6 +35,31 @@ carga.datos <- function(nombre.filas = T, ruta = NULL, separador = ";",
   }
   
   if(nombre.filas) {
+    row.names(res) <- res[[1]]
+    res[[1]] <- NULL
+  }
+  return(accion.NAs(res, deleteNA))
+}
+
+carga.datos.excel <- function(
+  ruta, sheet = 1, header = T, startRow = 0, startCol = 0, endRow = 0,
+  endCol = 0, row_names = T, deleteNA = T, preview = F) {
+  if(!is.null(ruta)) {
+    ruta <- gsub("\\", "/", ruta, fixed = T)
+  }
+  
+  if(preview) {
+    if(endRow < 10) {
+      endRow <- endRow
+    } else {
+      endRow <- 10
+    }
+  }
+  res <- readWorksheetFromFile(
+    ruta, sheet = sheet, header = header, startRow = startRow,
+    startCol = startCol, endRow = endRow, endCol = endCol)
+  
+  if(row_names) {
     row.names(res) <- res[[1]]
     res[[1]] <- NULL
   }
@@ -90,6 +117,61 @@ selectInputTrans <- function(datos, var, idioma = "es", originales) {
   )
 }
 
+btnInputArrange <- function(datos, var, idioma = "es") {
+  if(class(datos[, var]) %in% c("numeric", "integer")) {
+    asc <- tags$button(
+      type = "button", class = "btn btn-default action-button",
+      style = "margin-bottom: 10px;width: 70%;margin-right: 5px;",
+      onclick = paste0("accion(", var, ", 'a')"),
+      tags$i(class = "fa fa-sort-numeric-down", role = "presentation", 
+             `aria-label` = "sort-numeric-down icon"), tr("asc", idioma))
+    dsc <- tags$button(
+      type = "button", class = "btn btn-default action-button",
+      style = "margin-bottom: 10px;width: 70%;margin-right: 5px;",
+      onclick = paste0("accion(", var, ", 'd')"),
+      tags$i(class = "fa fa-sort-numeric-down-alt", role = "presentation", 
+             `aria-label` = "sort-numeric-down-alt icon"), tr("dsc", idioma))
+  } else {
+    asc <- tags$button(
+      type = "button", class = "btn btn-default action-button",
+      style = "margin-bottom: 10px;width: 70%;margin-right: 5px;",
+      onclick = paste0("accion(", var, ", 'a')"),
+      tags$i(class = "fa fa-sort-alpha-down", role = "presentation", 
+             `aria-label` = "sort-alpha-down icon"), tr("asc", idioma))
+    dsc <- tags$button(
+      type = "button", class = "btn btn-default action-button",
+      style = "margin-bottom: 10px;width: 70%;margin-right: 5px;",
+      onclick = paste0("accion(", var, ", 'd')"),
+      tags$i(class = "fa fa-sort-alpha-down-alt", role = "presentation", 
+             `aria-label` = "sort-alpha-down-alt icon"), tr("dsc", idioma))
+  }
+  
+  tags$div(tags$div(asc), tags$div(dsc))
+}
+
+selectInputGroup <- function(datos, var, idioma = "es", n, sel = 1) {
+  opts <- ""
+  for (i in 1:n) {
+    if(i == sel) {
+      opts <- paste0(opts, '<option value="', i, '" selected>', i, '</option>\n')
+    } else {
+      opts <- paste0(opts, '<option value="', i, '">', i, '</option>\n')
+    }
+  }
+  
+  res <- paste0(
+    '<div class = "form-group shiny-input-container">\n',
+    '  <select ', 
+    'style = "width: 70%;margin: 5px;height: 34px;border: 1px solid #cccccc;text-align: center;line-height: 34px;border-radius: 4px;"',
+    'onchange = "accion(', var, ', \'s\', this.value)">\n',
+    opts,
+    '  </select>\n',
+    '</div>'
+  )
+  
+  return(res)
+}
+
 prevsketch <- function(datos, tipos) {
   htmltools::withTags(table(thead(
     tr(
@@ -114,11 +196,19 @@ prevsketch <- function(datos, tipos) {
 sketch <- function(data.tabla, datos, originales, idioma, part, tipo.columnas) {
   rena <- tr("rena", idioma)
   tran <- tr("tran", idioma)
+  orde <- tr("orde", idioma)
   elim <- tr("elim", idioma)
+  vali <- tr("vali", idioma)
+  labelpart <- tr("part", idioma)
   htmltools::withTags(table(thead(tr(
     th('ID'), lapply(1:length(colnames(data.tabla)), function(i) {
       if(colnames(data.tabla)[i] == part) {
-        th(colnames(data.tabla)[i])
+        th(labelpart, class = "tablaHead",
+           div(class = "dropdown-content",
+               span(icon("sort-amount-down"), orde),
+               btnInputArrange(data.tabla, i, idioma)
+           )
+        )
       } else {
         th(colnames(data.tabla)[i], class = "tablaHead",
            div(class = "dropdown-content",
@@ -132,10 +222,13 @@ sketch <- function(data.tabla, datos, originales, idioma, part, tipo.columnas) {
                span(icon("exchange-alt"), tran), 
                selectInputTrans(data.tabla, i, idioma, originales),
                hr(style = "margin: 0px;"),
+               span(icon("sort-amount-down"), orde),
+               btnInputArrange(data.tabla, i, idioma),
+               hr(style = "margin: 0px;"),
                span(icon("cut"), elim),
                if(colnames(data.tabla)[i] %in% colnames(datos)) {
                  tags$input(
-                   type = "checkbox", 
+                   type = "checkbox",
                    onchange = paste0("accion(", i, ", 'e', this.checked)"),
                    style = "margin-bottom: 10px;margin-right: 10px;transform: scale(1.5);")
                } else {
@@ -143,7 +236,7 @@ sketch <- function(data.tabla, datos, originales, idioma, part, tipo.columnas) {
                    type = "checkbox", checked = "", 
                    onchange = paste0("accion(", i, ", 'e', this.checked)"),
                    style = "margin-bottom: 10px;margin-right: 10px;transform: scale(1.5);")
-                }
+               }
            )
         )
       }})
@@ -159,6 +252,20 @@ sketch <- function(data.tabla, datos, originales, idioma, part, tipo.columnas) {
 gg_color_hue <- function(n) {
   hues = seq(15, 375, length = n + 1)
   hcl(h = hues, l = 65, c = 100)[1:n]
+}
+
+restaurar.validacion <- function(updateData) {
+  updateData$numGrupos <- NULL
+  updateData$numValC   <- NULL
+  updateData$grupos    <- NULL
+  updateData$datos.tabla[[tr("part", updateData$idioma)]] <- NULL
+}
+
+restaurar.segmentacion <- function(updateData) {
+  updateData$datos.prueba      <- NULL
+  updateData$datos.aprendizaje <- NULL
+  updateData$variable.predecir <- NULL
+  updateData$indices           <- NULL
 }
 
 ############################### Generar Código ################################

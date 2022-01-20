@@ -1,12 +1,13 @@
 #' r_numerico UI Function
 #'
-#' @description A shiny Module.
+#' @param id Internal parameters for {shiny}.
 #'
-#' @param id,input,output,session Internal parameters for {shiny}.
-#'
-#' @noRd 
-#'
-#' @importFrom shiny NS tagList 
+#' @author Diego Jimenez <diego.jimenez@promidat.com>
+#' @return shiny ui
+#' @export mod_r_numerico_ui
+#' @import shiny
+#' @import shinydashboardPlus
+#' 
 mod_r_numerico_ui <- function(id) {
   ns <- NS(id)
   tagList(
@@ -15,7 +16,16 @@ mod_r_numerico_ui <- function(id) {
 }
 
 #' r_numerico Server Function
-#' @keywords internal
+#'
+#' @param id Internal parameters for {shiny}.
+#' @param updateData shiny reactive values.
+#'
+#' @author Diego Jimenez <diego.jimenez@promidat.com>
+#' @return shiny server
+#' @import shiny
+#' @importFrom stats median
+#' @export mod_r_numerico_server
+#' 
 mod_r_numerico_server <- function(id, updateData) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns

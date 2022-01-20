@@ -4,20 +4,18 @@
 \alias{mod_carga_datos_ui}
 \title{carga_datos UI Function}
 \usage{
-mod_carga_datos_ui(id)
+mod_carga_datos_ui(id, paquete = "predictoR")
 }
 \arguments{
 \item{id}{Internal parameters for {shiny}.}
+
+\item{paquete}{indicates if the data is going to be used for exploratory, predictive, or regression analysis.}
 }
 \value{
 shiny ui
 }
 \description{
 carga_datos UI Function
-}
-\examples{
-mod_carga_datos_ui("carga_datos_ui_1")
-
 }
 \author{
 Diego Jimenez <diego.jimenez@promidat.com>
