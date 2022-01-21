@@ -5,3 +5,7 @@
 # readeR 0.2.0
 
 * Functions that generate UI html are exported.
+
+# readeR 0.3.0
+
+* Functions to translate words on the application are exported.

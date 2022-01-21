@@ -41,7 +41,7 @@ app_server <- function(input, output, session) {
   # Update on Language
   observeEvent(input$idioma, {
     updateData$idioma = input$idioma
-    updateLabelInput(session, cambiar.labels(), tr(cambiar.labels(), input$idioma))
+    updateLabelInput(session, labels_readeR(), tr(labels_readeR(), input$idioma))
   })
   
   mod_carga_datos_server("carga_datos_ui_1", updateData, modelos, paquete)

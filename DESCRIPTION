@@ -1,6 +1,6 @@
 Package: readeR
 Title: Read Data for Analysis System
-Version: 0.2.0
+Version: 0.3.0
 Authors@R: c(person(given = "Oldemar", family = "Rodriguez", role = c("aut", "cre"), email = "oldemar.rodriguez@ucr.ac.cr"),
             person(given = "Diego", family = "Jiménez", role = c("ctb", "prg")),
             person(given = "Joseline", family = "Quirós", role = c("ctb", "prg")))
@@ -8,6 +8,7 @@ Description: Provides a framework for a database through a 'shiny' graphical int
 License: GPL (>=2)
 Imports: 
     DT,
+    plyr,
     caret,
     shiny,
     golem,
