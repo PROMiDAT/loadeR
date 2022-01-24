@@ -59,8 +59,8 @@ app_ui <- function(request) {
                    sliderInput(inputId = "aux", min = 2, value = 2,
                                label = "Cantidad de Clusters", max = 10),
                    colourpicker::colourInput(
-                     "auxColor", NULL, value = "red", allowTransparent = T)
-                   #radioSwitch("deleteNAaux", "eliminanaaux", c("eliminarai", "impsutar")),
+                     "auxColor", NULL, value = "red", allowTransparent = T),
+                   radioSwitch("deleteNAaux", "eliminanaaux", c("eliminarai", "impsutar")),
           )
         )
       ),

@@ -7,10 +7,23 @@
 #' @return shiny ui
 #' @export mod_carga_datos_ui
 #' @import shiny
+#' @import htmltools
 #' @import shinydashboardPlus
 #' 
 mod_carga_datos_ui <- function(id, paquete = "predictoR") {
   ns <- NS(id)
+  
+  # declare dependencies
+  shiny::addResourcePath(
+    "cargaDatos-lib", system.file("assets", "cargaDatos", package = "readeR"))
+  
+  deps <- list(
+    htmltools::htmlDependency(
+      "cargaDatos-lib", "0.1.0", c(href = "cargaDatos-lib"),
+      script = "cargaDatos.js",
+      stylesheet = "cargaDatos.css"
+    )
+  )
   
   carga <- list(
     tabsetPanel(
@@ -130,7 +143,7 @@ mod_carga_datos_ui <- function(id, paquete = "predictoR") {
   opc_load <- tabsOptions(botones = iconos, widths = widths, 
                           heights = heights, tabs.content = contenido)
   
-  tagList(
+  inputTag <- tagList(
     tabBoxPrmdt(
       id = "data", title = NULL, opciones = opc_load,
       open = "tab-content box-option-open-left",
@@ -141,6 +154,8 @@ mod_carga_datos_ui <- function(id, paquete = "predictoR") {
                        type = "html", loader = "loader4")))
     )
   )
+  
+  return(htmltools::attachDependencies(inputTag, deps))
 }
 
 #' carga_datos Server Functions
@@ -176,7 +191,7 @@ mod_carga_datos_server <- function(id, updateData, modelos, paquete = "predictoR
     renombrar <- function(indice, nuevo_nombre) {
       nom.column <- colnames(updateData$datos.tabla)[indice]
       if(nom.column %not_in% colnames(updateData$datos)) {
-        showNotification("ERROR CD040: Cant rename an eliminated column.", 
+        showNotification("ERROR CD040: Cant rename an eliminated column.",
                          type = "error")
       } else {
         pos1 <- which(colnames(updateData$datos) == nom.column)
@@ -331,9 +346,6 @@ mod_carga_datos_server <- function(id, updateData, modelos, paquete = "predictoR
       disyuntivas$nombre     <- NULL
       
       tryCatch({
-        #codigo <- code.carga(rowname, ruta$name, sep, dec, encabezado, deleteNA)
-        #updateAceEditor(session, "fieldCode", value = codigo)
-        
         if(input$file_type == "<span data-id=\"texf\"></span>") {
           rowname    <- isolate(input$rowname)
           ruta       <- isolate(input$archivo)
@@ -341,6 +353,9 @@ mod_carga_datos_server <- function(id, updateData, modelos, paquete = "predictoR
           dec        <- isolate(input$dec)
           encabezado <- isolate(input$header)
           deleteNA   <- isolate(input$deleteNA)
+          
+          cod <- code.carga(rowname, ruta$name, sep, dec, encabezado, deleteNA)
+          updateData$code  <- list(carga = list(doccarga = cod))
           
           updateData$originales <- carga.datos(
             rowname, ruta$datapath, sep, dec, encabezado, deleteNA)
@@ -354,6 +369,11 @@ mod_carga_datos_server <- function(id, updateData, modelos, paquete = "predictoR
           fila_final  <- isolate(input$fila_final)
           col_final   <- isolate(input$col_final)
           deleteNA    <- isolate(input$deleteNA_xlsx)
+          
+          cod <- code.carga.xlsx(
+            ruta$name, num_hoja, encabezado, fila_inicio, col_inicio, 
+            fila_final, col_final, rowname, deleteNA)
+          updateData$code <- list(carga = list(doccarga = cod))
           
           updateData$originales <- carga.datos.excel(
             ruta$datapath, num_hoja, encabezado, fila_inicio, col_inicio, 

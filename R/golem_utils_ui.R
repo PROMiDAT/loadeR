@@ -575,6 +575,19 @@ tabsOptions <- function(
   botones = list(icon("cog")), widths = 100,
   heights = 50, tabs.content = list("")
 ) {
+  
+  # declare dependencies
+  shiny::addResourcePath(
+    "tabsOptions-lib", system.file("assets", "tabsOptions", package = "readeR"))
+  
+  deps <- list(
+    htmltools::htmlDependency(
+      "tabsOptions-lib", "0.1.0", c(href = "tabsOptions-lib"),
+      script = "tabsOptions.js",
+      stylesheet = "tabsOptions.css"
+    )
+  )
+  
   res <- ""
   codeButtons <- ""
   cant <- length(botones)
@@ -599,5 +612,7 @@ tabsOptions <- function(
       class = "btn-options", style = "position:relative;", 
       width = "100%", HTML(codeButtons))
   )
-  return(tags$div(HTML(res)))
+  inputTag <- tags$div(HTML(res))
+  
+  return(htmltools::attachDependencies(inputTag, deps))
 }

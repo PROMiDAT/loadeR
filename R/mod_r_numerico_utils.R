@@ -18,16 +18,16 @@ resumen.numerico <- function(data, variable, idioma = "es") {
       Value = format(round(quantile(data[, variable], .75), 3), scientific = F)
     ),
     Mediana = list(
-      id = "mediana", Label = tags$span(`data-id`="mediana", tr("mediana", idioma)),
+      id = "mediana", Label = tags$span(`data-id`="mediana", tr("median", idioma)),
       Value = format(round(median(data[, variable]), 3), scientific = F)),
     Minimo = list(
-      id = "minimo", Label = tags$span(`data-id`="minimo", tr("minimo", idioma)),
+      id = "minimo", Label = tags$span(`data-id`="minimo", tr("min", idioma)),
       Value = format(round(min(data[, variable]), 3), scientific = F)),
     Promedio = list(
-      id = "promedio", Label = tags$span(`data-id`="promedio", tr("promedio", idioma)),
+      id = "promedio", Label = tags$span(`data-id`="promedio", tr("mean", idioma)),
       Value = format(round(mean(data[, variable]), 3), scientific = F)),
     Maximo = list(
-      id = "maximo", Label = tags$span(`data-id`="maximo", tr("maximo", idioma)),
+      id = "maximo", Label = tags$span(`data-id`="maximo", tr("max", idioma)),
       Value = format(round(max(data[, variable]), 3), scientific = F)),
     DS = list(
       id = "ds", Label = tags$span(`data-id`="ds", tr("ds", idioma)), 

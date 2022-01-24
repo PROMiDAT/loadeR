@@ -1,0 +1,52 @@
+/* radioSwitch */
+
+.radioGroupButtons {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: separate;
+}
+
+.btn-radiogroup {
+    vertical-align: middle;
+    display: table-cell;
+    position: relative;
+    float: none;
+}
+
+.btn-radioswitch.active {
+    color: #fff;
+    background-color: #3c8dbc;
+    border-color: #367fa9;
+}
+
+.btn-radioswitch {
+    color: black;
+    background-color: #bbb;
+}
+
+.btn-radiogroup>.btn {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    position: relative;
+    float: left;
+    width: 100%;
+}
+
+.btn.radiobtn .radio-btn-icon-yes {
+	opacity: 0;
+	display: none;
+}
+.btn.radiobtn.active .radio-btn-icon-yes {
+	opacity: 1;
+	display: inline-block;
+}
+
+.btn.radiobtn.active .radio-btn-icon-no {
+	opacity: 0; display: none;
+}
+.btn.radiobtn .radio-btn-icon-no {
+	opacity: 1; display: inline-block;
+}

@@ -83,7 +83,8 @@ translation.readeR <- function() {
             'run', 'scell', 'seed', 'selcolbar', 'selcolline', 'selcolor',
             'selcolpoint', 'seldec', 'selfile', 'selhead', 'selidioma',
             'selna', 'selpred', 'selrow', 'selsep', 'sigue', 'subi', 'tasim',
-            'test', 'texf', 'train', 'tran', 'tt', 'vali', 'version'),
+            'test', 'texf', 'train', 'tran', 'tt', 'vali', 'version', 'q1',
+            'q3', 'median', 'min', 'mean', 'max', 'ds', 'hist', 'curva'),
     es  = c('Acerca De', 'Alfa', 'Ascendente', 'Asimetría', 
             'Estadísticas Básicas', 'Cargar', 'Categórica', 'Categóricas',
             'Columna', 'TODOS LOS DERECHOS RESERVADOS A', 'Correlación',
@@ -105,7 +106,9 @@ translation.readeR <- function() {
             'Separador de Datos', '¿Sigue la normal?', 'Subir',
             'Valor del test', 'Prueba', 'Archivo de texto', 'Aprendizaje',
             'Transformar', 'Aprendizaje - Prueba', 'Seleccionar muestra',
-            'VERSIÓN DEL SISTEMA'),
+            'VERSIÓN DEL SISTEMA', 'Primer Cuartil', 'Tercer Cuartil', 
+            'Mediana', 'Mínimo', 'Promedio', 'Máximo', 'Desviación Estandar',
+            'Histograma', 'Curva Normal'),
     en  = c('About', 'Alpha', 'Ascendant', 'Asymmetry', 'Basic Statistics',
             'Load', 'Categorical', 'Categoricals', 'Column',
             'ALL RIGHTS RESERVED TO', 'Correlation', 'Cross Validation', 'Data',
@@ -123,7 +126,9 @@ translation.readeR <- function() {
             'Select the variable to be predicted', 'Row names',
             'Data Separator', 'is normally distributed?', 'Upload',
             'Test value', 'Test', 'Text file', 'Train', 'Transform',
-            'Train - Test', 'Select sample', 'SYSTEM VERSION')
+            'Train - Test', 'Select sample', 'SYSTEM VERSION', 
+            'First Quartile', 'Third Quartile', 'Median', 'Minimum', 'Mean',
+            'Maximum', 'Standard deviation', 'Histogram', 'Normal Curve')
   )
   
   translation.readeR <- dlply(arch , .(key), function(s) key = as.list(s))
@@ -172,7 +177,8 @@ labels_readeR <- function() {
          "sigue", "nres", "selcolor", "acerca", "selpred", "train", "test", 
          "tt", "seed", "cros", "ngr", "nvc", "part", "info", "copyright", 
          "version", "habi", "desh", "asc", "dsc", "texf", "nhoj", "scell", 
-         "ecell", "row", "col", "vali")
+         "ecell", "row", "col", "vali", 'q1', 'q3', 'median', 'min', 'mean',
+         'max', 'ds', 'hist', 'curva')
   return(x)
 }
 

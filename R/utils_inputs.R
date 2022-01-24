@@ -1,6 +1,18 @@
 radioSwitch <- function(id, label = NULL, names, values = NULL, val.def = T) {
+  # declare dependencies
+  shiny::addResourcePath(
+    "radioSwitch-lib", system.file("assets", "radioSwitch", package = "readeR"))
+  
+  deps <- list(
+    htmltools::htmlDependency(
+      "radioSwitch-lib", "0.1.0", c(href = "radioSwitch-lib"),
+      script = "radioSwitch.js",
+      stylesheet = "radioSwitch.css"
+    )
+  )
+  
   if(is.null(values)) values <- c(TRUE, FALSE)
-  tags$div(
+  inputTag <- tags$div(
     class = "form-group", `data-shinyjs-resettable-type`="RadioButtons",
     `data-shinyjs-resettable-value` = names[1],
     if(!is.null(label)) {
@@ -49,6 +61,8 @@ radioSwitch <- function(id, label = NULL, names, values = NULL, val.def = T) {
       )
     )
   )
+  
+  htmltools::attachDependencies(inputTag, deps)
 }
 
 #' Create a label that can be used to show text.
@@ -59,12 +73,27 @@ radioSwitch <- function(id, label = NULL, names, values = NULL, val.def = T) {
 #' @author Diego Jimenez <diego.jimenez@promidat.com>
 #' @return HTML
 #' @import shiny
+#' @import htmltools
 #' @export labelInput
 #' @examples
 #' labelInput("id", "data")
 #'
 labelInput <- function(inputId, value = "") {
-  tags$span(`data-id` = inputId, value)
+  
+  # declare dependencies
+  shiny::addResourcePath(
+    "labelInput-lib", system.file("assets", "labelInput", package = "readeR"))
+  
+  deps <- list(
+    htmltools::htmlDependency(
+      "labelInput-lib", "0.1.0", c(href = "labelInput-lib"),
+      script = "labelInput.js"
+    )
+  )
+  
+  inputTag <- tags$span(`data-id` = inputId, value)
+  
+  htmltools::attachDependencies(inputTag, deps)
 }
 
 #' Change the value of a label input on the client.

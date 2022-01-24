@@ -101,14 +101,15 @@ mod_normal_server <- function(id, updateData) {
       datos     <- updateData$datos[, var]
       colorBar  <- isolate(input$col_hist_bar)
       colorLine <- isolate(input$col_hist_line)
-      nombres   <- c(tr("histograma", updateData$idioma), 
-                     tr("curvanormal", updateData$idioma))
+      nombres   <- c(tr("hist", updateData$idioma), 
+                     tr("curva", updateData$idioma))
       
       tryCatch({
         cod <- paste0("e_histnormal(datos[['", var, "']], '", colorBar,
                       "', '", colorLine, "', c('", nombres[1], "', '", 
                       nombres[2], "'))")
-        updateAceEditor(session, "fieldCodeNormal", value = cod)
+        isolate(updateData$code[['basico']][['docnormal']] <- cod)
+        
         e_histnormal(datos, colorBar, colorLine, nombres)
       }, error = function(e) {
         showNotification(paste0("ERROR: ", e), duration = 10, type = "error")
@@ -127,7 +128,7 @@ mod_normal_server <- function(id, updateData) {
       tryCatch({
         cod <- paste0("e_qq(datos[['", var, "']], '", colorPoint,
                       "', '", colorLine, "')")
-        updateAceEditor(session, "fieldCodeQplot", value = cod)
+        isolate(updateData$code[['basico']][['docqq']] <- cod)
         
         e_qq(datos, colorPoint, colorLine)
       }, error = function(e) {
@@ -148,7 +149,7 @@ mod_normal_server <- function(id, updateData) {
                  tr('tasim', isolate(updateData$idioma)))
       
       tryCatch({
-        updateAceEditor(session, "fieldCalcNormal", value = "dfnormal(datos)")
+        isolate(updateData$code[['basico']][['docnormaldf']] <- "dfnormal(datos)")
         res <- dfnormal(datos)
         
         res <- res[, c(1, 5)]

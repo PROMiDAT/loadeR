@@ -282,6 +282,21 @@ code.carga <- function(nombre.filas = T, ruta = NULL, separador = ";",
   return(res)
 }
 
+code.carga.xlsx <- function(
+  ruta, sheet = 1, header = T, startRow = 0, startCol = 0, endRow = 0,
+  endCol = 0, nombre.filas = T, incluir.NA = F) {
+  res <- paste0(
+    "datos <- readWorksheetFromFile('", ruta, "', sheet = '", sheet, 
+    "', header = '", header, "', startRow = ", startRow, ", startCol = ", 
+    startCol, ", endRow = ", endRow, ", endCol = ", endCol, ")\n")
+  if(nombre.filas) {
+    res <- paste0(res, "row.names(datos) <- datos[[1]]\n")
+    res <- paste0(res, "datos[[1]] <- NULL\n")
+  }
+  res <- paste0(res, "\n", code.NA(incluir.NA))
+  return(res)
+}
+
 code.NA <- function(deleteNA = T) {
   res <- ifelse(
     deleteNA, "datos <- na.omit(datos)\n",

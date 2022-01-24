@@ -66,20 +66,3 @@ $.extend(radioGroupButtonsBinding, {
 });
 
 Shiny.inputBindings.register(radioGroupButtonsBinding, 'shiny.radioGroupButtonsInput');
-
-// LabelInput
-Shiny.addCustomMessageHandler("updateLabel",
-  function(message) {
-    for (var i = 0; i < message.ids.length; i++) {
-      element = $("[data-id=" + message.ids[i] + "]");
-      for (var j = 0; j < element.length; j++) {
-        element[j].innerHTML = message.values[i];
-      }
-    }
-  }
-);
-
-// Action transform, remove, rename column.
-var accion = function(col, acc, val) {
-  Shiny.setInputValue("carga_datos_ui_1-accion", [col, acc, val], {priority: "event"});
-};

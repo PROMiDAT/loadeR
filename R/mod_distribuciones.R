@@ -102,7 +102,7 @@ mod_distribuciones_server <- function(id, updateData) {
         cod <- paste0("e_histboxplot(datos[['", var, "']], '", var, "', '", 
                       colorBar, "', '", colorPoint, "', c('", 
                       paste(titulos, collapse = "', '"), "'))\n")
-        updateAceEditor(session, "fieldCodeNum", value = cod)
+        isolate(updateData$code[['basico']][['docdistnum']] <- cod)
         e_histboxplot(datos[[var]], var, colorBar, colorPoint, titulos)
       }, error = function(e) {
         showNotification(paste0("ERROR: ", e), duration = 10, type = "error")
@@ -130,7 +130,7 @@ mod_distribuciones_server <- function(id, updateData) {
         datos.plot <- updateData$datos[, var]
         
         cod <- code.dist.cat(var)
-        updateAceEditor(session, "fieldCodeCat", value = cod)
+        isolate(updateData$code[['basico']][['docdistcat']] <- cod)
         
         datos.plot <- data.frame (
           label = levels(datos.plot),

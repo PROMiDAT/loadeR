@@ -6,13 +6,28 @@
 #' @return shiny ui
 #' @export mod_r_numerico_ui
 #' @import shiny
+#' @import htmltools
 #' @import shinydashboardPlus
 #' 
 mod_r_numerico_ui <- function(id) {
   ns <- NS(id)
-  tagList(
+  
+  # declare dependencies
+  shiny::addResourcePath(
+    "resumenNumerico-lib", system.file("assets", "resumenNumerico", package = "readeR"))
+  
+  deps <- list(
+    htmltools::htmlDependency(
+      "resumenNumerico-lib", "0.1.0", c(href = "resumenNumerico-lib"),
+      stylesheet = "resumenNumerico.css"
+    )
+  )
+  
+  inputTag <- tagList(
     div(uiOutput(ns("resumennumerico")))
   )
+  
+  return(htmltools::attachDependencies(inputTag, deps))
 }
 
 #' r_numerico Server Function
@@ -64,6 +79,7 @@ mod_r_numerico_server <- function(id, updateData) {
         )))
       }))
       
+      isolate(updateData$code[['basico']][['docresumen']] <- "summary(datos)")
       res <- tags$div(style = "height: 80vh; overflow-y: scroll;",
                       do.call(tagList, res))
       
