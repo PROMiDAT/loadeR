@@ -553,6 +553,7 @@ mod_carga_datos_server <- function(id, updateData, modelos, paquete = "predictoR
             aseed      <- isolate(input$aseed)
             
             res <- segmentar.datos(datos, variable, porcentaje, seed, aseed)
+            updateData$variable.predecir <- variable
             updateData$datos.prueba      <- res$test
             updateData$datos.aprendizaje <- res$train
             nom.part <- vector(mode = "character", length = nrow(datos))
