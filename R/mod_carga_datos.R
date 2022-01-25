@@ -578,7 +578,7 @@ mod_carga_datos_server <- function(id, updateData, modelos, paquete = "predictoR
             updateData$variable.predecir <- variable
             updateData$numGrupos         <- num.grupos
             updateData$grupos            <- grupos
-            updateData$numValC           <- numValC
+            updateData$numValC           <- num.valC
             
             grupos <- updateData$grupos[[1]]
             for (grupo in 1:length(grupos)) {

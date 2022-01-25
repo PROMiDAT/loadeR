@@ -311,7 +311,7 @@ code.NA <- function(deleteNA = T) {
       "      datos[, var][is.na(datos[, var])] <- mean(datos[, var], na.rm = T)\n",
       "    } else {\n",
       "      datos[, var][is.na(datos[, var])] <- Mode(datos[, var])\n",
-      "    }\n  }\n}"))
+      "    }\n  }\n}\n"))
   return(res)
 }
 
@@ -330,7 +330,7 @@ code.trans <- function(var, nuevo.tipo) {
   }
 }
 
-code.segment.tt <- function(variable.predecir, porcentaje = 30, semilla = 5, perm.semilla = F) {
+code.segment.tt <- function(var, porcentaje = 30, semilla = 5, perm.semilla = F) {
   res <- "### doctt\n"
   
   if (perm.semilla) {
@@ -339,30 +339,24 @@ code.segment.tt <- function(variable.predecir, porcentaje = 30, semilla = 5, per
   }
   
   res <- paste0(
-    res, "\n",
-    "particion <- createDataPartition(y = datos[, '", variable.predecir, "'], p = ", porcentaje/100, ", list = F)\n",
+    res,
+    "particion <- createDataPartition(y = datos[, '", var, "'], p = ", porcentaje/100, ", list = F)\n",
     "indices <- particion[, 1]\n",
     "test  <- datos[-particion, ]\n",
-    "train <- datos[particion, ]\n\n",
+    "train <- datos[particion, ]\n"
   )
   
   return(res)
 }
 
-code.segment.vc <- function(variable.predecir, validaciones, grupos) {
-  res <- "### doccv\n"
-  
-  if (perm.semilla) {
-    semilla <- ifelse(is.numeric(semilla), semilla, 5)
-    res <- paste0(res, "set.seed(", semilla, ")\n")
-  }
-  
+code.segment.vc <- function(var, validaciones, grupos) {
   res <- paste0(
-    res, "\n",
-    "particion <- createDataPartition(y = datos[, '", variable.predecir, "'], p = ", porcentaje/100, ", list = F)\n",
-    "indices <- particion[, 1]\n",
-    "test  <- datos[-particion, ]\n",
-    "train <- datos[particion, ]\n\n",
+    "### doccv\n",
+    "grupos <- vector(mode = 'list', length = ", validaciones, ")\n",
+    "for(i in 1:", validaciones, ") {\n",
+    "  grupo <- createFolds(datos[, ", var, "], ", grupos, ")\n",
+    "  grupos[i] <- list(grupo)\n",
+    "}\n"
   )
   
   return(res)
