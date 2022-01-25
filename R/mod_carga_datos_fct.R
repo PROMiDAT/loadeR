@@ -258,7 +258,7 @@ restaurar.validacion <- function(updateData) {
   updateData$numGrupos <- NULL
   updateData$numValC   <- NULL
   updateData$grupos    <- NULL
-  updateData$datos.tabla[[tr("part", updateData$idioma)]] <- NULL
+  updateData$datos.tabla[["part"]] <- NULL
 }
 
 restaurar.segmentacion <- function(updateData) {
@@ -271,9 +271,11 @@ restaurar.segmentacion <- function(updateData) {
 ############################### Generar Código ################################
 code.carga <- function(nombre.filas = T, ruta = NULL, separador = ";",
                        sep.decimal = ",", encabezado = T, incluir.NA = F) {
-  res <- paste0("datos <- fread('", ruta, "', sep = '", separador, 
-                "', dec = '", sep.decimal, "', header = ", encabezado, 
-                ", stringsAsFactors = T, data.table = F, check.names = T)\n")
+  res <- paste0(
+    "##### doccarga #####\n",
+    "datos <- fread('", ruta, "', sep = '", separador, 
+    "', dec = '", sep.decimal, "', header = ", encabezado, 
+    ", stringsAsFactors = T, data.table = F, check.names = T)\n")
   if(nombre.filas) {
     res <- paste0(res, "row.names(datos) <- datos[[1]]\n")
     res <- paste0(res, "datos[[1]] <- NULL\n")
@@ -286,6 +288,7 @@ code.carga.xlsx <- function(
   ruta, sheet = 1, header = T, startRow = 0, startCol = 0, endRow = 0,
   endCol = 0, nombre.filas = T, incluir.NA = F) {
   res <- paste0(
+    "##### doccarga #####\n",
     "datos <- readWorksheetFromFile('", ruta, "', sheet = '", sheet, 
     "', header = '", header, "', startRow = ", startRow, ", startCol = ", 
     startCol, ", endRow = ", endRow, ", endCol = ", endCol, ")\n")
@@ -325,4 +328,42 @@ code.trans <- function(var, nuevo.tipo) {
       "datos <- datos.disyuntivos(datos, '", var,"')\n", 
       "datos[['", var, "']] <- NULL\n"))
   }
+}
+
+code.segment.tt <- function(variable.predecir, porcentaje = 30, semilla = 5, perm.semilla = F) {
+  res <- "### doctt\n"
+  
+  if (perm.semilla) {
+    semilla <- ifelse(is.numeric(semilla), semilla, 5)
+    res <- paste0(res, "set.seed(", semilla, ")\n")
+  }
+  
+  res <- paste0(
+    res, "\n",
+    "particion <- createDataPartition(y = datos[, '", variable.predecir, "'], p = ", porcentaje/100, ", list = F)\n",
+    "indices <- particion[, 1]\n",
+    "test  <- datos[-particion, ]\n",
+    "train <- datos[particion, ]\n\n",
+  )
+  
+  return(res)
+}
+
+code.segment.vc <- function(variable.predecir, validaciones, grupos) {
+  res <- "### doccv\n"
+  
+  if (perm.semilla) {
+    semilla <- ifelse(is.numeric(semilla), semilla, 5)
+    res <- paste0(res, "set.seed(", semilla, ")\n")
+  }
+  
+  res <- paste0(
+    res, "\n",
+    "particion <- createDataPartition(y = datos[, '", variable.predecir, "'], p = ", porcentaje/100, ", list = F)\n",
+    "indices <- particion[, 1]\n",
+    "test  <- datos[-particion, ]\n",
+    "train <- datos[particion, ]\n\n",
+  )
+  
+  return(res)
 }

@@ -345,6 +345,9 @@ mod_carga_datos_server <- function(id, updateData, modelos, paquete = "predictoR
       disyuntivas$valor      <- NULL
       disyuntivas$nombre     <- NULL
       
+      restaurar.segmentacion(updateData)
+      restaurar.validacion(updateData)
+      
       tryCatch({
         if(input$file_type == "<span data-id=\"texf\"></span>") {
           rowname    <- isolate(input$rowname)
@@ -354,11 +357,11 @@ mod_carga_datos_server <- function(id, updateData, modelos, paquete = "predictoR
           encabezado <- isolate(input$header)
           deleteNA   <- isolate(input$deleteNA)
           
-          cod <- code.carga(rowname, ruta$name, sep, dec, encabezado, deleteNA)
-          updateData$code  <- list(carga = list(doccarga = cod))
-          
           updateData$originales <- carga.datos(
             rowname, ruta$datapath, sep, dec, encabezado, deleteNA)
+          
+          cod <- code.carga(rowname, ruta$name, sep, dec, encabezado, deleteNA)
+          updateData$code <- append(updateData$code, cod)
         } else {
           ruta        <- isolate(input$archivo_xslx)
           num_hoja    <- isolate(input$num_hoja)
@@ -370,14 +373,14 @@ mod_carga_datos_server <- function(id, updateData, modelos, paquete = "predictoR
           col_final   <- isolate(input$col_final)
           deleteNA    <- isolate(input$deleteNA_xlsx)
           
-          cod <- code.carga.xlsx(
-            ruta$name, num_hoja, encabezado, fila_inicio, col_inicio, 
-            fila_final, col_final, rowname, deleteNA)
-          updateData$code <- list(carga = list(doccarga = cod))
-          
           updateData$originales <- carga.datos.excel(
             ruta$datapath, num_hoja, encabezado, fila_inicio, col_inicio, 
             fila_final, col_final, rowname, deleteNA)
+          
+          cod <- code.carga.xlsx(
+            ruta$name, num_hoja, encabezado, fila_inicio, col_inicio, 
+            fila_final, col_final, rowname, deleteNA)
+          updateData$code <- append(updateData$code, cod)
         }
         
         if(ncol(updateData$originales) <= 1) {
@@ -539,11 +542,6 @@ mod_carga_datos_server <- function(id, updateData, modelos, paquete = "predictoR
       idioma   <- isolate(updateData$idioma)
       tryCatch({
         if(variable != "") {
-          # codigo.editor <- code.segment(porcentaje,
-          #                               variable,
-          #                               semilla,
-          #                               permitir.semilla)
-          # updateAceEditor(session, "fieldCodeSegment", value = codigo.editor)
           
           updateData$datos.tabla[["part"]] <- NULL
           if(input$part_metodo == "<span data-id=\"tt\"></span>") {
@@ -561,6 +559,10 @@ mod_carga_datos_server <- function(id, updateData, modelos, paquete = "predictoR
             nom.part[-res$indices] <- "test"
             updateData$datos.tabla <- cbind(part = as.factor(nom.part), updateData$datos.tabla)
             updateData$indices     <- res$indices
+            
+            cod <- code.segment.tt(variable, porcentaje, seed, aseed)
+            updateData$code <- append(updateData$code, cod)
+            
           } else {
             sampleopt$valor <- 1
             num.grupos <- isolate(input$numGrupos)
@@ -576,6 +578,7 @@ mod_carga_datos_server <- function(id, updateData, modelos, paquete = "predictoR
             updateData$variable.predecir <- variable
             updateData$numGrupos         <- num.grupos
             updateData$grupos            <- grupos
+            updateData$numValC           <- numValC
             
             grupos <- updateData$grupos[[1]]
             for (grupo in 1:length(grupos)) {
@@ -583,6 +586,9 @@ mod_carga_datos_server <- function(id, updateData, modelos, paquete = "predictoR
             }
             
             updateData$datos.tabla <- cbind(part = as.factor(nom.grupo), updateData$datos.tabla)
+            
+            cod <- code.segment.vc(variable, num.valC, num.grupos)
+            updateData$code <- append(updateData$code, cod)
           }
         }
       }, error = function(e) {

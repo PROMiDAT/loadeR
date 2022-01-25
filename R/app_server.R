@@ -29,7 +29,7 @@ app_server <- function(input, output, session) {
     datos = NULL, originales = NULL, datos.tabla = NULL, idioma = NULL, 
     datos.prueba = NULL, datos.aprendizaje = NULL, variable.predecir = NULL, 
     indices = NULL, numGrupos = NULL, numValC = NULL, grupos = NULL, 
-    code = NULL, codenew = NULL)
+    code = list())
   
   modelos <-  rv(
     svm = NULL, knn = NULL, bayes = NULL, rl = NULL, rlr = NULL, xgb = NULL,
@@ -44,34 +44,20 @@ app_server <- function(input, output, session) {
   })
   
   # Update Code
-  observeEvent(c(updateData$code, updateData$codenew, input$idioma), {
-    todo  <- updateData$code
-    nuevo <- updateData$codenew
-    lg    <- input$idioma
+  observeEvent(c(updateData$code, input$idioma), {
+    lg <- input$idioma
     
-    comp <- todo[["comp"]]
-    todo[["comp"]] <- NULL
-    
-    cod <- paste0(
+    codigo.completo <- paste0(
       "library(XLConnect)\n", "library(caret)\n",
       "library(echarts4r)\n", "library(readeR)\n\n"
     )
-    for (modulo in todo) {
-      for (n in names(modulo)) {
-        cod <- paste0(cod, "### ", tr(n, lg), "\n", modulo[[n]], "\n\n")
-      }
+    for (codigo in updateData$code) {
+      codigo.completo <- paste0(codigo.completo, "\n", codigo)
     }
-    for (n in names(comp)) {
-      cod <- paste0(cod, "### ", tr(n, lg), "\n", comp[[n]], "\n\n")
-    }
-    if(!is.null(nuevo)) {
-      cod <- paste0(cod, "############  ", tr("news", lg), "  ###########\n\n")
-    }
-    for (n in names(nuevo)) {
-      cod <- paste0(cod, "### ", tr(n, lg), "\n", nuevo[[n]], "\n\n")
-    }
-    updateAceEditor(session, "fieldCode", value = cod)
+    updateAceEditor(session, "fieldCode", value = codigo.completo)
   })
+  
+  ##################################  Modules  ################################
   
   mod_carga_datos_server("carga_datos_ui_1", updateData, modelos, paquete)
   

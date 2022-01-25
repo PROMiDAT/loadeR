@@ -84,7 +84,8 @@ translation.readeR <- function() {
             'selcolpoint', 'seldec', 'selfile', 'selhead', 'selidioma',
             'selna', 'selpred', 'selrow', 'selsep', 'sigue', 'subi', 'tasim',
             'test', 'texf', 'train', 'tran', 'tt', 'vali', 'version', 'q1',
-            'q3', 'median', 'min', 'mean', 'max', 'ds', 'hist', 'curva'),
+            'q3', 'median', 'min', 'mean', 'max', 'ds', 'hist', 'curva', 
+            'code'),
     es  = c('Acerca De', 'Alfa', 'Ascendente', 'Asimetría', 
             'Estadísticas Básicas', 'Cargar', 'Categórica', 'Categóricas',
             'Columna', 'TODOS LOS DERECHOS RESERVADOS A', 'Correlación',
@@ -108,11 +109,11 @@ translation.readeR <- function() {
             'Transformar', 'Aprendizaje - Prueba', 'Seleccionar muestra',
             'VERSIÓN DEL SISTEMA', 'Primer Cuartil', 'Tercer Cuartil', 
             'Mediana', 'Mínimo', 'Promedio', 'Máximo', 'Desviación Estandar',
-            'Histograma', 'Curva Normal'),
+            'Histograma', 'Curva Normal', 'Código'),
     en  = c('About', 'Alpha', 'Ascendant', 'Asymmetry', 'Basic Statistics',
             'Load', 'Categorical', 'Categoricals', 'Column',
-            'ALL RIGHTS RESERVED TO', 'Correlation', 'Cross Validation', 'Data',
-            'Disabled', 'Disyunctive', 'Scatter Plot', 'Distribution',
+            'ALL RIGHTS RESERVED TO', 'Correlation', 'Cross Validation', 
+            'Data', 'Disabled', 'Disyunctive', 'Scatter Plot', 'Distribution',
             'Descendant', 'End Cell', 'Remove', 'Spanish', 'Enabled',
             'Language', 'Impute', 'MORE INFORMATION', 'Number of Groups',
             'Sheet Number', 'Normality Test', 'Numerical Results', 'Numerical',
@@ -128,7 +129,8 @@ translation.readeR <- function() {
             'Test value', 'Test', 'Text file', 'Train', 'Transform',
             'Train - Test', 'Select sample', 'SYSTEM VERSION', 
             'First Quartile', 'Third Quartile', 'Median', 'Minimum', 'Mean',
-            'Maximum', 'Standard deviation', 'Histogram', 'Normal Curve')
+            'Maximum', 'Standard deviation', 'Histogram', 'Normal Curve', 
+            'Code')
   )
   
   translation.readeR <- dlply(arch , .(key), function(s) key = as.list(s))
@@ -178,7 +180,7 @@ labels_readeR <- function() {
          "tt", "seed", "cros", "ngr", "nvc", "part", "info", "copyright", 
          "version", "habi", "desh", "asc", "dsc", "texf", "nhoj", "scell", 
          "ecell", "row", "col", "vali", 'q1', 'q3', 'median', 'min', 'mean',
-         'max', 'ds', 'hist', 'curva')
+         'max', 'ds', 'hist', 'curva', 'code')
   return(x)
 }
 
