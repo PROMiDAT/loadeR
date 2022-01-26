@@ -45,14 +45,24 @@ app_server <- function(input, output, session) {
   
   # Update Code
   observeEvent(c(updateData$code, input$idioma), {
+    codigo <- updateData$code
     lg <- input$idioma
+    
+    keys <- c(
+      'doccarga', 'doctt', 'doccv', 'docresumen', 'dochist', 'docqq', 
+      'docnormal', 'docdisp', 'docdistnum', 'docdistcat', 'doccor',
+      'docrename', 'doctrans', 'doceliminar')
+    
+    for (k in keys) {
+      codigo <- gsub(k, tr(k, idioma = lg), codigo, fixed = T)
+    }
     
     codigo.completo <- paste0(
       "library(XLConnect)\n", "library(caret)\n",
       "library(echarts4r)\n", "library(readeR)\n\n"
     )
-    for (codigo in updateData$code) {
-      codigo.completo <- paste0(codigo.completo, "\n", codigo)
+    for (cod in codigo) {
+      codigo.completo <- paste0(codigo.completo, "\n", cod)
     }
     updateAceEditor(session, "fieldCode", value = codigo.completo)
   })

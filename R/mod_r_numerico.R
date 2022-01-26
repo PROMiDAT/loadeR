@@ -79,7 +79,8 @@ mod_r_numerico_server <- function(id, updateData) {
         )))
       }))
       
-      isolate(updateData$code[['basico']][['docresumen']] <- "summary(datos)")
+      cod <- paste0("### docresumen\n", "summary(datos)\n")
+      isolate(updateData$code <- append(updateData$code, cod))
       res <- tags$div(style = "height: 80vh; overflow-y: scroll;",
                       do.call(tagList, res))
       

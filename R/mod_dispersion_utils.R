@@ -1,6 +1,7 @@
 ############################### Generar Código ################################
 code.disp.2d <- function(vars, color) {
   res <- paste0(
+    "### docdisp\n",
     "datos.plot <- data.frame(x = datos[['", vars[1], "'], y = datos[['", vars[2], "']],\n",
     "                         id = row.names(datos))\n\n",
     "datos.plot %>% e_charts(x) %>% e_scatter(y, bind = id, symbol_size = 10) %>%\n",
@@ -16,6 +17,7 @@ code.disp.2d <- function(vars, color) {
 
 code.disp.3d <- function(vars, color) {
   res <- paste0(
+    "### docdisp\n",
     "datos.plot <- data.frame(x = datos[['", vars[1], "'], y = datos[['", vars[2], "']],\n",
     "                         z = datos[['", vars[3], "']], id = row.names(datos))\n\n",
     "datos.plot %>% e_charts(x) %>% e_scatter_3d(y, z, bind = id) %>% e_color('", color, "') %>%\n",

@@ -67,7 +67,7 @@ mod_dispersion_server <- function(id, updateData) {
       
       if(length(vars) == 2) {
         cod <- code.disp.2d(vars, color)
-        isolate(updateData$code[['basico']][['docdisp']] <- cod)
+        isolate(updateData$code <- append(updateData$code, cod))
         datos <- data.frame(x = datos[[vars[1]]], y = datos[[vars[2]]],
                             id = row.names(datos))
         
@@ -82,7 +82,7 @@ mod_dispersion_server <- function(id, updateData) {
           ) |> e_legend(F) |> e_show_loading()
       } else if (length(vars) == 3) {
         cod <- code.disp.3d(vars, color)
-        isolate(updateData$code[['basico']][['docdisp']] <- cod)
+        isolate(updateData$code <- append(updateData$code, cod))
         datos <- data.frame(
           x = datos[[vars[1]]], y = datos[[vars[2]]],
           z = datos[[vars[3]]], id = row.names(datos)

@@ -68,72 +68,13 @@ rvtl <- shiny::reactiveValuesToList
 #'
 #' @author Diego Jimenez <diego.jimenez@promidat.com>
 #' @return list
-#' @import plyr
 #' @export translation.readeR
 #' @examples
 #' translation.readeR()
 #'
 translation.readeR <- function() {
-  arch <- data.frame(
-    key = c('acerca', 'alfa', 'asc', 'asim', 'basi', 'carg', 'cat', 'cats',
-            'col', 'copyright', 'corr', 'cros', 'data', 'desh', 'dis', 'disp',
-            'dist', 'dsc', 'ecell', 'elim', 'espa', 'habi', 'idio', 'impu',
-            'info', 'ngr', 'nhoj', 'norm', 'nres', 'num', 'nums', 'nvc',
-            'opts', 'orde', 'part', 'pnorm', 'pvalue', 'rena', 'resu', 'row',
-            'run', 'scell', 'seed', 'selcolbar', 'selcolline', 'selcolor',
-            'selcolpoint', 'seldec', 'selfile', 'selhead', 'selidioma',
-            'selna', 'selpred', 'selrow', 'selsep', 'sigue', 'subi', 'tasim',
-            'test', 'texf', 'train', 'tran', 'tt', 'vali', 'version', 'q1',
-            'q3', 'median', 'min', 'mean', 'max', 'ds', 'hist', 'curva', 
-            'code'),
-    es  = c('Acerca De', 'Alfa', 'Ascendente', 'Asimetría', 
-            'Estadísticas Básicas', 'Cargar', 'Categórica', 'Categóricas',
-            'Columna', 'TODOS LOS DERECHOS RESERVADOS A', 'Correlación',
-            'Validación Cruzada', 'Datos', 'Deshabilitada', 'Disyuntiva',
-            'Dispersión', 'Distribución', 'Descendente', 'Celda final',
-            'Eliminar', 'Español', 'Habilitada', 'Idioma', 'Imputar',
-            'MÁS INFORMACIÓN', 'Número de Grupos', 'Número de Hoja',
-            'Test de Normalidad', 'Resultados Numéricos', 'Numérica',
-            'Numéricas', 'Número de Validaciones', 'Opciones', 'Ordenar',
-            'Partición', 'Gráfico Normalidad', 'P-valor (Shapiro)',
-            'Renombrar', 'Resumen Numérico', 'Fila', 'Ejecutar',
-            'Celda inicial', 'Semilla Aleatoria',
-            'Seleccione el color de la barra',
-            'Seleccione el color de la linea', 'Seleccionar color',
-            'Seleccione el color del punto', 'Separador de Decimales',
-            'Cargar archivo', 'Nombre de Variables', 'Seleccionar Idioma',
-            'Acción para Datos Ausentes (NAs)',
-            'Seleccionar la variable a predecir', 'Nombre de Individuos',
-            'Separador de Datos', '¿Sigue la normal?', 'Subir',
-            'Valor del test', 'Prueba', 'Archivo de texto', 'Aprendizaje',
-            'Transformar', 'Aprendizaje - Prueba', 'Seleccionar muestra',
-            'VERSIÓN DEL SISTEMA', 'Primer Cuartil', 'Tercer Cuartil', 
-            'Mediana', 'Mínimo', 'Promedio', 'Máximo', 'Desviación Estandar',
-            'Histograma', 'Curva Normal', 'Código'),
-    en  = c('About', 'Alpha', 'Ascendant', 'Asymmetry', 'Basic Statistics',
-            'Load', 'Categorical', 'Categoricals', 'Column',
-            'ALL RIGHTS RESERVED TO', 'Correlation', 'Cross Validation', 
-            'Data', 'Disabled', 'Disyunctive', 'Scatter Plot', 'Distribution',
-            'Descendant', 'End Cell', 'Remove', 'Spanish', 'Enabled',
-            'Language', 'Impute', 'MORE INFORMATION', 'Number of Groups',
-            'Sheet Number', 'Normality Test', 'Numerical Results', 'Numerical',
-            'Numericals', 'Number of Cross Validations', 'Options', 'Arrange',
-            'Partition', 'Normal Plot', 'P-value (Shapiro)', 'Rename',
-            'Numeric Summary', 'Row', 'Run', 'Start Cell', 'Random Seed',
-            'Select the bar color', 'Select the line color', 'Select color',
-            'Select the point color', 'Decimal Separator', 'Load archive',
-            'Variables names', 'Select Language',
-            'Action for Missing Data (NAs)',
-            'Select the variable to be predicted', 'Row names',
-            'Data Separator', 'is normally distributed?', 'Upload',
-            'Test value', 'Test', 'Text file', 'Train', 'Transform',
-            'Train - Test', 'Select sample', 'SYSTEM VERSION', 
-            'First Quartile', 'Third Quartile', 'Median', 'Minimum', 'Mean',
-            'Maximum', 'Standard deviation', 'Histogram', 'Normal Curve', 
-            'Code')
-  )
-  
-  translation.readeR <- dlply(arch , .(key), function(s) key = as.list(s))
+  ruta <- system.file("app", "lang", package = "readeR")
+  load(paste0(ruta, "/translation_readeR.bin"))
   
   return(translation.readeR)
 }

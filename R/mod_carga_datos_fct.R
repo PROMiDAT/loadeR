@@ -336,6 +336,8 @@ code.segment.tt <- function(var, porcentaje = 30, semilla = 5, perm.semilla = F)
   if (perm.semilla) {
     semilla <- ifelse(is.numeric(semilla), semilla, 5)
     res <- paste0(res, "set.seed(", semilla, ")\n")
+  } else {
+    res <- paste0(res, "rm(.Random.seed, envir = globalenv())\n")
   }
   
   res <- paste0(

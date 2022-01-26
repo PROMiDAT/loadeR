@@ -88,8 +88,8 @@ mod_normal_server <- function(id, updateData) {
     
     # Update on load data
     observeEvent(updateData$datos, {
-      datos       <- updateData$datos
-      numericos   <- var.numericas(datos)
+      datos     <- updateData$datos
+      numericos <- var.numericas(datos)
       
       updateSelectInput(session, "sel_normal", choices = colnames(numericos))
     })
@@ -105,10 +105,12 @@ mod_normal_server <- function(id, updateData) {
                      tr("curva", updateData$idioma))
       
       tryCatch({
-        cod <- paste0("e_histnormal(datos[['", var, "']], '", colorBar,
-                      "', '", colorLine, "', c('", nombres[1], "', '", 
-                      nombres[2], "'))")
-        isolate(updateData$code[['basico']][['docnormal']] <- cod)
+        cod <- paste0(
+          "### dochist\n",
+          "e_histnormal(datos[['", var, "']], '", colorBar,
+          "', '", colorLine, "', c('", nombres[1], "', '", 
+          nombres[2], "'))\n")
+        isolate(updateData$code <- append(updateData$code, cod))
         
         e_histnormal(datos, colorBar, colorLine, nombres)
       }, error = function(e) {
@@ -126,9 +128,11 @@ mod_normal_server <- function(id, updateData) {
       colorLine  <- isolate(input$col_qq_line)
       
       tryCatch({
-        cod <- paste0("e_qq(datos[['", var, "']], '", colorPoint,
-                      "', '", colorLine, "')")
-        isolate(updateData$code[['basico']][['docqq']] <- cod)
+        cod <- paste0(
+          "### docqq\n",
+          "e_qq(datos[['", var, "']], '", colorPoint,
+          "', '", colorLine, "')\n")
+        isolate(updateData$code <- append(updateData$code, cod))
         
         e_qq(datos, colorPoint, colorLine)
       }, error = function(e) {
@@ -149,7 +153,8 @@ mod_normal_server <- function(id, updateData) {
                  tr('tasim', isolate(updateData$idioma)))
       
       tryCatch({
-        isolate(updateData$code[['basico']][['docnormaldf']] <- "dfnormal(datos)")
+        cod <- paste0("### docnormal\n", "dfnormal(datos)\n")
+        isolate(updateData$code <- append(updateData$code, cod))
         res <- dfnormal(datos)
         
         res <- res[, c(1, 5)]

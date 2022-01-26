@@ -99,10 +99,12 @@ mod_distribuciones_server <- function(id, updateData) {
       )
       
       tryCatch({
-        cod <- paste0("e_histboxplot(datos[['", var, "']], '", var, "', '", 
-                      colorBar, "', '", colorPoint, "', c('", 
-                      paste(titulos, collapse = "', '"), "'))\n")
-        isolate(updateData$code[['basico']][['docdistnum']] <- cod)
+        cod <- paste0(
+          "### docdistnum\n",
+          "e_histboxplot(datos[['", var, "']], '", var, "', '", 
+          colorBar, "', '", colorPoint, "', c('", 
+          paste(titulos, collapse = "', '"), "'))\n")
+        isolate(updateData$code <- append(updateData$code, cod))
         e_histboxplot(datos[[var]], var, colorBar, colorPoint, titulos)
       }, error = function(e) {
         showNotification(paste0("ERROR: ", e), duration = 10, type = "error")
@@ -130,7 +132,7 @@ mod_distribuciones_server <- function(id, updateData) {
         datos.plot <- updateData$datos[, var]
         
         cod <- code.dist.cat(var)
-        isolate(updateData$code[['basico']][['docdistcat']] <- cod)
+        isolate(updateData$code <- append(updateData$code, cod))
         
         datos.plot <- data.frame (
           label = levels(datos.plot),

@@ -99,6 +99,7 @@ e_histboxplot <- function(data, var.name, colorBar = "steelblue", colorPoint = "
 ############################### Generar Código ################################
 code.dist.cat <- function(var) {
   paste0(
+    "### docdistcat\n", 
     "datos.plot <- data.frame (\n",
     "  label = levels(datos[['", var, "']]), value = summary(datos[['", var, "']],\n",
     "  maxsum = length(levels(datos[['", var, "']])))\n",

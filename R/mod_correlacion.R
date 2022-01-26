@@ -72,7 +72,7 @@ mod_correlacion_server <- function(id, updateData) {
       
       tryCatch({
         cod <- code.cor(colores)
-        isolate(updateData$code[['basico']][['doccorr']] <- cod)
+        isolate(updateData$code <- append(updateData$code, cod))
         
         datos.plot <- round(cor(datos), 3)
         e_cor(datos.plot, colores)

@@ -52,6 +52,38 @@ datos.disyuntivos <- function(data, var) {
   return(data)
 }
 
+#' Back disjunctive column to original.
+#'
+#' @param data a data.frame object.
+#' @param var the column name that is disyunctive.
+#'
+#' @author Diego Jimenez <diego.jimenez@promidat.com>
+#' @return data.frame
+#' @export devolver.disyuntivos
+#' @examples
+#' r <- datos.disyuntivos(iris, "Species")
+#' devolver.disyuntivos(r, "Species")
+#' 
+devolver.disyuntivos <- function(data, var) {
+  if(is.null(data)) {
+    return(NULL)
+  }
+  
+  vars <- colnames(data)[grepl(paste0(var, "."), colnames(data), fixed = T)]
+  valores <- rep(NA, nrow(data))
+  
+  for (x in vars) {
+    cat <- paste0(gsub("\\.", "\\\\.", var), ".")
+    cat <- gsub(cat, "", x)
+    valores[which(data[[x]] == 1)] <- cat
+    data[[x]] <- NULL
+  }
+  
+  data[[var]] <- valores
+  
+  return(data)
+}
+
 # Segmenta los datos
 segmentar.datos <- function(datos, variable.predecir, porcentaje = 30, semilla = 5, perm.semilla = F) {
   semilla <- ifelse(is.numeric(semilla), semilla, 5)

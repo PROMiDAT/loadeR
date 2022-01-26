@@ -1,66 +1,90 @@
-key;es;en
-idio;Idioma;Language
-data;Datos;Data
-subi;Subir;Upload
-carg;Cargar;Load
-espa;Español;Spanish
-rena;Renombrar;Rename
-tran;Transformar;Transform
-orde;Ordenar;Arrange
-elim;Eliminar;Remove
-asc;Ascendente;Ascendant
-dsc;Descendente;Descendant
-impu;Imputar;Impute
-selhead;Nombre de Variables;Variables names
-selrow;Nombre de Individuos;Row names
-selsep;Separador de Datos;Data Separator
-seldec;Separador de Decimales;Decimal Separator
-selna;Acción para Datos Ausentes (NAs);Action for Missing Data (NAs)
-selfile;Cargar archivo;Load archive
-selidioma;Seleccionar Idioma;Select Language
-num;Numérica;Numerical
-cat;Categórica;Categorical
-dis;Disyuntiva;Disyunctive
-nums;Numéricas;Numericals
-cats;Categóricas;Categoricals
-opts;Opciones;Options
-run;Ejecutar;Run
-selcolbar;Seleccione el color de la barra;Select the bar color
-selcolline;Seleccione el color de la linea;Select the line color
-selcolpoint;Seleccione el color del punto;Select the point color
-alfa;Alfa;Alpha
-basi;Estadísticas Básicas;Basic Statistics
-resu;Resumen Numérico;Numeric Summary
-norm;Test de Normalidad;Normality Test
-disp;Dispersión;Scatter Plot
-dist;Distribución;Distribution
-corr;Correlación;Correlation
-pnorm;Gráfico Normalidad;Normal Plot
-asim;Asimetría;Asymmetry
-tasim;Valor del test;Test value
-pvalue;P-valor (Shapiro);P-value (Shapiro)
-sigue;¿Sigue la normal?;is normally distributed?
-nres;Resultados Numéricos;Numerical Results
-selcolor;Seleccionar color;Select color
-acerca;Acerca De;About
-selpred;Seleccionar la variable a predecir;Select the variable to be predicted
-train;Aprendizaje;Train
-test;Prueba;Test
-tt;Aprendizaje - Prueba;Train - Test
-seed;Semilla Aleatoria;Random Seed
-part;Partición;Partition
-cros;Validación Cruzada;Cross Validation
-ngr;Número de Grupos;Number of Groups
-nvc;Número de Validaciones;Number of Cross Validations
-desh;Deshabilitada;Disabled
-habi;Habilitada;Enabled
-texf;Archivo de texto;Text file
-nhoj;Número de Hoja;Sheet Number
-scell;Celda inicial;Start Cell
-ecell;Celda final;End Cell
-row;Fila;Row
-col;Columna;Column
-vali;Seleccionar muestra;Select sample
-info;MÁS INFORMACIÓN;MORE INFORMATION
-copyright;TODOS LOS DERECHOS RESERVADOS A;ALL RIGHTS RESERVED TO
-version;VERSIÓN DEL SISTEMA;SYSTEM VERSION
+"key";"es";"en"
+"1";"acerca";"Acerca De";"About"
+"2";"alfa";"Alfa";"Alpha"
+"3";"asc";"Ascendente";"Ascendant"
+"4";"asim";"Asimetría";"Asymmetry"
+"5";"basi";"Estadísticas Básicas";"Basic Statistics"
+"6";"carg";"Cargar";"Load"
+"7";"cat";"Categórica";"Categorical"
+"8";"cats";"Categóricas";"Categoricals"
+"75";"code";"Código";"Code"
+"9";"col";"Columna";"Column"
+"10";"copyright";"TODOS LOS DERECHOS RESERVADOS A";"ALL RIGHTS RESERVED TO"
+"11";"corr";"Correlación";"Correlation"
+"12";"cros";"Validación Cruzada";"Cross Validation"
+"74";"curva";"Curva Normal";"Normal Curve"
+"13";"data";"Datos";"Data"
+"14";"desh";"Deshabilitada";"Disabled"
+"15";"dis";"Disyuntiva";"Disyunctive"
+"16";"disp";"Dispersión";"Scatter Plot"
+"17";"dist";"Distribución";"Distribution"
+"76";"doccarga";"Carga de datos";"Data load"
+"86";"doccor";"Matriz de correlaciones";"Correlation matrix"
+"78";"doccv";"Partición Validación Cruzada";"Cross Validation Partition"
+"83";"docdisp";"Gráfico de dispersión";"Scatter plot"
+"85";"docdistcat";"Gráfico de distribución (catégorica)";"Distribution plot (Categoric)"
+"84";"docdistnum";"Gráfico de distribución (numérica)";"Distribution plot (Numeric)"
+"89";"doceliminar";"Eliminar columna";"Column delete"
+"80";"dochist";"Gráfico normalidad";"Normality plot"
+"82";"docnormal";"Prueba de la normalidad";"Normality test"
+"81";"docqq";"QQplot-QQline";"QQplot-QQline"
+"87";"docrename";"Renombrar columna";"Column rename"
+"79";"docresumen";"Resumen numérico";"Numeric Summary"
+"88";"doctrans";"Transformar columna";"Column transform"
+"77";"doctt";"Partición Aprendizaje-Prueba";"Train-Test Partition"
+"72";"ds";"Desviación Estandar";"Standard deviation"
+"18";"dsc";"Descendente";"Descendant"
+"19";"ecell";"Celda final";"End Cell"
+"20";"elim";"Eliminar";"Remove"
+"21";"espa";"Español";"Spanish"
+"22";"habi";"Habilitada";"Enabled"
+"73";"hist";"Histograma";"Histogram"
+"23";"idio";"Idioma";"Language"
+"24";"impu";"Imputar";"Impute"
+"25";"info";"MÁS INFORMACIÓN";"MORE INFORMATION"
+"71";"max";"Máximo";"Maximum"
+"70";"mean";"Promedio";"Mean"
+"68";"median";"Mediana";"Median"
+"69";"min";"Mínimo";"Minimum"
+"26";"ngr";"Número de Grupos";"Number of Groups"
+"27";"nhoj";"Número de Hoja";"Sheet Number"
+"28";"norm";"Test de Normalidad";"Normality Test"
+"29";"nres";"Resultados Numéricos";"Numerical Results"
+"30";"num";"Numérica";"Numerical"
+"31";"nums";"Numéricas";"Numericals"
+"32";"nvc";"Número de Validaciones";"Number of Cross Validations"
+"33";"opts";"Opciones";"Options"
+"34";"orde";"Ordenar";"Arrange"
+"35";"part";"Partición";"Partition"
+"36";"pnorm";"Gráfico Normalidad";"Normal Plot"
+"37";"pvalue";"P-valor (Shapiro)";"P-value (Shapiro)"
+"66";"q1";"Primer Cuartil";"First Quartile"
+"67";"q3";"Tercer Cuartil";"Third Quartile"
+"38";"rena";"Renombrar";"Rename"
+"39";"resu";"Resumen Numérico";"Numeric Summary"
+"40";"row";"Fila";"Row"
+"41";"run";"Ejecutar";"Run"
+"42";"scell";"Celda inicial";"Start Cell"
+"43";"seed";"Semilla Aleatoria";"Random Seed"
+"44";"selcolbar";"Seleccione el color de la barra";"Select the bar color"
+"45";"selcolline";"Seleccione el color de la linea";"Select the line color"
+"46";"selcolor";"Seleccionar color";"Select color"
+"47";"selcolpoint";"Seleccione el color del punto";"Select the point color"
+"48";"seldec";"Separador de Decimales";"Decimal Separator"
+"49";"selfile";"Cargar archivo";"Load archive"
+"50";"selhead";"Nombre de Variables";"Variables names"
+"51";"selidioma";"Seleccionar Idioma";"Select Language"
+"52";"selna";"Acción para Datos Ausentes (NAs)";"Action for Missing Data (NAs)"
+"53";"selpred";"Seleccionar la variable a predecir";"Select the variable to be predicted"
+"54";"selrow";"Nombre de Individuos";"Row names"
+"55";"selsep";"Separador de Datos";"Data Separator"
+"56";"sigue";"¿Sigue la normal?";"is normally distributed?"
+"57";"subi";"Subir";"Upload"
+"58";"tasim";"Valor del test";"Test value"
+"59";"test";"Prueba";"Test"
+"60";"texf";"Archivo de texto";"Text file"
+"61";"train";"Aprendizaje";"Train"
+"62";"tran";"Transformar";"Transform"
+"63";"tt";"Aprendizaje - Prueba";"Train - Test"
+"64";"vali";"Seleccionar muestra";"Select sample"
+"65";"version";"VERSIÓN DEL SISTEMA";"SYSTEM VERSION"

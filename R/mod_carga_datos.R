@@ -200,6 +200,11 @@ mod_carga_datos_server <- function(id, updateData, modelos, paquete = "predictoR
         colnames(updateData$datos)[pos1]       <- nuevo_nombre
         colnames(updateData$datos.tabla)[pos2] <- nuevo_nombre
         colnames(updateData$originales)[pos3]  <- nuevo_nombre
+        
+        cod <- paste0(
+          "### docrename\n", 
+          "colnames(datos)[", pos1, "] <- ", nuevo_nombre, "\n")
+        updateData$code <- append(updateData$code, cod)
       }
     }
     
@@ -209,6 +214,7 @@ mod_carga_datos_server <- function(id, updateData, modelos, paquete = "predictoR
       datos.tabla <- updateData$datos.tabla
       originales  <- updateData$originales
       nom.column  <- colnames(datos.tabla)[indice]
+      cod <- "### doctrans\n"
       
       if(nom.column %not_in% colnames(datos)) {
         showNotification("ERROR CD050: Cant transform an eliminated column.",
@@ -219,11 +225,13 @@ mod_carga_datos_server <- function(id, updateData, modelos, paquete = "predictoR
              class(datos[, nom.column]) %in% c("numeric", "integer")) {
             datos[, nom.column]       <- as.factor(datos[, nom.column])
             datos.tabla[, nom.column] <- as.factor(datos.tabla[, nom.column])
+            cod <- paste0(cod, "datos[, '", nom.column, "'] <- as.factor(datos[, '", nom.column, "'])\n")
           }
           if(nuevo_tipo == "num" & 
              !(class(datos[, nom.column]) %in% c("numeric", "integer"))) {
             datos[, nom.column]       <- as.numeric(as.character(datos[, nom.column]))
             datos.tabla[, nom.column] <- as.numeric(as.character(datos.tabla[, nom.column]))
+            cod <- paste0(cod, "datos[, '", nom.column, "'] <- as.numeric(as.character(datos[, '", nom.column, "']))\n")
           }
           if(nuevo_tipo == "dis") {
             tipo.original <- ifelse(class(datos[, nom.column]) %in% c("numeric","integer"), "num", "cat")
@@ -238,6 +246,10 @@ mod_carga_datos_server <- function(id, updateData, modelos, paquete = "predictoR
               datos[, cat]       <- disyuntivas$valor[[nom.column]]$nuevo$valores[[cat]]
               datos.tabla[, cat] <- disyuntivas$valor[[nom.column]]$nuevo$valores[[cat]]
             }
+            
+            cod <- paste0(
+              cod, "datos <- datos.disyuntivos(datos, '", nom.column,"')\n",
+              "datos[, '", nom.column, "'] <- NULL\n")
           }
         } else {
           nom.split <- unlist(strsplit(nom.column, ".", fixed = TRUE))
@@ -246,8 +258,12 @@ mod_carga_datos_server <- function(id, updateData, modelos, paquete = "predictoR
             if(nom.aux %in% colnames(originales))
               break
             else
-              nom.aux <- paste0(nom.aux,"." ,nom.split[i])
+              nom.aux <- paste0(nom.aux, "." , nom.split[i])
           }
+          
+          cod <- paste0(
+            cod, "datos <- devolver.disyuntivos(datos, '", nom.aux,"')\n")
+          
           if(nuevo_tipo == "cat") {
             datos[, nom.aux]       <- as.factor(disyuntivas$valor[[nom.aux]]$original)
             datos.tabla[, nom.aux] <- as.factor(disyuntivas$valor[[nom.aux]]$original)
@@ -256,6 +272,9 @@ mod_carga_datos_server <- function(id, updateData, modelos, paquete = "predictoR
               datos[, cat]       <- NULL
               datos.tabla[, cat] <- NULL
             }
+            
+            cod <- paste0(
+              cod, "datos[, '", nom.aux, "'] <- as.factor(datos[, '", nom.aux, "'])\n")
           }
           if(nuevo_tipo == "num") {
             datos[, nom.aux]       <- as.numeric(as.character(disyuntivas$valor[[nom.aux]]$original))
@@ -265,11 +284,14 @@ mod_carga_datos_server <- function(id, updateData, modelos, paquete = "predictoR
               datos[, cat]       <- NULL
               datos.tabla[, cat] <- NULL
             }
+            
+            cod <- paste0(cod, "datos[, '", nom.aux, "'] <- as.numeric(as.character(datos[, '", nom.aux, "']))\n")
           }
         }
       }
       updateData$datos       <- datos
       updateData$datos.tabla <- datos.tabla
+      updateData$code <- append(updateData$code, cod)
     }
     
     # Ordena columna tabla de datos.
@@ -296,15 +318,24 @@ mod_carga_datos_server <- function(id, updateData, modelos, paquete = "predictoR
       datos.tabla <- updateData$datos.tabla
       nom.col     <- colnames(datos.tabla)[indice]
       
+      cod <- "### doceliminar\n"
+      
       if(nom.col %in% colnames(originales)) {
         if(nom.col %not_in% colnames(updateData$datos)) {
-          updateData$datos[, nom.col] <- datos.tabla[,nom.col]
+          updateData$datos[, nom.col] <- datos.tabla[, nom.col]
+          cod <- paste0(cod, "datos[['", nom.col,"']] <- ", nom.col, "\n")
+          updateData$code <- append(updateData$code, cod)
           showNotification("Column successfully restored.", type = "message")
         } else {
-          if(dim(updateData$datos)[2] > 2)
+          if(dim(updateData$datos)[2] > 2) {
             updateData$datos[, nom.col] <- NULL
-          else
+            cod <- paste0(cod, nom.col, " <- datos[['", nom.col,"']]\n",
+                          "datos[['", nom.col,"']] <- NULL\n")
+            updateData$code <- append(updateData$code, cod)
+          }
+          else {
             showNotification("ERROR CD070: The dataset must have at least 2 columns.", type = "warning")
+          }
         }
       } else {
         showNotification("ERROR CD060: Cant remove a disyuntive column.", type = "message")
