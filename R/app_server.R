@@ -32,11 +32,6 @@ app_server <- function(input, output, session) {
     datos.aprendizaje = NULL, variable.predecir = NULL, indices = NULL, 
     numGrupos = NULL, numValC = NULL, grupos = NULL)
   
-  updateNuevos <- rv(
-    datos = NULL, originales = NULL, datos.tabla = NULL, datos.prueba = NULL, 
-    datos.aprendizaje = NULL, variable.predecir = NULL, indices = NULL, 
-    numGrupos = NULL, numValC = NULL, grupos = NULL)
-  
   codedioma <- rv(idioma = "es", code = list())
   
   modelos <- rv(

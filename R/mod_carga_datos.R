@@ -512,7 +512,7 @@ mod_carga_datos_server <- function(id, updateData, modelos, codedioma, paquete =
                 '  <span>\n',
                 '    ', tr("vali", idioma), '\n',
                 '  </span>\n',
-                selectInputGroup(datos.tabla, 1, idioma, length(updateData$grupos), isolate(sampleopt$valor)),
+                selectInputGroup(ns('accion'), datos.tabla, 1, idioma, length(updateData$grupos), isolate(sampleopt$valor)),
                 '</div>'
               )
             } else {
@@ -524,7 +524,7 @@ mod_carga_datos_server <- function(id, updateData, modelos, codedioma, paquete =
           res     <- DT::datatable(
             datos.tabla, selection = 'none', editable = TRUE,  
             container = sketch(
-              datos.tabla, datos, originales, idioma, "part", tipo.columnas),
+              ns('accion'), datos.tabla, datos, originales, idioma, "part", tipo.columnas),
             options = list(dom = 'frtip', ordering = F)) |>
             formatStyle(columns = nombres, color = 'black', background = '#CAC9C9')
           
@@ -555,10 +555,11 @@ mod_carga_datos_server <- function(id, updateData, modelos, codedioma, paquete =
       datos <- updateData$datos
       if(paquete == "predictoR") {
         vars  <- rev(colnames.empty(var.categoricas(datos)))
+        updateSelectInput(session, "sel.predic.var", choices = vars)
       } else if(paquete == "regressoR") {
         vars  <- rev(colnames.empty(var.numericas(datos)))
+        updateSelectInput(session, "sel.predic.var", choices = vars)
       }
-      updateSelectInput(session, "sel.predic.var", choices = vars)
     })
     
     # Segment Button Function

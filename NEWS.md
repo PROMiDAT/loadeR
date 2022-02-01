@@ -23,3 +23,7 @@
 # readeR 0.6.0
 
 * Reactive values for language and code are separated from the data.
+
+# readeR 0.7.0
+
+* Fix transform, rename, sort and delete columns to work with multiple modules.

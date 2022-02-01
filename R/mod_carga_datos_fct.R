@@ -83,25 +83,25 @@ valores.disyuntivos <- function(data, var) {
   return(list(categorias = categorias, valores = valores))
 }
 
-selectInputTrans <- function(datos, var, idioma = "es", originales) {
+selectInputTrans <- function(id, datos, var, idioma = "es", originales) {
   if(class(datos[, var]) %in% c("numeric", "integer")) {
     cat <- tags$input(
       type = "radio", value = "cat", name = paste0("radio_", var),
-      onclick = paste0("accion(", var, ", 't', this.value)"))
+      onclick = paste0("accion('", id, "', ", var, ", 't', this.value)"))
   } else {
     cat <- tags$input(
       type = "radio", value = "cat", name = paste0("radio_", var), 
-      onclick = paste0("accion(", var, ", 't', this.value)"), checked = "")
+      onclick = paste0("accion('", id, "', ", var, ", 't', this.value)"), checked = "")
   }
   
   if(colnames(datos)[var] %in% colnames(originales)){
     dis <- tags$input(
       type = "radio", value = "dis", name = paste0("radio_", var),
-      onclick = paste0("accion(", var, ", 't', this.value)"))
+      onclick = paste0("accion('", id, "', ", var, ", 't', this.value)"))
   } else {
     dis <- tags$input(
       type = "radio", value = "dis", name = paste0("radio_", var), 
-      onclick = paste0("accion(", var, ", 't', this.value)"), checked = "")
+      onclick = paste0("accion('", id, "', ", var, ", 't', this.value)"), checked = "")
   }
   
   tags$div(
@@ -109,7 +109,7 @@ selectInputTrans <- function(datos, var, idioma = "es", originales) {
     tags$label(
       tr("num", idioma), class = "label-trans",
       tags$input(type = "radio", value = "num", name = paste0("radio_", var),
-                 onclick = paste0("accion(", var, ", 't', this.value)"),
+                 onclick = paste0("accion('", id, "', ", var, ", 't', this.value)"),
                  checked = "")
     ),
     tags$label(tr("cat", idioma), class = "label-trans", cat),
@@ -117,31 +117,31 @@ selectInputTrans <- function(datos, var, idioma = "es", originales) {
   )
 }
 
-btnInputArrange <- function(datos, var, idioma = "es") {
+btnInputArrange <- function(id, datos, var, idioma = "es") {
   if(class(datos[, var]) %in% c("numeric", "integer")) {
     asc <- tags$button(
       type = "button", class = "btn btn-default action-button",
       style = "margin-bottom: 10px;width: 70%;margin-right: 5px;",
-      onclick = paste0("accion(", var, ", 'a')"),
+      onclick = paste0("accion('", id, "', ", var, ", 'a')"),
       tags$i(class = "fa fa-sort-numeric-down", role = "presentation", 
              `aria-label` = "sort-numeric-down icon"), tr("asc", idioma))
     dsc <- tags$button(
       type = "button", class = "btn btn-default action-button",
       style = "margin-bottom: 10px;width: 70%;margin-right: 5px;",
-      onclick = paste0("accion(", var, ", 'd')"),
+      onclick = paste0("accion('", id, "', ", var, ", 'd')"),
       tags$i(class = "fa fa-sort-numeric-down-alt", role = "presentation", 
              `aria-label` = "sort-numeric-down-alt icon"), tr("dsc", idioma))
   } else {
     asc <- tags$button(
       type = "button", class = "btn btn-default action-button",
       style = "margin-bottom: 10px;width: 70%;margin-right: 5px;",
-      onclick = paste0("accion(", var, ", 'a')"),
+      onclick = paste0("accion('", id, "', ", var, ", 'a')"),
       tags$i(class = "fa fa-sort-alpha-down", role = "presentation", 
              `aria-label` = "sort-alpha-down icon"), tr("asc", idioma))
     dsc <- tags$button(
       type = "button", class = "btn btn-default action-button",
       style = "margin-bottom: 10px;width: 70%;margin-right: 5px;",
-      onclick = paste0("accion(", var, ", 'd')"),
+      onclick = paste0("accion('", id, "', ", var, ", 'd')"),
       tags$i(class = "fa fa-sort-alpha-down-alt", role = "presentation", 
              `aria-label` = "sort-alpha-down-alt icon"), tr("dsc", idioma))
   }
@@ -149,7 +149,7 @@ btnInputArrange <- function(datos, var, idioma = "es") {
   tags$div(tags$div(asc), tags$div(dsc))
 }
 
-selectInputGroup <- function(datos, var, idioma = "es", n, sel = 1) {
+selectInputGroup <- function(id, datos, var, idioma = "es", n, sel = 1) {
   opts <- ""
   for (i in 1:n) {
     if(i == sel) {
@@ -163,7 +163,7 @@ selectInputGroup <- function(datos, var, idioma = "es", n, sel = 1) {
     '<div class = "form-group shiny-input-container">\n',
     '  <select ', 
     'style = "width: 70%;margin: 5px;height: 34px;border: 1px solid #cccccc;text-align: center;line-height: 34px;border-radius: 4px;"',
-    'onchange = "accion(', var, ', \'s\', this.value)">\n',
+    'onchange = "accion(\'', id, '\', ', var, ', \'s\', this.value)">\n',
     opts,
     '  </select>\n',
     '</div>'
@@ -193,7 +193,7 @@ prevsketch <- function(datos, tipos) {
   )))
 }
 
-sketch <- function(data.tabla, datos, originales, idioma, part, tipo.columnas) {
+sketch <- function(id, data.tabla, datos, originales, idioma, part, tipo.columnas) {
   rena <- tr("rena", idioma)
   tran <- tr("tran", idioma)
   orde <- tr("orde", idioma)
@@ -206,7 +206,7 @@ sketch <- function(data.tabla, datos, originales, idioma, part, tipo.columnas) {
         th(labelpart, class = "tablaHead",
            div(class = "dropdown-content",
                span(icon("sort-amount-down"), orde),
-               btnInputArrange(data.tabla, i, idioma)
+               btnInputArrange(id, data.tabla, i, idioma)
            )
         )
       } else {
@@ -216,25 +216,25 @@ sketch <- function(data.tabla, datos, originales, idioma, part, tipo.columnas) {
                tags$input(
                  type = "text", class = "form-control", 
                  value = colnames(data.tabla)[i],
-                 onchange = paste0("accion(", i, ", 'r', this.value)"),
+                 onchange = paste0("accion('", id, "', ", i, ", 'r', this.value)"),
                  style = "margin-bottom: 10px;width: 70%;display: initial;margin-right: 5px;"),
                hr(style = "margin: 0px;"),
                span(icon("exchange-alt"), tran), 
-               selectInputTrans(data.tabla, i, idioma, originales),
+               selectInputTrans(id, data.tabla, i, idioma, originales),
                hr(style = "margin: 0px;"),
                span(icon("sort-amount-down"), orde),
-               btnInputArrange(data.tabla, i, idioma),
+               btnInputArrange(id, data.tabla, i, idioma),
                hr(style = "margin: 0px;"),
                span(icon("cut"), elim),
                if(colnames(data.tabla)[i] %in% colnames(datos)) {
                  tags$input(
                    type = "checkbox",
-                   onchange = paste0("accion(", i, ", 'e', this.checked)"),
+                   onchange = paste0("accion('", id, "', ", i, ", 'e', this.checked)"),
                    style = "margin-bottom: 10px;margin-right: 10px;transform: scale(1.5);")
                } else {
                  tags$input(
                    type = "checkbox", checked = "", 
-                   onchange = paste0("accion(", i, ", 'e', this.checked)"),
+                   onchange = paste0("accion('", id, "', ", i, ", 'e', this.checked)"),
                    style = "margin-bottom: 10px;margin-right: 10px;transform: scale(1.5);")
                }
            )
