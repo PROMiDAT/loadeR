@@ -4,12 +4,14 @@
 \alias{mod_normal_server}
 \title{normal Server Function}
 \usage{
-mod_normal_server(id, updateData)
+mod_normal_server(id, updateData, codedioma)
 }
 \arguments{
 \item{id}{Internal parameters for {shiny}.}
 
 \item{updateData}{shiny reactive values.}
+
+\item{codedioma}{shiny reactive values.}
 }
 \value{
 shiny server

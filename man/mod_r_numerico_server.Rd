@@ -4,12 +4,14 @@
 \alias{mod_r_numerico_server}
 \title{r_numerico Server Function}
 \usage{
-mod_r_numerico_server(id, updateData)
+mod_r_numerico_server(id, updateData, codedioma)
 }
 \arguments{
 \item{id}{Internal parameters for {shiny}.}
 
 \item{updateData}{shiny reactive values.}
+
+\item{codedioma}{shiny reactive values.}
 }
 \value{
 shiny server

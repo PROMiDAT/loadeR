@@ -76,13 +76,14 @@ mod_normal_ui <- function(id) {
 #'
 #' @param id Internal parameters for {shiny}.
 #' @param updateData shiny reactive values.
+#' @param codedioma shiny reactive values.
 #'
 #' @author Diego Jimenez <diego.jimenez@promidat.com>
 #' @return shiny server
 #' @import shiny
 #' @export mod_normal_server
 #' 
-mod_normal_server <- function(id, updateData) {
+mod_normal_server <- function(id, updateData, codedioma) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
     
@@ -101,8 +102,8 @@ mod_normal_server <- function(id, updateData) {
       datos     <- updateData$datos[, var]
       colorBar  <- isolate(input$col_hist_bar)
       colorLine <- isolate(input$col_hist_line)
-      nombres   <- c(tr("hist", updateData$idioma), 
-                     tr("curva", updateData$idioma))
+      nombres   <- c(tr("hist", codedioma$idioma), 
+                     tr("curva", codedioma$idioma))
       
       tryCatch({
         cod <- paste0(
@@ -146,11 +147,11 @@ mod_normal_server <- function(id, updateData) {
       input$run_normal
       datos <- updateData$datos
       alfa <- isolate(as.numeric(input$slide_inter))
-      noms  <- c(tr('asim', isolate(updateData$idioma)),
-                 tr('norm', isolate(updateData$idioma)),
-                 tr('sigue', isolate(updateData$idioma)),
-                 tr('pvalue', isolate(updateData$idioma)),
-                 tr('tasim', isolate(updateData$idioma)))
+      noms  <- c(tr('asim', isolate(codedioma$idioma)),
+                 tr('norm', isolate(codedioma$idioma)),
+                 tr('sigue', isolate(codedioma$idioma)),
+                 tr('pvalue', isolate(codedioma$idioma)),
+                 tr('tasim', isolate(codedioma$idioma)))
       
       tryCatch({
         cod <- paste0("### docnormal\n", "dfnormal(datos)\n")

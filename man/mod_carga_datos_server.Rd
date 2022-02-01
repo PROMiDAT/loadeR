@@ -4,7 +4,13 @@
 \alias{mod_carga_datos_server}
 \title{carga_datos Server Functions}
 \usage{
-mod_carga_datos_server(id, updateData, modelos, paquete = "predictoR")
+mod_carga_datos_server(
+  id,
+  updateData,
+  modelos,
+  codedioma,
+  paquete = "predictoR"
+)
 }
 \arguments{
 \item{id}{Internal parameters for {shiny}.}
@@ -12,6 +18,8 @@ mod_carga_datos_server(id, updateData, modelos, paquete = "predictoR")
 \item{updateData}{shiny reactive values.}
 
 \item{modelos}{shiny reactive values.}
+
+\item{codedioma}{shiny reactive values.}
 
 \item{paquete}{indicates if the data is going to be used for exploratory, predictive, or regression analysis.}
 }

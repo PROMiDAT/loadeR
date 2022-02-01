@@ -344,8 +344,8 @@ code.segment.tt <- function(var, porcentaje = 30, semilla = 5, perm.semilla = F)
     res,
     "particion <- createDataPartition(y = datos[, '", var, "'], p = ", porcentaje/100, ", list = F)\n",
     "indices <- particion[, 1]\n",
-    "test  <- datos[-particion, ]\n",
-    "train <- datos[particion, ]\n"
+    "datos.prueba <- datos[-particion, ]\n",
+    "datos.aprendizaje <- datos[particion, ]\n"
   )
   
   return(res)

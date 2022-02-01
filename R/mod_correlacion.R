@@ -53,6 +53,7 @@ mod_correlacion_ui <- function(id){
 #'
 #' @param id Internal parameters for {shiny}.
 #' @param updateData shiny reactive values.
+#' @param codedioma shiny reactive values.
 #'
 #' @author Diego Jimenez <diego.jimenez@promidat.com>
 #' @return shiny server
@@ -60,7 +61,7 @@ mod_correlacion_ui <- function(id){
 #' @importFrom stats cor
 #' @export mod_correlacion_server
 #' 
-mod_correlacion_server <- function(id, updateData) {
+mod_correlacion_server <- function(id, updateData, codedioma) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
     
@@ -72,7 +73,7 @@ mod_correlacion_server <- function(id, updateData) {
       
       tryCatch({
         cod <- code.cor(colores)
-        isolate(updateData$code <- append(updateData$code, cod))
+        isolate(codedioma$code <- append(codedioma$code, cod))
         
         datos.plot <- round(cor(datos), 3)
         e_cor(datos.plot, colores)

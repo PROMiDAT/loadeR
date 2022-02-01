@@ -19,3 +19,7 @@
 # readeR 0.5.0
 
 * The code log is now visible in the right sidebar menu.
+
+# readeR 0.6.0
+
+* Reactive values for language and code are separated from the data.

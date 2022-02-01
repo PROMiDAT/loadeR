@@ -163,6 +163,7 @@ mod_carga_datos_ui <- function(id, paquete = "predictoR") {
 #' @param id Internal parameters for {shiny}.
 #' @param updateData shiny reactive values.
 #' @param modelos shiny reactive values.
+#' @param codedioma shiny reactive values.
 #' @param paquete indicates if the data is going to be used for exploratory, predictive, or regression analysis.
 #'
 #' @author Joseline Quiros <joseline.quiros@promidat.com>
@@ -172,7 +173,7 @@ mod_carga_datos_ui <- function(id, paquete = "predictoR") {
 #' @import shiny
 #' @export mod_carga_datos_server
 #' 
-mod_carga_datos_server <- function(id, updateData, modelos, paquete = "predictoR") {
+mod_carga_datos_server <- function(id, updateData, modelos, codedioma, paquete = "predictoR") {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
     disyuntivas <- rv(valor = list(), nombre = NULL)
@@ -204,7 +205,7 @@ mod_carga_datos_server <- function(id, updateData, modelos, paquete = "predictoR
         cod <- paste0(
           "### docrename\n", 
           "colnames(datos)[", pos1, "] <- ", nuevo_nombre, "\n")
-        updateData$code <- append(updateData$code, cod)
+        codedioma$code <- append(codedioma$code, cod)
       }
     }
     
@@ -291,7 +292,7 @@ mod_carga_datos_server <- function(id, updateData, modelos, paquete = "predictoR
       }
       updateData$datos       <- datos
       updateData$datos.tabla <- datos.tabla
-      updateData$code <- append(updateData$code, cod)
+      codedioma$code <- append(codedioma$code, cod)
     }
     
     # Ordena columna tabla de datos.
@@ -324,14 +325,14 @@ mod_carga_datos_server <- function(id, updateData, modelos, paquete = "predictoR
         if(nom.col %not_in% colnames(updateData$datos)) {
           updateData$datos[, nom.col] <- datos.tabla[, nom.col]
           cod <- paste0(cod, "datos[['", nom.col,"']] <- ", nom.col, "\n")
-          updateData$code <- append(updateData$code, cod)
+          codedioma$code <- append(codedioma$code, cod)
           showNotification("Column successfully restored.", type = "message")
         } else {
           if(dim(updateData$datos)[2] > 2) {
             updateData$datos[, nom.col] <- NULL
             cod <- paste0(cod, nom.col, " <- datos[['", nom.col,"']]\n",
                           "datos[['", nom.col,"']] <- NULL\n")
-            updateData$code <- append(updateData$code, cod)
+            codedioma$code <- append(codedioma$code, cod)
           }
           else {
             showNotification("ERROR CD070: The dataset must have at least 2 columns.", type = "warning")
@@ -392,7 +393,7 @@ mod_carga_datos_server <- function(id, updateData, modelos, paquete = "predictoR
             rowname, ruta$datapath, sep, dec, encabezado, deleteNA)
           
           cod <- code.carga(rowname, ruta$name, sep, dec, encabezado, deleteNA)
-          updateData$code <- append(updateData$code, cod)
+          codedioma$code <- append(codedioma$code, cod)
         } else {
           ruta        <- isolate(input$archivo_xslx)
           num_hoja    <- isolate(input$num_hoja)
@@ -411,7 +412,7 @@ mod_carga_datos_server <- function(id, updateData, modelos, paquete = "predictoR
           cod <- code.carga.xlsx(
             ruta$name, num_hoja, encabezado, fila_inicio, col_inicio, 
             fila_final, col_final, rowname, deleteNA)
-          updateData$code <- append(updateData$code, cod)
+          codedioma$code <- append(codedioma$code, cod)
         }
         
         if(ncol(updateData$originales) <= 1) {
@@ -440,7 +441,7 @@ mod_carga_datos_server <- function(id, updateData, modelos, paquete = "predictoR
       encabezado <- input$header
       deleteNA   <- input$deleteNA
       
-      idioma <- updateData$idioma
+      idioma <- codedioma$idioma
       tipos  <- c(tr("num", idioma), tr("cat", idioma))
       
       tryCatch({
@@ -470,7 +471,7 @@ mod_carga_datos_server <- function(id, updateData, modelos, paquete = "predictoR
       col_final   <- input$col_final
       deleteNA    <- input$deleteNA_xlsx
       
-      idioma <- updateData$idioma
+      idioma <- codedioma$idioma
       tipos  <- c(tr("num", idioma), tr("cat", idioma))
       
       tryCatch({
@@ -494,7 +495,7 @@ mod_carga_datos_server <- function(id, updateData, modelos, paquete = "predictoR
       datos        <- updateData$datos
       datos.tabla  <- updateData$datos.tabla
       originales   <- updateData$originales
-      idioma       <- updateData$idioma
+      idioma       <- codedioma$idioma
       tipos  <- c(tr("num", idioma), tr("cat", idioma))
       res  <- NULL
       tryCatch({
@@ -570,7 +571,7 @@ mod_carga_datos_server <- function(id, updateData, modelos, paquete = "predictoR
       
       variable <- isolate(input$sel.predic.var)
       datos    <- updateData$datos
-      idioma   <- isolate(updateData$idioma)
+      idioma   <- isolate(codedioma$idioma)
       tryCatch({
         if(variable != "") {
           
@@ -592,7 +593,7 @@ mod_carga_datos_server <- function(id, updateData, modelos, paquete = "predictoR
             updateData$indices     <- res$indices
             
             cod <- code.segment.tt(variable, porcentaje, seed, aseed)
-            updateData$code <- append(updateData$code, cod)
+            codedioma$code <- append(codedioma$code, cod)
             
           } else {
             sampleopt$valor <- 1
@@ -619,7 +620,7 @@ mod_carga_datos_server <- function(id, updateData, modelos, paquete = "predictoR
             updateData$datos.tabla <- cbind(part = as.factor(nom.grupo), updateData$datos.tabla)
             
             cod <- code.segment.vc(variable, num.valC, num.grupos)
-            updateData$code <- append(updateData$code, cod)
+            codedioma$code <- append(codedioma$code, cod)
           }
         }
       }, error = function(e) {

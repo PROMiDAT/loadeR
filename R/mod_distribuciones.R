@@ -63,13 +63,14 @@ mod_distribuciones_ui <- function(id){
 #'
 #' @param id Internal parameters for {shiny}.
 #' @param updateData shiny reactive values.
+#' @param codedioma shiny reactive values.
 #'
 #' @author Diego Jimenez <diego.jimenez@promidat.com>
 #' @return shiny server
 #' @import shiny
 #' @export mod_distribuciones_server
 #' 
-mod_distribuciones_server <- function(id, updateData) {
+mod_distribuciones_server <- function(id, updateData, codedioma) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
     
@@ -91,11 +92,11 @@ mod_distribuciones_server <- function(id, updateData) {
       colorBar   <- isolate(input$col_dist_bar)
       colorPoint <- isolate(input$col_dist_point)
       titulos <- c(
-        tr("minimo", updateData$idioma),
-        tr("q1", updateData$idioma),
-        tr("mediana", updateData$idioma),
-        tr("q3", updateData$idioma),
-        tr("maximo", updateData$idioma)
+        tr("minimo", codedioma$idioma),
+        tr("q1", codedioma$idioma),
+        tr("mediana", codedioma$idioma),
+        tr("q3", codedioma$idioma),
+        tr("maximo", codedioma$idioma)
       )
       
       tryCatch({
@@ -104,7 +105,7 @@ mod_distribuciones_server <- function(id, updateData) {
           "e_histboxplot(datos[['", var, "']], '", var, "', '", 
           colorBar, "', '", colorPoint, "', c('", 
           paste(titulos, collapse = "', '"), "'))\n")
-        isolate(updateData$code <- append(updateData$code, cod))
+        isolate(codedioma$code <- append(codedioma$code, cod))
         e_histboxplot(datos[[var]], var, colorBar, colorPoint, titulos)
       }, error = function(e) {
         showNotification(paste0("ERROR: ", e), duration = 10, type = "error")
@@ -126,13 +127,13 @@ mod_distribuciones_server <- function(id, updateData) {
     # Gráfico de Distribuciones (Categóricas)
     output$plot_cat = renderEcharts4r({
       var  <- input$sel_dya_cat
-      validate(need(var != "", tr("errorcat", isolate(updateData$idioma))))
+      validate(need(var != "", tr("errorcat", isolate(codedioma$idioma))))
       
       tryCatch({
         datos.plot <- updateData$datos[, var]
         
         cod <- code.dist.cat(var)
-        isolate(updateData$code <- append(updateData$code, cod))
+        isolate(codedioma$code <- append(codedioma$code, cod))
         
         datos.plot <- data.frame (
           label = levels(datos.plot),

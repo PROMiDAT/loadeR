@@ -34,6 +34,7 @@ mod_r_numerico_ui <- function(id) {
 #'
 #' @param id Internal parameters for {shiny}.
 #' @param updateData shiny reactive values.
+#' @param codedioma shiny reactive values.
 #'
 #' @author Diego Jimenez <diego.jimenez@promidat.com>
 #' @return shiny server
@@ -41,13 +42,13 @@ mod_r_numerico_ui <- function(id) {
 #' @importFrom stats median
 #' @export mod_r_numerico_server
 #' 
-mod_r_numerico_server <- function(id, updateData) {
+mod_r_numerico_server <- function(id, updateData, codedioma) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
     
     output$resumennumerico = renderUI({
       datos  <- updateData$datos
-      idioma <- updateData$idioma
+      idioma <- codedioma$idioma
       numeric.names <- colnames(var.numericas(datos))
       res    <- vector(mode = "list", length = ncol(datos))
       res <- list(res, lapply(colnames(datos), function(col.name) {
@@ -80,7 +81,7 @@ mod_r_numerico_server <- function(id, updateData) {
       }))
       
       cod <- paste0("### docresumen\n", "summary(datos)\n")
-      isolate(updateData$code <- append(updateData$code, cod))
+      isolate(codedioma$code <- append(codedioma$code, cod))
       res <- tags$div(style = "height: 80vh; overflow-y: scroll;",
                       do.call(tagList, res))
       
