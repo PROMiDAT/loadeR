@@ -1,6 +1,7 @@
 #' carga_datos UI Function
 #'
 #' @param id Internal parameters for {shiny}.
+#' @param title Display title for tab.
 #' @param paquete indicates if the data is going to be used for exploratory, predictive, or regression analysis.
 #' 
 #' @author Joseline Quiros <joseline.quiros@promidat.com>
@@ -10,7 +11,7 @@
 #' @import htmltools
 #' @import shinydashboardPlus
 #' 
-mod_carga_datos_ui <- function(id, paquete = "predictoR") {
+mod_carga_datos_ui <- function(id, title, paquete = "predictoR") {
   ns <- NS(id)
   
   # declare dependencies
@@ -148,7 +149,7 @@ mod_carga_datos_ui <- function(id, paquete = "predictoR") {
       id = "data", title = NULL, opciones = opc_load,
       open = "tab-content box-option-open-left",
       tabPanel(
-        title = labelInput("data"),
+        title = title,
         div(style = "height: 72vh; overflow: auto;",
             withLoader(DT::dataTableOutput(ns('tabladatos')), 
                        type = "html", loader = "loader4")))

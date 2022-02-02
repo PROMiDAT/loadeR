@@ -5,10 +5,6 @@ a {
   color: #cbb051;
 }
 
-.btn-primary {
-  background-color: #cbb051;
-}
-
 .summ-row{
   overflow-y: auto !important; 
   max-height: 200px !important;
@@ -24,4 +20,26 @@ a {
 .col-sm-3 > .col-sm-12 > .box {
   background-color: #ffffff;
   color: #777777;
+}
+
+/* Botón Configuración */ 
+.btn-primary {
+    background-color: #CBB051 !important;
+    border-color: #367fa9;
+}
+
+.btn-primary.hover, .btn-primary:active, .btn-primary:hover {
+    background-color: #CBB051;
+}
+
+.btn-primary.focus, .btn-primary:focus {
+    color: #fff;
+    background-color: #CBB051;
+    border-color: #122b40;
+}
+
+.btn-primary.active.focus, .btn-primary.active:focus, .btn-primary.active:hover, .btn-primary:active.focus, .btn-primary:active:focus, .btn-primary:active:hover, .open > .dropdown-toggle.btn-primary.focus, .open > .dropdown-toggle.btn-primary:focus, .open > .dropdown-toggle.btn-primary:hover {
+    color: #fff;
+    background-color: #CBB051;
+    border-color: #122b40;
 }

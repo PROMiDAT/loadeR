@@ -4,10 +4,12 @@
 \alias{mod_carga_datos_ui}
 \title{carga_datos UI Function}
 \usage{
-mod_carga_datos_ui(id, paquete = "predictoR")
+mod_carga_datos_ui(id, title, paquete = "predictoR")
 }
 \arguments{
 \item{id}{Internal parameters for {shiny}.}
+
+\item{title}{Display title for tab.}
 
 \item{paquete}{indicates if the data is going to be used for exploratory, predictive, or regression analysis.}
 }

@@ -11,7 +11,7 @@ System to read data and show it.
 \tabular{ll}{
 Package: \tab readeR\cr
 Type: \tab Package\cr
-Version: \tab 0.6.0\cr
+Version: \tab 0.8.0\cr
 Date: \tab 2022-02-01\cr
 License: \tab GPL (>=2)\cr
 }

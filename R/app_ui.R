@@ -68,8 +68,8 @@ app_ui <- function(request) {
         
         tabItems(
           # Carga de Datos
-          tabItem(tabName = "cargar", 
-                  mod_carga_datos_ui("carga_datos_ui_1", paquete = paquete)),
+          tabItem(tabName = "cargar", mod_carga_datos_ui(
+            "carga_datos_ui_1", labelInput('data'), paquete = paquete)),
           
           # Resumen Numérico
           tabItem(tabName = "resumen", mod_r_numerico_ui("r_numerico_ui_1")),
@@ -115,7 +115,7 @@ app_ui <- function(request) {
 #' @import shiny
 #' @importFrom golem add_resource_path activate_js favicon bundle_resources
 #' @noRd
-golem_add_external_resources <- function(){
+golem_add_external_resources <- function() {
   
   add_resource_path('www', app_sys('app/www'))
   add_resource_path('img', app_sys('app/img'))

@@ -27,3 +27,7 @@
 # readeR 0.7.0
 
 * Fix transform, rename, sort and delete columns to work with multiple modules.
+
+# readeR 0.8.0
+
+* Title is added to load data module.
