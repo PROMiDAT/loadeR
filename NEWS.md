@@ -31,3 +31,7 @@
 # readeR 0.8.0
 
 * Title is added to load data module.
+
+# readeR 0.9.0
+
+* The options are visible on start the application.

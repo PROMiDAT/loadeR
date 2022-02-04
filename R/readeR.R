@@ -10,8 +10,8 @@
 #' \tabular{ll}{
 #' Package: \tab readeR\cr
 #' Type: \tab Package\cr
-#' Version: \tab 0.8.0\cr
-#' Date: \tab 2022-02-01\cr
+#' Version: \tab 0.9.0\cr
+#' Date: \tab 2022-02-04\cr
 #' License: \tab GPL (>=2)\cr
 #' }
 #' @keywords package

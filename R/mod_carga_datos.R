@@ -144,10 +144,15 @@ mod_carga_datos_ui <- function(id, title, paquete = "predictoR") {
   opc_load <- tabsOptions(botones = iconos, widths = widths, 
                           heights = heights, tabs.content = contenido)
   
+  if(paquete == "discoveR") {
+    open <- "tab-content box-option-open-center"
+  } else {
+    open <- "tab-content box-option-open-left"
+  }
+  
   inputTag <- tagList(
     tabBoxPrmdt(
-      id = "data", title = NULL, opciones = opc_load,
-      open = "tab-content box-option-open-left",
+      id = "data", title = NULL, opciones = opc_load, open = open,
       tabPanel(
         title = title,
         div(style = "height: 72vh; overflow: auto;",
