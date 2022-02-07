@@ -236,9 +236,19 @@ mod_carga_datos_server <- function(id, updateData, modelos, codedioma, paquete =
           }
           if(nuevo_tipo == "num" & 
              !(class(datos[, nom.column]) %in% c("numeric", "integer"))) {
-            datos[, nom.column]       <- as.numeric(as.character(datos[, nom.column]))
-            datos.tabla[, nom.column] <- as.numeric(as.character(datos.tabla[, nom.column]))
-            cod <- paste0(cod, "datos[, '", nom.column, "'] <- as.numeric(as.character(datos[, '", nom.column, "']))\n")
+            nueva.var <- gsub(",", ".", as.character(datos[, nom.column]))
+            nueva.var <- as.numeric(nueva.var)
+            if(any(is.na(nueva.var))) {
+              showNotification("ERROR CD050: Can't transform text to numeric. To do this, apply disjunctive code.",
+                               type = "error")
+              cod <- ""
+            } else {
+              datos[, nom.column]       <- nueva.var
+              datos.tabla[, nom.column] <- nueva.var
+              cod <- paste0(
+                cod, "nueva.var <- gsub(',', '.', as.character(datos[, ", nom.column, "]))\n",
+                "datos[, '", nom.column, "'] <- as.numeric(nueva.var)\n")
+            }
           }
           if(nuevo_tipo == "dis") {
             tipo.original <- ifelse(class(datos[, nom.column]) %in% c("numeric","integer"), "num", "cat")

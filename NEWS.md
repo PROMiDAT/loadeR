@@ -35,3 +35,7 @@
 # readeR 0.9.0
 
 * The options are visible on start the application.
+
+# readeR 1.0.0
+
+* Return error on transform text variable to numeric variable.
