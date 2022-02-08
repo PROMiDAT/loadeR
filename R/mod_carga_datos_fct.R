@@ -84,6 +84,11 @@ valores.disyuntivos <- function(data, var) {
 }
 
 selectInputTrans <- function(id, datos, var, idioma = "es", originales) {
+  num <- tags$input(
+    type = "radio", value = "num", name = paste0("radio_", var),
+    onclick = paste0("accion('", id, "', ", var, ", 't', this.value)"),
+    checked = "")
+    
   if(class(datos[, var]) %in% c("numeric", "integer")) {
     cat <- tags$input(
       type = "radio", value = "cat", name = paste0("radio_", var),
@@ -102,16 +107,13 @@ selectInputTrans <- function(id, datos, var, idioma = "es", originales) {
     dis <- tags$input(
       type = "radio", value = "dis", name = paste0("radio_", var), 
       onclick = paste0("accion('", id, "', ", var, ", 't', this.value)"), checked = "")
+    num <- tags$input(type = "radio", value = "num", name = paste0("radio_", var),
+                      disabled = "")
   }
   
   tags$div(
     class = "radio-trans",
-    tags$label(
-      tr("num", idioma), class = "label-trans",
-      tags$input(type = "radio", value = "num", name = paste0("radio_", var),
-                 onclick = paste0("accion('", id, "', ", var, ", 't', this.value)"),
-                 checked = "")
-    ),
+    tags$label(tr("num", idioma), class = "label-trans", num),
     tags$label(tr("cat", idioma), class = "label-trans", cat),
     tags$label(tr("dis", idioma), class = "label-trans", dis)
   )
