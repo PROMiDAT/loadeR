@@ -202,7 +202,7 @@ sketch <- function(id, data.tabla, datos, originales, idioma, part, tipo.columna
   elim <- tr("elim", idioma)
   vali <- tr("vali", idioma)
   labelpart <- tr("part", idioma)
-  htmltools::withTags(table(thead(tr(
+  htmltools::withTags(table(class = "display", thead(tr(
     th('ID'), lapply(1:length(colnames(data.tabla)), function(i) {
       if(colnames(data.tabla)[i] == part) {
         th(labelpart, class = "tablaHead",

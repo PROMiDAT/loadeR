@@ -39,3 +39,7 @@
 # readeR 1.0.0
 
 * Return error on transform text variable to numeric variable.
+
+# readeR 1.0.1
+
+* Button to download the data is added.

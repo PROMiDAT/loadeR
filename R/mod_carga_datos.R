@@ -514,6 +514,7 @@ mod_carga_datos_server <- function(id, updateData, modelos, codedioma, paquete =
       idioma       <- codedioma$idioma
       tipos  <- c(tr("num", idioma), tr("cat", idioma))
       res  <- NULL
+      
       tryCatch({
         if(!is.null(datos.tabla) && !is.null(datos)) {
           tipo.columnas <- sapply(colnames(datos.tabla), function(i)
@@ -538,10 +539,37 @@ mod_carga_datos_server <- function(id, updateData, modelos, codedioma, paquete =
           
           nombres <- setdiff(colnames(datos.tabla), colnames(datos))
           res     <- DT::datatable(
-            datos.tabla, selection = 'none', editable = TRUE,  
+            datos.tabla, selection = 'none', editable = TRUE,
+            extensions = 'Buttons',
             container = sketch(
               ns('accion'), datos.tabla, datos, originales, idioma, "part", tipo.columnas),
-            options = list(dom = 'frtip', ordering = F)) |>
+            options = list(dom = 'Bfrtip', ordering = F, buttons = list(list(
+              extend = 'csv', filename = "data", header = T,
+              exportOptions = list(
+                modifier = list(page = "all"),
+                format = list(
+                  header = DT::JS(paste0(
+                    "function ( data, columnIdx ) {\n",
+                    "  aux = ['ID', '", paste(colnames(datos.tabla), collapse = "', '"), "']\n",
+                    "  return aux[columnIdx];\n", 
+                    "}"))
+                )
+              ),
+              text = '<i class="fa fa-file-csv"></i>'),
+              list(
+                extend = 'excel', filename = "data", header = T,
+                exportOptions = list(
+                  modifier = list(page = "all"),
+                  format = list(
+                    header = DT::JS(paste0(
+                      "function ( data, columnIdx ) {\n",
+                      "  aux = ['ID', '", paste(colnames(datos.tabla), collapse = "', '"), "']\n",
+                      "  return aux[columnIdx];\n", 
+                      "}"))
+                  )
+                ),
+                text = '<i class="fa fa-file-excel"></i>')))
+            ) |>
             formatStyle(columns = nombres, color = 'black', background = '#CAC9C9')
           
           if("part" %in% colnames(datos.tabla)) {
@@ -564,7 +592,7 @@ mod_carga_datos_server <- function(id, updateData, modelos, codedioma, paquete =
         showNotification(paste0("ERROR CD030: ", e), type = "error")
         return(NULL)
       })
-    }, server = T)
+    }, server = F)
     
     # Update Predict Variable
     observeEvent(updateData$datos, {
