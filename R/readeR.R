@@ -2,10 +2,13 @@
 #' @aliases readeR
 #' @docType package
 #' @title Read Data System
-#' @author Oldemar Rodriguez Rojas \cr
+#' @author
 #' Maintainer: Oldemar Rodriguez Rojas <oldemar.rodriguez@ucr.ac.cr>
+#' Oldemar Rodriguez Rojas \cr
+#' Diego Jiménez Alvarado \cr
+#' Joseline Quirós Mendez
 #' @description
-#' System to read data and show it.
+#' Provides a framework for a database through a 'shiny' graphical interface.
 #' @details
 #' \tabular{ll}{
 #' Package: \tab readeR\cr
