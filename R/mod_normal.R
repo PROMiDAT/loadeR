@@ -111,7 +111,7 @@ mod_normal_server <- function(id, updateData, codedioma) {
           "e_histnormal(datos[['", var, "']], '", colorBar,
           "', '", colorLine, "', c('", nombres[1], "', '", 
           nombres[2], "'))\n")
-        isolate(updateData$code <- append(updateData$code, cod))
+        isolate(codedioma$code <- append(codedioma$code, cod))
         
         e_histnormal(datos, colorBar, colorLine, nombres)
       }, error = function(e) {
@@ -133,7 +133,7 @@ mod_normal_server <- function(id, updateData, codedioma) {
           "### docqq\n",
           "e_qq(datos[['", var, "']], '", colorPoint,
           "', '", colorLine, "')\n")
-        isolate(updateData$code <- append(updateData$code, cod))
+        isolate(codedioma$code <- append(codedioma$code, cod))
         
         e_qq(datos, colorPoint, colorLine)
       }, error = function(e) {
@@ -155,7 +155,7 @@ mod_normal_server <- function(id, updateData, codedioma) {
       
       tryCatch({
         cod <- paste0("### docnormal\n", "dfnormal(datos)\n")
-        isolate(updateData$code <- append(updateData$code, cod))
+        isolate(codedioma$code <- append(codedioma$code, cod))
         res <- dfnormal(datos)
         
         res <- res[, c(1, 5)]

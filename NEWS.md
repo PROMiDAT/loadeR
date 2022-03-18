@@ -43,3 +43,7 @@
 # readeR 1.0.1
 
 * Button to download the data is added.
+
+# readeR 1.0.2
+
+* Code of normality test is added.
