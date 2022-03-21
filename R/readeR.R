@@ -3,10 +3,12 @@
 #' @docType package
 #' @title Read Data System
 #' @author
-#' Maintainer: Oldemar Rodriguez Rojas <oldemar.rodriguez@ucr.ac.cr>
-#' Oldemar Rodriguez Rojas \cr
-#' Diego Jiménez Alvarado \cr
-#' Joseline Quirós Mendez
+#' Maintainer: Oldemar Rodriguez Rojas <oldemar.rodriguez@ucr.ac.cr>\cr
+#' \itemize{
+#'   \item Oldemar Rodriguez Rojas <oldemar.rodriguez@ucr.ac.cr>
+#'   \item Diego Jiménez Alvarado
+#'   \item Joseline Quirós Mendez
+#' }
 #' @description
 #' Provides a framework for a database through a 'shiny' graphical interface.
 #' @details
