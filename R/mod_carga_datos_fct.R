@@ -17,55 +17,6 @@ accion.NAs <- function(datos, deleteNA = T) {
   }
 }
 
-carga.datos <- function(
-  nombre.filas = T, ruta = NULL, separador = ";", sep.decimal = ",", 
-  encabezado = T, deleteNA = T, preview = F) {
-  if(!is.null(ruta)) {
-    ruta <- gsub("\\", "/", ruta, fixed = T)
-  }
-  
-  if(preview) {
-    res <- fread(
-      ruta, sep = separador, dec = sep.decimal, header = encabezado, 
-      stringsAsFactors = T, data.table = F, check.names = T, nrows = 10)
-  } else {
-    res <- fread(
-      ruta, sep = separador, dec = sep.decimal, header = encabezado, 
-      stringsAsFactors = T, data.table = F, check.names = T)
-  }
-  
-  if(nombre.filas) {
-    row.names(res) <- res[[1]]
-    res[[1]] <- NULL
-  }
-  return(accion.NAs(res, deleteNA))
-}
-
-carga.datos.excel <- function(
-  ruta, sheet = 1, header = T, startRow = 0, startCol = 0, endRow = 0,
-  endCol = 0, row_names = T, deleteNA = T, preview = F) {
-  if(!is.null(ruta)) {
-    ruta <- gsub("\\", "/", ruta, fixed = T)
-  }
-  
-  if(preview) {
-    if(endRow < 10) {
-      endRow <- endRow
-    } else {
-      endRow <- 10
-    }
-  }
-  res <- readWorksheetFromFile(
-    ruta, sheet = sheet, header = header, startRow = startRow,
-    startCol = startCol, endRow = endRow, endCol = endCol)
-  
-  if(row_names) {
-    row.names(res) <- res[[1]]
-    res[[1]] <- NULL
-  }
-  return(accion.NAs(res, deleteNA))
-}
-
 valores.disyuntivos <- function(data, var) {
   if(is.null(data)) {
     return(NULL)

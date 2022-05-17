@@ -84,6 +84,97 @@ devolver.disyuntivos <- function(data, var) {
   return(data)
 }
 
+#' Load data from text file.
+#'
+#' @param nombre.filas a logical value indicating whether the file contains the names of the rows as its first column.
+#' @param ruta the name of the file which the data are to be read from.
+#' @param separador the field separator character.
+#' @param sep.decimal the character used in the file for decimal points.
+#' @param encabezado a logical value indicating whether the file contains the names of the variables as its first line.
+#' @param deleteNA a logical value indicating if rows with NA should be removed.
+#' @param preview a logical value indicating if only load the first 10 rows.
+#'
+#' @author Diego Jimenez <diego.jimenez@promidat.com>
+#' @return data.frame
+#' @export carga.datos
+#' @examples
+#' tf <- tempfile()
+#' write.table(iris, tf, sep = ";", dec = ",", row.names = FALSE)
+#' carga.datos(ruta = tf, nombre.filas = FALSE, preview = TRUE)
+#' 
+carga.datos <- function(
+  nombre.filas = T, ruta = NULL, separador = ";", sep.decimal = ",", 
+  encabezado = T, deleteNA = T, preview = F) {
+  if(!is.null(ruta)) {
+    ruta <- gsub("\\", "/", ruta, fixed = T)
+  }
+  
+  if(preview) {
+    res <- fread(
+      ruta, sep = separador, dec = sep.decimal, header = encabezado, 
+      stringsAsFactors = T, data.table = F, check.names = T, nrows = 10)
+  } else {
+    res <- fread(
+      ruta, sep = separador, dec = sep.decimal, header = encabezado, 
+      stringsAsFactors = T, data.table = F, check.names = T)
+  }
+  
+  if(nombre.filas) {
+    row.names(res) <- res[[1]]
+    res[[1]] <- NULL
+  }
+  return(accion.NAs(res, deleteNA))
+}
+
+#' Load data from excel.
+#'
+#' @param ruta the name of the file which the data are to be read from.
+#' @param sheet The name or index of the worksheet to read from.
+#' @param header a logical value indicating whether the file contains the names of the variables as its first line.
+#' @param startRow The index of the first row to read from. Defaults to 0 meaning that the start row is determined automatically.
+#' @param startCol The index of the first column to read from. Defaults to 0 meaning that the start column is determined automatically.
+#' @param endRow The index of the last row to read from. Defaults to 0 meaning that the end row is determined automatically.
+#' @param endCol The index of the last column to read from. Defaults to 0 meaning that the end column is determined automatically.
+#' @param row_names a logical value indicating whether the file contains the names of the rows as its first column.
+#' @param deleteNA a logical value indicating if rows with NA should be removed.
+#' @param preview a logical value indicating if only load the first 10 rows.
+#'
+#' @importFrom XLConnect writeWorksheetToFile readWorksheetFromFile
+#'
+#' @author Diego Jimenez <diego.jimenez@promidat.com>
+#' @return data.frame
+#' @export carga.datos.excel
+#' @examples
+#' tf <- tempfile()
+#' XLConnect::writeWorksheetToFile(paste0(tf, ".xlsx"), iris, "firstsheet")
+#' carga.datos.excel(ruta = paste0(tf, ".xlsx"), row_names = FALSE, preview = TRUE)
+#' 
+carga.datos.excel <- function(
+  ruta, sheet = 1, header = T, startRow = 0, startCol = 0, endRow = 0,
+  endCol = 0, row_names = T, deleteNA = T, preview = F) {
+  if(!is.null(ruta)) {
+    ruta <- gsub("\\", "/", ruta, fixed = T)
+  }
+  
+  if(preview) {
+    if(endRow < 10 & endRow > 0) {
+      endRow <- endRow
+    } else {
+      endRow <- 10
+    }
+  }
+  res <- readWorksheetFromFile(
+    ruta, sheet = sheet, header = header, startRow = startRow,
+    startCol = startCol, endRow = endRow, endCol = endCol)
+  res <- data.frame(unclass(res), stringsAsFactors = T)
+  
+  if(row_names) {
+    row.names(res) <- res[[1]]
+    res[[1]] <- NULL
+  }
+  return(accion.NAs(res, deleteNA))
+}
+
 # Segmenta los datos
 segmentar.datos <- function(datos, variable.predecir, porcentaje = 30, semilla = 5, perm.semilla = F) {
   semilla <- ifelse(is.numeric(semilla), semilla, 5)

@@ -47,3 +47,8 @@
 # readeR 1.0.2
 
 * Code of normality test is added.
+
+# readeR 1.0.3
+
+* Functions for load data are exported.
+* Strings are now loaded as type factor when read from excel.
