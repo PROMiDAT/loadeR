@@ -52,3 +52,9 @@
 
 * Functions for load data are exported.
 * Strings are now loaded as type factor when read from excel.
+
+# readeR 1.0.4
+
+* Update RoxygenNote
+* Removed processx package dependency
+* Icon names updated 

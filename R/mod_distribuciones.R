@@ -21,7 +21,7 @@ mod_distribuciones_ui <- function(id){
   )
   
   opc_dist <- tabsOptions(
-    botones = list(icon("cog"), icon("info")),
+    botones = list(icon("gear"), icon("info")),
     widths = c(100, 100), heights = c(50, 50),
     tabs.content = list(
       list(

@@ -572,7 +572,7 @@ tabBoxPrmdt <- function (..., id = NULL, title = NULL, opciones = NULL, open = N
 #' tabsOptions()
 #' 
 tabsOptions <- function(
-  botones = list(icon("cog")), widths = 100,
+  botones = list(icon("gear")), widths = 100,
   heights = 50, tabs.content = list("")
 ) {
   

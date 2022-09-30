@@ -5,7 +5,7 @@
 \title{Returns a footer menu for tabBoxPrmdt (tabsetPanel).}
 \usage{
 tabsOptions(
-  botones = list(icon("cog")),
+  botones = list(icon("gear")),
   widths = 100,
   heights = 50,
   tabs.content = list("")

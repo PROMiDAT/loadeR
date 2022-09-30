@@ -165,20 +165,20 @@ sketch <- function(id, data.tabla, datos, originales, idioma, part, tipo.columna
       } else {
         th(colnames(data.tabla)[i], class = "tablaHead",
            div(class = "dropdown-content",
-               span(icon("pencil-alt"), rena),
+               span(icon("pencil"), rena),
                tags$input(
                  type = "text", class = "form-control", 
                  value = colnames(data.tabla)[i],
                  onchange = paste0("accion('", id, "', ", i, ", 'r', this.value)"),
                  style = "margin-bottom: 10px;width: 70%;display: initial;margin-right: 5px;"),
                hr(style = "margin: 0px;"),
-               span(icon("exchange-alt"), tran), 
+               span(icon("right-left"), tran), 
                selectInputTrans(id, data.tabla, i, idioma, originales),
                hr(style = "margin: 0px;"),
-               span(icon("sort-amount-down"), orde),
+               span(icon("arrow-down-wide-short"), orde),
                btnInputArrange(id, data.tabla, i, idioma),
                hr(style = "margin: 0px;"),
-               span(icon("cut"), elim),
+               span(icon("scissors"), elim),
                if(colnames(data.tabla)[i] %in% colnames(datos)) {
                  tags$input(
                    type = "checkbox",

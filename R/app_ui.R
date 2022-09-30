@@ -30,7 +30,7 @@ app_ui <- function(request) {
             </a>
           </span>',
           '<img src= "img/logo_small.png" height = 50%, width = "120%">'
-        )), controlbarIcon = icon("cogs")
+        )), controlbarIcon = icon("gears")
       ),
       dashboardSidebar(
         sidebarMenu(
@@ -39,9 +39,9 @@ app_ui <- function(request) {
           menuItem(labelInput("data"), icon = icon("database"),
                    tabName = "cargar"),
           menuItem(labelInput("basi"), tabName = "parte1",
-                   icon = icon("th-list"),
+                   icon = icon("table-list"),
                    menuSubItem(labelInput("resu"), "resumen",
-                               icon = icon("sort-numeric-down")),
+                               icon = icon("arrow-down-1-9")),
                    menuSubItem(labelInput("norm"), "normalidad",
                                icon = icon("chart-bar")),
                    menuSubItem(labelInput("disp"), "dispersion",

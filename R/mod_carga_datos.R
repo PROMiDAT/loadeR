@@ -130,7 +130,7 @@ mod_carga_datos_ui <- function(id, title, paquete = "predictoR") {
     )
   )
   
-  iconos    <- list(icon("database"), icon("cog"))
+  iconos    <- list(icon("database"), icon("gear"))
   widths    <- c(50, 50)
   heights   <- c(100, 100)
   contenido <- list(carga, particion)
