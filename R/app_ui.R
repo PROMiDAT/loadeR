@@ -55,12 +55,16 @@ app_ui <- function(request) {
                    icon = icon("info")),
           hr(),
           menu.idioma(),
+          hr(),
+          img(src = "img/readeR.png",
+              style = paste0("margin-left: auto;",
+                             "margin-right: auto;display: block;width: 80%;")),
           tags$div(style = "display:none;",
                    sliderInput(inputId = "aux", min = 2, value = 2,
                                label = "Cantidad de Clusters", max = 10),
                    colourpicker::colourInput(
                      "auxColor", NULL, value = "red", allowTransparent = T),
-                   radioSwitch("deleteNAaux", "eliminanaaux", c("eliminarai", "impsutar")),
+                   radioSwitch("deleteNAaux", "eliminanaaux", c("eliminarai", "impsutar"))
           )
         )
       ),

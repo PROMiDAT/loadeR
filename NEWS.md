@@ -58,3 +58,7 @@
 * Update RoxygenNote
 * Removed processx package dependency
 * Icon names updated 
+
+# readeR 1.0.5
+
+* Hex Icon added.

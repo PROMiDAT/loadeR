@@ -1,6 +1,6 @@
 Package: readeR
 Title: Read Data for Analysis System
-Version: 1.0.4
+Version: 1.0.5
 Authors@R: c(person(given = "Oldemar", family = "Rodriguez", role = c("aut", "cre"), email = "oldemar.rodriguez@ucr.ac.cr"),
             person(given = "Diego", family = "Jiménez", role = c("aut")),
             person(given = "Joseline", family = "Quirós", role = c("aut")))
