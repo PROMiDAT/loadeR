@@ -70,6 +70,29 @@ selectInputTrans <- function(id, datos, var, idioma = "es", originales) {
   )
 }
 
+radioInputEliminar <- function(id, presente, var, idioma = "es") {
+  
+  if(presente) {
+    no <- tags$input(type = "radio", name = paste0("eliminar_", var), 
+                     checked = "")
+    si <- tags$input(
+      type = "radio", name = paste0("eliminar_", var),
+      onclick = paste0("accion('", id, "', ", var, ", 'e', true)"))
+  } else {
+    no <- tags$input(
+      type = "radio", name = paste0("eliminar_", var), checked = "",
+      onclick = paste0("accion('", id, "', ", var, ", 'e', false)"))
+    si <- tags$input(type = "radio", name = paste0("eliminar_", var), 
+                     checked = "")
+  }
+  
+  tags$div(
+    class = "radio-trans",
+    tags$label(tr("no", idioma), class = "label-trans", no),
+    tags$label(tr("si", idioma), class = "label-trans", si)
+  )
+}
+
 btnInputArrange <- function(id, datos, var, idioma = "es") {
   if(class(datos[, var]) %in% c("numeric", "integer")) {
     asc <- tags$button(
@@ -158,7 +181,7 @@ sketch <- function(id, data.tabla, datos, originales, idioma, part, tipo.columna
       if(colnames(data.tabla)[i] == part) {
         th(labelpart, class = "tablaHead",
            div(class = "dropdown-content",
-               span(icon("sort-amount-down"), orde),
+               span(icon("arrow-down-wide-short"), orde),
                btnInputArrange(id, data.tabla, i, idioma)
            )
         )
@@ -179,17 +202,7 @@ sketch <- function(id, data.tabla, datos, originales, idioma, part, tipo.columna
                btnInputArrange(id, data.tabla, i, idioma),
                hr(style = "margin: 0px;"),
                span(icon("scissors"), elim),
-               if(colnames(data.tabla)[i] %in% colnames(datos)) {
-                 tags$input(
-                   type = "checkbox",
-                   onchange = paste0("accion('", id, "', ", i, ", 'e', this.checked)"),
-                   style = "margin-bottom: 10px;margin-right: 10px;transform: scale(1.5);")
-               } else {
-                 tags$input(
-                   type = "checkbox", checked = "", 
-                   onchange = paste0("accion('", id, "', ", i, ", 'e', this.checked)"),
-                   style = "margin-bottom: 10px;margin-right: 10px;transform: scale(1.5);")
-               }
+               radioInputEliminar(id, colnames(data.tabla)[i] %in% colnames(datos), i, idioma)
            )
         )
       }})

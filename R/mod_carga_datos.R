@@ -123,7 +123,7 @@ mod_carga_datos_ui <- function(id, title, paquete = "predictoR") {
         div(
           col_6(numericInput(ns("numGrupos"), labelInput("ngr"), 5, 
                              width = "100%", min = 1)),
-          col_6(numericInput(ns("numVC"), labelInput("nvc"), 5, 
+          col_6(numericInput(ns("numVC"), labelInput("nvc"), 1, 
                              width = "100%", min = 1))
         )
       )
@@ -142,7 +142,8 @@ mod_carga_datos_ui <- function(id, title, paquete = "predictoR") {
   }
   
   opc_load <- tabsOptions(botones = iconos, widths = widths, 
-                          heights = heights, tabs.content = contenido)
+                          heights = heights, tabs.content = contenido, 
+                          id = "tabscarga")
   
   if(paquete == "discoveR") {
     open <- "tab-content box-option-open-center"
@@ -439,6 +440,7 @@ mod_carga_datos_server <- function(id, updateData, modelos, codedioma, paquete =
         } else {
           updateData$datos       <- updateData$originales
           updateData$datos.tabla <- updateData$originales
+          shinyjs::runjs("document.getElementById('tabscarga').parentElement.className = 'tab-content';")
         }
       }, error = function(e) {
         updateData$originales  <- NULL
@@ -648,6 +650,21 @@ mod_carga_datos_server <- function(id, updateData, modelos, codedioma, paquete =
             tabla.aux  <- updateData$datos.tabla
             nom.grupo  <- vector(mode = "character", length = nrow(tabla.aux))
             
+            if(num.valC > 20 | num.valC < 1) {
+              msg <- paste0(
+                "ERROR (CD040): El numero de validaciones cruzadas no es valida. ",
+                "Debe ser un valor entre 1 y 20.")
+              showNotification(msg, type = "error")
+              stop()
+            }
+            if(num.grupos > nrow(datos) | num.grupos < 1) {
+              msg <- paste0(
+                "ERROR (CD045): La cantidad de grupos no es valida. ",
+                "Debe ser un valor mayor 1 y menor a la cantidad de filas de los datos.")
+              showNotification(msg, type = "error")
+              stop()
+            }
+            
             for(i in 1:num.valC) {
               grupo     <- createFolds(datos[, variable], num.grupos)  
               grupos[i] <- list(grupo)
@@ -670,7 +687,7 @@ mod_carga_datos_server <- function(id, updateData, modelos, codedioma, paquete =
         }
       }, error = function(e) {
         restaurar.segmentacion(updateData)
-        showNotification(paste0("ERROR al segmentar los datos: ", e), type = "error")
+        showNotification(paste0("ERROR (CD050): ", e), type = "error")
       })
     })
     

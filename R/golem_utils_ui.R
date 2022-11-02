@@ -563,6 +563,7 @@ tabBoxPrmdt <- function (..., id = NULL, title = NULL, opciones = NULL, open = N
 #' @param widths vector of widths to each option of the menu. Minimum 1, maximum 5.
 #' @param heights vector of heights to each option of the menu. Minimum 1, maximum 5.
 #' @param tabs.content list of UI elements to include within each menu option. Minimum 1, maximum 5.
+#' @param id If provided, you can use input$id in your server logic to get the element.
 #'
 #' @author Diego Jimenez <diego.jimenez@promidat.com>
 #' @return HTML
@@ -573,7 +574,7 @@ tabBoxPrmdt <- function (..., id = NULL, title = NULL, opciones = NULL, open = N
 #' 
 tabsOptions <- function(
   botones = list(icon("gear")), widths = 100,
-  heights = 50, tabs.content = list("")
+  heights = 50, tabs.content = list(""), id = NULL
 ) {
   
   # declare dependencies
@@ -612,7 +613,7 @@ tabsOptions <- function(
       class = "btn-options", style = "position:relative;", 
       width = "100%", HTML(codeButtons))
   )
-  inputTag <- tags$div(HTML(res))
+  inputTag <- tags$div(HTML(res), id = id)
   
   return(htmltools::attachDependencies(inputTag, deps))
 }

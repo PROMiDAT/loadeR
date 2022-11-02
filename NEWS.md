@@ -62,3 +62,13 @@
 # readeR 1.0.5
 
 * Hex Icon added.
+
+# readeR 1.0.6
+
+* The Load Data tab now closes when the data loads successfully.
+* Changed the checkbox to delete columns to a radio Input.
+* Number of Cross Validations default value changed to 1.
+* It is validated that the Number of Cross Validations is from 1 to 20.
+* It is validated that the Number of Groups is minimum 1 and maximum the number of rows of data.
+
+

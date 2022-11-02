@@ -112,16 +112,19 @@ tr <- function(text, idioma = "es") {
 #' labels_readeR()
 #'
 labels_readeR <- function() {
-  x <- c("idio", "data", "subi", "carg", "espa", "selhead", "selrow", "selsep",
-         "seldec", "selna", "selfile", "selidioma", "num", "cat", "nums", 
-         "cats", "rena", "tran", "orde", "elim", "impu", "opts", "run", 
-         "selcolbar", "selcolline", "selcolpoint", "alfa", "basi", "resu", 
-         "norm", "disp", "dist", "corr", "pnorm", "asim", "tasim", "pvalue",
-         "sigue", "nres", "selcolor", "acerca", "selpred", "train", "test", 
-         "tt", "seed", "cros", "ngr", "nvc", "part", "info", "copyright", 
-         "version", "habi", "desh", "asc", "dsc", "texf", "nhoj", "scell", 
-         "ecell", "row", "col", "vali", 'q1', 'q3', 'median', 'min', 'mean',
-         'max', 'ds', 'hist', 'curva', 'code')
+  x <- c("acerca", "alfa", "asc", "asim", "basi", "carg", "cat", "cats", 
+         "code", "col", "copyright", "corr", "cros", "curva", "data", 
+         "desh", "dis", "disp", "dist", "doccarga", "doccor", "doccv", 
+         "docdisp", "docdistcat", "docdistnum", "doceliminar", "dochist", 
+         "docnormal", "docqq", "docrename", "docresumen", "doctrans", "doctt",
+         "ds", "dsc", "ecell", "elim", "espa", "habi", "hist", "idio", "impu",
+         "info", "max", "mean", "median", "min", "ngr", "nhoj", "no", "norm",
+         "nres", "num", "nums", "nvc", "opts", "orde", "part", "pnorm",
+         "pvalue", "q1", "q3", "rena", "resu", "row", "run", "scell",
+         "seed", "selcolbar", "selcolline", "selcolor", "selcolpoint",
+         "seldec", "selfile", "selhead", "selidioma", "selna", "selpred",
+         "selrow", "selsep", "si", "sigue", "subi", "tasim", "test", "texf",
+         "train", "tran", "tt", "vali", "version")
   return(x)
 }
 

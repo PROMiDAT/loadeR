@@ -8,7 +8,8 @@ tabsOptions(
   botones = list(icon("gear")),
   widths = 100,
   heights = 50,
-  tabs.content = list("")
+  tabs.content = list(""),
+  id = NULL
 )
 }
 \arguments{
@@ -19,6 +20,8 @@ tabsOptions(
 \item{heights}{vector of heights to each option of the menu. Minimum 1, maximum 5.}
 
 \item{tabs.content}{list of UI elements to include within each menu option. Minimum 1, maximum 5.}
+
+\item{id}{If provided, you can use input$id in your server logic to get the element.}
 }
 \value{
 HTML
