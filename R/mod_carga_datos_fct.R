@@ -238,7 +238,7 @@ restaurar.segmentacion <- function(updateData) {
 code.carga <- function(nombre.filas = T, ruta = NULL, separador = ";",
                        sep.decimal = ",", encabezado = T, incluir.NA = F) {
   res <- paste0(
-    "##### doccarga #####\n",
+    "# doccarga\n",
     "datos <- fread('", ruta, "', sep = '", separador, 
     "', dec = '", sep.decimal, "', header = ", encabezado, 
     ", stringsAsFactors = T, data.table = F, check.names = T)\n")
@@ -254,7 +254,7 @@ code.carga.xlsx <- function(
   ruta, sheet = 1, header = T, startRow = 0, startCol = 0, endRow = 0,
   endCol = 0, nombre.filas = T, incluir.NA = F) {
   res <- paste0(
-    "##### doccarga #####\n",
+    "# doccarga\n",
     "datos <- readWorksheetFromFile('", ruta, "', sheet = '", sheet, 
     "', header = '", header, "', startRow = ", startRow, ", startCol = ", 
     startCol, ", endRow = ", endRow, ", endCol = ", endCol, ")\n")
