@@ -71,4 +71,6 @@
 * It is validated that the Number of Cross Validations is from 1 to 20.
 * It is validated that the Number of Groups is minimum 1 and maximum the number of rows of data.
 
+# loadeR 1.0.7
 
+* Change package name

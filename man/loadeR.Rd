@@ -11,7 +11,7 @@ Provides a framework for a database through a 'shiny' graphical interface.
 \tabular{ll}{
 Package: \tab loadeR\cr
 Type: \tab Package\cr
-Version: \tab 1.0.6\cr
+Version: \tab 1.0.7\cr
 Date: \tab 2022-12-19\cr
 License: \tab GPL (>=2)\cr
 }
