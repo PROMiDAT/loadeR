@@ -73,4 +73,4 @@
 
 # loadeR 1.0.7
 
-* Change package name
+* Change package name.
