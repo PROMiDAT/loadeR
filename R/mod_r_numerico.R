@@ -14,7 +14,7 @@ mod_r_numerico_ui <- function(id) {
   
   # declare dependencies
   shiny::addResourcePath(
-    "resumenNumerico-lib", system.file("assets", "resumenNumerico", package = "readeR"))
+    "resumenNumerico-lib", system.file("assets", "resumenNumerico", package = "loadeR"))
   
   deps <- list(
     htmltools::htmlDependency(

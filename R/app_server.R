@@ -43,7 +43,7 @@ app_server <- function(input, output, session) {
   # Update on Language
   observeEvent(input$idioma, {
     codedioma$idioma = input$idioma
-    updateLabelInput(session, labels_readeR(), tr(labels_readeR(), input$idioma))
+    updateLabelInput(session, labels_loadeR(), tr(labels_loadeR(), input$idioma))
   })
   
   # Update Code
@@ -62,7 +62,7 @@ app_server <- function(input, output, session) {
     
     codigo.completo <- paste0(
       "library(XLConnect)\n", "library(caret)\n",
-      "library(echarts4r)\n", "library(readeR)\n\n"
+      "library(echarts4r)\n", "library(loadeR)\n\n"
     )
     for (cod in codigo) {
       codigo.completo <- paste0(codigo.completo, "\n", cod)

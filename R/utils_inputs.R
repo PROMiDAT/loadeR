@@ -1,7 +1,7 @@
 radioSwitch <- function(id, label = NULL, names, values = NULL, val.def = T) {
   # declare dependencies
   shiny::addResourcePath(
-    "radioSwitch-lib", system.file("assets", "radioSwitch", package = "readeR"))
+    "radioSwitch-lib", system.file("assets", "radioSwitch", package = "loadeR"))
   
   deps <- list(
     htmltools::htmlDependency(
@@ -82,7 +82,7 @@ labelInput <- function(inputId, value = "") {
   
   # declare dependencies
   shiny::addResourcePath(
-    "labelInput-lib", system.file("assets", "labelInput", package = "readeR"))
+    "labelInput-lib", system.file("assets", "labelInput", package = "loadeR"))
   
   deps <- list(
     htmltools::htmlDependency(

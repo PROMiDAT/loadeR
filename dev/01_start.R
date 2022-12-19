@@ -1,5 +1,5 @@
 golem::fill_desc(
-  pkg_name = "readeR",
+  pkg_name = "loadeR",
   pkg_title = "PKG_TITLE",
   pkg_description = "PKG_DESC.",
   author_first_name = "AUTHOR_FIRST",

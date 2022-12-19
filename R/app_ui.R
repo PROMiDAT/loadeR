@@ -56,7 +56,7 @@ app_ui <- function(request) {
           hr(),
           menu.idioma(),
           hr(),
-          img(src = "img/readeR.png",
+          img(src = "img/loadeR.png",
               style = paste0("margin-left: auto;",
                              "margin-right: auto;display: block;width: 80%;")),
           tags$div(style = "display:none;",
@@ -129,7 +129,7 @@ golem_add_external_resources <- function() {
     favicon(),
     bundle_resources(
       path = app_sys('app/www'),
-      app_title = 'readeR'
+      app_title = 'loadeR'
     ),
     shinyjs::useShinyjs()
   )

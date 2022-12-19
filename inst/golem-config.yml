@@ -1,5 +1,5 @@
 default:
-  golem_name: readeR
+  golem_name: loadeR
   golem_version: 1.0.6
   app_prod: no
 production:

@@ -68,18 +68,18 @@ rvtl <- shiny::reactiveValuesToList
 #'
 #' @author Diego Jimenez <diego.jimenez@promidat.com>
 #' @return list
-#' @export translation.readeR
+#' @export translation.loadeR
 #' @examples
-#' translation.readeR()
+#' translation.loadeR()
 #'
-translation.readeR <- function() {
-  ruta <- system.file("app", "lang", package = "readeR")
-  load(paste0(ruta, "/translation_readeR.bin"))
+translation.loadeR <- function() {
+  ruta <- system.file("app", "lang", package = "loadeR")
+  load(paste0(ruta, "/translation_loadeR.bin"))
   
-  return(translation.readeR)
+  return(translation.loadeR)
 }
 
-translation <- translation.readeR()
+translation <- translation.loadeR()
 
 #' Returns a translate text (user defined).
 #' 
@@ -107,11 +107,11 @@ tr <- function(text, idioma = "es") {
 #'
 #' @author Diego Jimenez <diego.jimenez@promidat.com>
 #' @return text
-#' @export labels_readeR
+#' @export labels_loadeR
 #' @examples
-#' labels_readeR()
+#' labels_loadeR()
 #'
-labels_readeR <- function() {
+labels_loadeR <- function() {
   x <- c("acerca", "alfa", "asc", "asim", "basi", "carg", "cat", "cats", 
          "code", "col", "copyright", "corr", "cros", "curva", "data", 
          "desh", "dis", "disp", "dist", "doccarga", "doccor", "doccv", 
@@ -132,7 +132,7 @@ labels_readeR <- function() {
 # crear.traslation <- function() {
 #   library(plyr)
 #   archivo <- read.table("diccionario.csv", header = TRUE, sep = ";", as.is = TRUE)
-#   translation.readeR <- dlply(archivo , .(key), function(s) key = as.list(s))
+#   translation.loadeR <- dlply(archivo , .(key), function(s) key = as.list(s))
 #   
-#   save(translation.readeR, file = "translation_readeR.bin")
+#   save(translation.loadeR, file = "translation_loadeR.bin")
 # }

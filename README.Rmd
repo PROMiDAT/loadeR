@@ -13,20 +13,20 @@ knitr::opts_chunk$set(
 )
 ```
 
-# readeR
+# loadeR
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
-The goal of readeR is to ...
+The goal of loadeR is to ...
 
 ## Installation
 
-You can install the released version of readeR from [CRAN](https://CRAN.R-project.org) with:
+You can install the released version of loadeR from [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
-install.packages("readeR")
+install.packages("loadeR")
 ```
 
 ## Example
@@ -34,7 +34,7 @@ install.packages("readeR")
 This is a basic example which shows you how to solve a common problem:
 
 ```{r example}
-library(readeR)
+library(loadeR)
 ## basic example code
 ```
 

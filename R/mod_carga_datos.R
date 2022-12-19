@@ -16,7 +16,7 @@ mod_carga_datos_ui <- function(id, title, paquete = "predictoR") {
   
   # declare dependencies
   shiny::addResourcePath(
-    "cargaDatos-lib", system.file("assets", "cargaDatos", package = "readeR"))
+    "cargaDatos-lib", system.file("assets", "cargaDatos", package = "loadeR"))
   
   deps <- list(
     htmltools::htmlDependency(

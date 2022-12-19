@@ -579,7 +579,7 @@ tabsOptions <- function(
   
   # declare dependencies
   shiny::addResourcePath(
-    "tabsOptions-lib", system.file("assets", "tabsOptions", package = "readeR"))
+    "tabsOptions-lib", system.file("assets", "tabsOptions", package = "loadeR"))
   
   deps <- list(
     htmltools::htmlDependency(
