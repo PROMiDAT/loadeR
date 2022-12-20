@@ -74,3 +74,7 @@
 # loadeR 1.0.7
 
 * Package name changed.
+
+# loadeR 1.0.8
+
+* The example of carga.datos.excel does not run.

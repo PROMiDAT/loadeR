@@ -145,9 +145,11 @@ carga.datos <- function(
 #' @return data.frame
 #' @export carga.datos.excel
 #' @examples
-#' tf <- tempfile()
-#' XLConnect::writeWorksheetToFile(paste0(tf, ".xlsx"), iris, "firstsheet")
-#' carga.datos.excel(ruta = paste0(tf, ".xlsx"), row_names = FALSE, preview = TRUE)
+#' \dontrun{
+#'   tf <- tempfile()
+#'   XLConnect::writeWorksheetToFile(paste0(tf, ".xlsx"), iris, "firstsheet")
+#'   carga.datos.excel(ruta = paste0(tf, ".xlsx"), row_names = FALSE, preview = TRUE)
+#' }
 #' 
 carga.datos.excel <- function(
   ruta, sheet = 1, header = T, startRow = 0, startCol = 0, endRow = 0,

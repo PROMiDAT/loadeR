@@ -45,9 +45,11 @@ data.frame
 Load data from excel.
 }
 \examples{
-tf <- tempfile()
-XLConnect::writeWorksheetToFile(paste0(tf, ".xlsx"), iris, "firstsheet")
-carga.datos.excel(ruta = paste0(tf, ".xlsx"), row_names = FALSE, preview = TRUE)
+\dontrun{
+  tf <- tempfile()
+  XLConnect::writeWorksheetToFile(paste0(tf, ".xlsx"), iris, "firstsheet")
+  carga.datos.excel(ruta = paste0(tf, ".xlsx"), row_names = FALSE, preview = TRUE)
+}
 
 }
 \author{
