@@ -7,7 +7,7 @@
 labels_loadeR()
 }
 \value{
-text
+a vector of keys.
 }
 \description{
 Returns a vector of keys to translate with tr.

@@ -3,7 +3,7 @@
 #' @param id Internal parameters for {shiny}.
 #'
 #' @author Diego Jimenez <diego.jimenez@promidat.com>
-#' @return shiny ui
+#' @return shiny ui module.
 #' @export mod_normal_ui
 #' @import shiny
 #' @import shinydashboardPlus
@@ -19,12 +19,12 @@ mod_normal_ui <- function(id) {
              col_6(
                colourpicker::colourInput(
                  ns("col_hist_bar"), labelInput("selcolbar"),
-                 value = "steelblue", allowTransparent = T)
+                 value = "steelblue", allowTransparent = TRUE)
              ),
              col_6(
                colourpicker::colourInput(
                  ns("col_hist_line"), labelInput("selcolline"),
-                 value = "#555555", allowTransparent = T)
+                 value = "#555555", allowTransparent = TRUE)
              )
            )
          ),
@@ -34,12 +34,12 @@ mod_normal_ui <- function(id) {
              col_6(
                colourpicker::colourInput(
                  ns("col_qq_point"), labelInput("selcolpoint"),
-                 value = "steelblue", allowTransparent = T)
+                 value = "steelblue", allowTransparent = TRUE)
              ),
              col_6(
                colourpicker::colourInput(
                  ns("col_qq_line"), labelInput("selcolline"),
-                 value = "#555555", allowTransparent = T)
+                 value = "#555555", allowTransparent = TRUE)
              )
            )
          ),
@@ -79,7 +79,7 @@ mod_normal_ui <- function(id) {
 #' @param codedioma shiny reactive values.
 #'
 #' @author Diego Jimenez <diego.jimenez@promidat.com>
-#' @return shiny server
+#' @return shiny server module.
 #' @import shiny
 #' @export mod_normal_server
 #' 
@@ -186,7 +186,7 @@ mod_normal_server <- function(id, updateData, codedioma) {
         ))
         
         DT::datatable(
-          res, selection = 'none', container = sketch, escape = F,
+          res, selection = 'none', container = sketch, escape = FALSE,
           options = list(dom = 'frtip', scrollY = "50vh")
         )
       }, error = function(e) {

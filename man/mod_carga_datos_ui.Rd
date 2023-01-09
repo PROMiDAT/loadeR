@@ -14,7 +14,7 @@ mod_carga_datos_ui(id, title, paquete = "predictoR")
 \item{paquete}{indicates if the data is going to be used for exploratory, predictive, or regression analysis.}
 }
 \value{
-shiny ui
+shiny ui module.
 }
 \description{
 carga_datos UI Function

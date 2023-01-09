@@ -14,7 +14,7 @@ updateLabelInput(session, labelid, value = NULL)
 \item{value}{Initial value.}
 }
 \value{
-HTML
+An HTML element.
 }
 \description{
 Change the value of a label input on the client.

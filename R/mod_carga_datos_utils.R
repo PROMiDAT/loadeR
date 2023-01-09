@@ -1,9 +1,9 @@
-#' Filter numeric variables of a data.frame
+#' Filter numeric variables of a data.frame.
 #'
 #' @param data a data.frame object.
 #'
 #' @author Diego Jimenez <diego.jimenez@promidat.com>
-#' @return data.frame
+#' @return A data.frame object only with its numeric variables.
 #' @export var.numericas
 #' @examples
 #' var.numericas(iris)
@@ -13,12 +13,12 @@ var.numericas <- function(data) {
   subset(data, select = sapply(data, class) %in% c('numeric', 'integer'))
 }
 
-#' Filter category variables of a data.frame
+#' Filter category variables of a data.frame.
 #'
 #' @param data a data.frame object.
 #'
 #' @author Diego Jimenez <diego.jimenez@promidat.com>
-#' @return data.frame
+#' @return A data.frame object only with its categoric variables.
 #' @export var.categoricas
 #' @examples
 #' var.categoricas(iris)
@@ -34,7 +34,7 @@ var.categoricas <- function(data) {
 #' @param var the column name to apply disjunctive code.
 #'
 #' @author Diego Jimenez <diego.jimenez@promidat.com>
-#' @return data.frame
+#' @return A data.frame object after apply disjunctive code.
 #' @export datos.disyuntivos
 #' @examples
 #' datos.disyuntivos(iris, "Species")
@@ -58,7 +58,7 @@ datos.disyuntivos <- function(data, var) {
 #' @param var the column name that is disyunctive.
 #'
 #' @author Diego Jimenez <diego.jimenez@promidat.com>
-#' @return data.frame
+#' @return A data.frame object before apply disjunctive code.
 #' @export devolver.disyuntivos
 #' @examples
 #' r <- datos.disyuntivos(iris, "Species")
@@ -69,7 +69,7 @@ devolver.disyuntivos <- function(data, var) {
     return(NULL)
   }
   
-  vars <- colnames(data)[grepl(paste0(var, "."), colnames(data), fixed = T)]
+  vars <- colnames(data)[grepl(paste0(var, "."), colnames(data), fixed = TRUE)]
   valores <- rep(NA, nrow(data))
   
   for (x in vars) {
@@ -95,7 +95,7 @@ devolver.disyuntivos <- function(data, var) {
 #' @param preview a logical value indicating if only load the first 10 rows.
 #'
 #' @author Diego Jimenez <diego.jimenez@promidat.com>
-#' @return data.frame
+#' @return A data.frame object with the information of a file.
 #' @export carga.datos
 #' @examples
 #' tf <- tempfile()
@@ -103,20 +103,20 @@ devolver.disyuntivos <- function(data, var) {
 #' carga.datos(ruta = tf, nombre.filas = FALSE, preview = TRUE)
 #' 
 carga.datos <- function(
-  nombre.filas = T, ruta = NULL, separador = ";", sep.decimal = ",", 
-  encabezado = T, deleteNA = T, preview = F) {
+  nombre.filas = TRUE, ruta = NULL, separador = ";", sep.decimal = ",", 
+  encabezado = TRUE, deleteNA = TRUE, preview = FALSE) {
   if(!is.null(ruta)) {
-    ruta <- gsub("\\", "/", ruta, fixed = T)
+    ruta <- gsub("\\", "/", ruta, fixed = TRUE)
   }
   
   if(preview) {
     res <- fread(
       ruta, sep = separador, dec = sep.decimal, header = encabezado, 
-      stringsAsFactors = T, data.table = F, check.names = T, nrows = 10)
+      stringsAsFactors = TRUE, data.table = FALSE, check.names = TRUE, nrows = 10)
   } else {
     res <- fread(
       ruta, sep = separador, dec = sep.decimal, header = encabezado, 
-      stringsAsFactors = T, data.table = F, check.names = T)
+      stringsAsFactors = TRUE, data.table = FALSE, check.names = TRUE)
   }
   
   if(nombre.filas) {
@@ -142,20 +142,20 @@ carga.datos <- function(
 #' @importFrom XLConnect writeWorksheetToFile readWorksheetFromFile
 #'
 #' @author Diego Jimenez <diego.jimenez@promidat.com>
-#' @return data.frame
+#' @return A data.frame object with the information of a file on excel.
 #' @export carga.datos.excel
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'   tf <- tempfile()
 #'   XLConnect::writeWorksheetToFile(paste0(tf, ".xlsx"), iris, "firstsheet")
 #'   carga.datos.excel(ruta = paste0(tf, ".xlsx"), row_names = FALSE, preview = TRUE)
 #' }
 #' 
 carga.datos.excel <- function(
-  ruta, sheet = 1, header = T, startRow = 0, startCol = 0, endRow = 0,
-  endCol = 0, row_names = T, deleteNA = T, preview = F) {
+  ruta, sheet = 1, header = TRUE, startRow = 0, startCol = 0, endRow = 0,
+  endCol = 0, row_names = TRUE, deleteNA = TRUE, preview = FALSE) {
   if(!is.null(ruta)) {
-    ruta <- gsub("\\", "/", ruta, fixed = T)
+    ruta <- gsub("\\", "/", ruta, fixed = TRUE)
   }
   
   if(preview) {
@@ -168,7 +168,7 @@ carga.datos.excel <- function(
   res <- readWorksheetFromFile(
     ruta, sheet = sheet, header = header, startRow = startRow,
     startCol = startCol, endRow = endRow, endCol = endCol)
-  res <- data.frame(unclass(res), stringsAsFactors = T)
+  res <- data.frame(unclass(res), stringsAsFactors = TRUE)
   
   if(row_names) {
     row.names(res) <- res[[1]]
@@ -178,7 +178,7 @@ carga.datos.excel <- function(
 }
 
 # Segmenta los datos
-segmentar.datos <- function(datos, variable.predecir, porcentaje = 30, semilla = 5, perm.semilla = F) {
+segmentar.datos <- function(datos, variable.predecir, porcentaje = 30, semilla = 5, perm.semilla = FALSE) {
   semilla <- ifelse(is.numeric(semilla), semilla, 5)
   
   if (perm.semilla) {
@@ -186,7 +186,7 @@ segmentar.datos <- function(datos, variable.predecir, porcentaje = 30, semilla =
   } else {
     rm(.Random.seed, envir = globalenv())
   }
-  particion      <- createDataPartition(y = datos[, variable.predecir], p = porcentaje/100, list = F)
+  particion      <- createDataPartition(y = datos[, variable.predecir], p = porcentaje/100, list = FALSE)
   indices        <- particion[, 1]
   test  <- datos[-particion, ]
   train <- datos[particion, ]

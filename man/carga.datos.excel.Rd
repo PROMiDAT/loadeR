@@ -7,14 +7,14 @@
 carga.datos.excel(
   ruta,
   sheet = 1,
-  header = T,
+  header = TRUE,
   startRow = 0,
   startCol = 0,
   endRow = 0,
   endCol = 0,
-  row_names = T,
-  deleteNA = T,
-  preview = F
+  row_names = TRUE,
+  deleteNA = TRUE,
+  preview = FALSE
 )
 }
 \arguments{
@@ -39,13 +39,13 @@ carga.datos.excel(
 \item{preview}{a logical value indicating if only load the first 10 rows.}
 }
 \value{
-data.frame
+A data.frame object with the information of a file on excel.
 }
 \description{
 Load data from excel.
 }
 \examples{
-\dontrun{
+\donttest{
   tf <- tempfile()
   XLConnect::writeWorksheetToFile(paste0(tf, ".xlsx"), iris, "firstsheet")
   carga.datos.excel(ruta = paste0(tf, ".xlsx"), row_names = FALSE, preview = TRUE)

@@ -12,7 +12,7 @@ labelInput(inputId, value = "")
 \item{value}{Initial value.}
 }
 \value{
-HTML
+An HTML element.
 }
 \description{
 Create a label that can be used to show text.

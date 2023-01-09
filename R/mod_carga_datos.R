@@ -5,7 +5,7 @@
 #' @param paquete indicates if the data is going to be used for exploratory, predictive, or regression analysis.
 #' 
 #' @author Joseline Quiros <joseline.quiros@promidat.com>
-#' @return shiny ui
+#' @return shiny ui module.
 #' @export mod_carga_datos_ui
 #' @import shiny
 #' @import htmltools
@@ -35,16 +35,16 @@ mod_carga_datos_ui <- function(id, title, paquete = "predictoR") {
           ns('archivo'), labelInput("selfile"), width = "100%",
           placeholder = "", buttonLabel = labelInput("subi"),
           accept = c('text/csv', '.csv', '.txt')),
-        col_6(checkboxInput(ns('header'), labelInput("selhead"), value = T)),
-        col_6(checkboxInput(ns('rowname'), labelInput("selrow"), value = T)),
+        col_6(checkboxInput(ns('header'), labelInput("selhead"), value = TRUE)),
+        col_6(checkboxInput(ns('rowname'), labelInput("selrow"), value = TRUE)),
         col_6(
           radioButtons(
-            ns('sep'), labelInput("selsep"), inline = T,
+            ns('sep'), labelInput("selsep"), inline = TRUE,
             choiceNames = c(';', ',', 'TAB'), choiceValues = c(';', ',', '\t')
           )
         ),
         col_6(
-          radioButtons(ns('dec'), labelInput("seldec"), c(',', '.'), inline = T)
+          radioButtons(ns('dec'), labelInput("seldec"), c(',', '.'), inline = TRUE)
         ),
         radioSwitch(ns("deleteNA"), label = "selna", c("elim", "impu")), hr(),
         wellPanel(style = "height: 25vh; overflow: auto;",
@@ -64,8 +64,8 @@ mod_carga_datos_ui <- function(id, title, paquete = "predictoR") {
         ),
         fluidRow(
           style = "margin-right: 0px;margin-left: 0px;",
-          col_6(checkboxInput(ns('header_xlsx'), labelInput("selhead"), value = T)),
-          col_6(checkboxInput(ns('rowname_xlsx'), labelInput("selrow"), value = T))
+          col_6(checkboxInput(ns('header_xlsx'), labelInput("selhead"), value = TRUE)),
+          col_6(checkboxInput(ns('rowname_xlsx'), labelInput("selrow"), value = TRUE))
         ),
         fluidRow(
           style = "margin-right: 0px;margin-left: 0px;",
@@ -110,7 +110,7 @@ mod_carga_datos_ui <- function(id, title, paquete = "predictoR") {
         tags$b(labelInput("seed")),
         div(
           col_6(radioSwitch(ns("aseed"), NULL, c("habi", "desh"),
-                            val.def = F)),
+                            val.def = FALSE)),
           col_6(numericInput(ns("seed"), NULL, value = 5, width = "100%"))
         ),
         sliderInput(ns("n_tt"), label = div(
@@ -165,7 +165,7 @@ mod_carga_datos_ui <- function(id, title, paquete = "predictoR") {
   return(htmltools::attachDependencies(inputTag, deps))
 }
 
-#' carga_datos Server Functions
+#' carga_datos Server Functions.
 #'
 #' @param id Internal parameters for {shiny}.
 #' @param updateData shiny reactive values.
@@ -174,7 +174,7 @@ mod_carga_datos_ui <- function(id, title, paquete = "predictoR") {
 #' @param paquete indicates if the data is going to be used for exploratory, predictive, or regression analysis.
 #'
 #' @author Joseline Quiros <joseline.quiros@promidat.com>
-#' @return shiny server
+#' @return shiny server module.
 #' @import caret
 #' @import XLConnect
 #' @import shiny
@@ -469,7 +469,7 @@ mod_carga_datos_server <- function(id, updateData, modelos, codedioma, paquete =
         preview <- carga.datos(
           rowname, ruta$datapath, sep, dec, encabezado, deleteNA, T)
         DT::datatable(
-          preview, options = list(dom = 'rt', ordering = F), 
+          preview, options = list(dom = 'rt', ordering = FALSE), 
           selection = 'none', container = prevsketch(preview, tipos)
         )
       }, error = function(e) {
@@ -500,7 +500,7 @@ mod_carga_datos_server <- function(id, updateData, modelos, codedioma, paquete =
           ruta$datapath, num_hoja, encabezado, fila_inicio, col_inicio, 
           fila_final, col_final, rowname, deleteNA, T)
         DT::datatable(
-          preview, options = list(dom = 'rt', ordering = F), 
+          preview, options = list(dom = 'rt', ordering = FALSE), 
           selection = 'none', container = prevsketch(preview, tipos)
         )
       }, error = function(e) {
@@ -545,8 +545,8 @@ mod_carga_datos_server <- function(id, updateData, modelos, codedioma, paquete =
             extensions = 'Buttons',
             container = sketch(
               ns('accion'), datos.tabla, datos, originales, idioma, "part", tipo.columnas),
-            options = list(dom = 'Bfrtip', ordering = F, buttons = list(list(
-              extend = 'csv', filename = "data", header = T,
+            options = list(dom = 'Bfrtip', ordering = FALSE, buttons = list(list(
+              extend = 'csv', filename = "data", header = TRUE,
               exportOptions = list(
                 modifier = list(page = "all"),
                 format = list(
@@ -559,7 +559,7 @@ mod_carga_datos_server <- function(id, updateData, modelos, codedioma, paquete =
               ),
               text = '<i class="fa fa-file-csv"></i>'),
               list(
-                extend = 'excel', filename = "data", header = T,
+                extend = 'excel', filename = "data", header = TRUE,
                 exportOptions = list(
                   modifier = list(page = "all"),
                   format = list(
@@ -594,7 +594,7 @@ mod_carga_datos_server <- function(id, updateData, modelos, codedioma, paquete =
         showNotification(paste0("ERROR CD030: ", e), type = "error")
         return(NULL)
       })
-    }, server = F)
+    }, server = FALSE)
     
     # Update Predict Variable
     observeEvent(updateData$datos, {
@@ -697,7 +697,7 @@ mod_carga_datos_server <- function(id, updateData, modelos, codedioma, paquete =
         input$archivo$name
       },
       content = function(file) {
-        fwrite(updateData$datos, file, row.names = T)
+        fwrite(updateData$datos, file, row.names = TRUE)
       }
     )
   })

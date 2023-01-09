@@ -7,6 +7,8 @@
 #' @importFrom shiny shinyApp
 #' @importFrom golem with_golem_options
 run_app <- function(paquete = "predictoR", ...) {
+  old <- options()
+  on.exit(options(old))
   Sys.setenv("LANGUAGE" = "ES")
   if(toupper(.Platform$OS.type) != "WINDOWS") {
     options(encoding = "utf8")

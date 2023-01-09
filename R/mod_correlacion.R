@@ -3,7 +3,7 @@
 #' @param id Internal parameters for {shiny}.
 #'
 #' @author Diego Jimenez <diego.jimenez@promidat.com>
-#' @return shiny ui
+#' @return shiny ui module.
 #' @export mod_correlacion_ui
 #' @import shiny
 #' @import shinydashboardPlus
@@ -18,17 +18,17 @@ mod_correlacion_ui <- function(id){
         col_4(
           colourpicker::colourInput(
             ns("col_max"), labelInput("selcolor"), "#2E86C1",
-            allowTransparent = T)
+            allowTransparent = TRUE)
         ),
         col_4(
           colourpicker::colourInput(
             ns("col_med"), labelInput("selcolor"), "#F8F5F5",
-            allowTransparent = T)
+            allowTransparent = TRUE)
         ),
         col_4(
           colourpicker::colourInput(
             ns("col_min"), labelInput("selcolor"), "#FF5733",
-            allowTransparent = T)
+            allowTransparent = TRUE)
         )
       )
     )
@@ -56,7 +56,7 @@ mod_correlacion_ui <- function(id){
 #' @param codedioma shiny reactive values.
 #'
 #' @author Diego Jimenez <diego.jimenez@promidat.com>
-#' @return shiny server
+#' @return shiny server module.
 #' @import shiny
 #' @importFrom stats cor
 #' @export mod_correlacion_server

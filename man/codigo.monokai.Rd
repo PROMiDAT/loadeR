@@ -2,7 +2,7 @@
 % Please edit documentation in R/golem_utils_ui.R
 \name{codigo.monokai}
 \alias{codigo.monokai}
-\title{Returns HTML for code}
+\title{HTML for show code on shiny application.}
 \usage{
 codigo.monokai(id, height)
 }
@@ -12,10 +12,10 @@ codigo.monokai(id, height)
 \item{height}{The height of the input, e.g. '400px', or '100vh'.}
 }
 \value{
-HTML
+An HTML element.
 }
 \description{
-Returns HTML for code
+HTML for show code on shiny application.
 }
 \examples{
 codigo.monokai("id", "70vh")

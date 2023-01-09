@@ -12,7 +12,7 @@ devolver.disyuntivos(data, var)
 \item{var}{the column name that is disyunctive.}
 }
 \value{
-data.frame
+A data.frame object before apply disjunctive code.
 }
 \description{
 Back disjunctive column to original.

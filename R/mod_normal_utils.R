@@ -6,7 +6,7 @@
 #' @param nombres a character vector of length 2 specifying the titles to use on legend.
 #'
 #' @author Diego Jimenez <diego.jimenez@promidat.com>
-#' @return echarts4r plot
+#' @return echarts4r plot.
 #' @export e_histnormal
 #' @import echarts4r
 #' @importFrom graphics hist
@@ -16,10 +16,10 @@
 #' 
 e_histnormal <- function(data, colorbar = "steelblue", colorline = "gray",
                          nombres = c("Histograma", "Curva Normal")) {
-  h <- hist(data, plot = F)
-  x <- seq(min(h$mids, na.rm = T), max(h$mids, na.rm = T), length = length(h$mids))
-  promedio <- mean(data, na.rm = T)
-  desviacion <- sd(data, na.rm = T)
+  h <- hist(data, plot = FALSE)
+  x <- seq(min(h$mids, na.rm = TRUE), max(h$mids, na.rm = TRUE), length = length(h$mids))
+  promedio <- mean(data, na.rm = TRUE)
+  desviacion <- sd(data, na.rm = TRUE)
   normalidad <- dnorm(x, promedio, desviacion)
   
   d <- diff(h$breaks)[1]
@@ -30,10 +30,10 @@ e_histnormal <- function(data, colorbar = "steelblue", colorline = "gray",
   )
   
   distribu |> e_charts(x) |> e_bar(d, name = nombres[1]) |> 
-    e_line(n, name = nombres[2]) |> e_x_axis(scale = T) |>
+    e_line(n, name = nombres[2]) |> e_x_axis(scale = TRUE) |>
     e_axis_labels(x = "", y = "Densidad") |> 
     e_color(c(colorbar, colorline)) |> e_tooltip() |> 
-    e_datazoom(show = F) |> e_show_loading()
+    e_datazoom(show = FALSE) |> e_show_loading()
 }
 
 #' Qplot + Qline
@@ -43,7 +43,7 @@ e_histnormal <- function(data, colorbar = "steelblue", colorline = "gray",
 #' @param colorline a color for the line.
 #'
 #' @author Diego Jimenez <diego.jimenez@promidat.com>
-#' @return echarts4r plot
+#' @return echarts4r plot.
 #' @export e_qq
 #' @import echarts4r
 #' @importFrom stats qnorm qqnorm quantile
@@ -51,9 +51,9 @@ e_histnormal <- function(data, colorbar = "steelblue", colorline = "gray",
 #' e_qq(iris$Sepal.Length)
 #' 
 e_qq <- function(data, colorpoint = "steelblue", colorline = "gray") {
-  data <- data.frame(qqnorm(data, plot = F))
+  data <- data.frame(qqnorm(data, plot = FALSE))
   
-  y <- quantile(data$y, c(0.25, 0.75), names = F, na.rm = T)
+  y <- quantile(data$y, c(0.25, 0.75), names = FALSE, na.rm = TRUE)
   x <- qnorm(c(0.25, 0.75))
   slope <- diff(y)/diff(x)
   int <- y[1L] - slope * x[1L]
@@ -62,17 +62,17 @@ e_qq <- function(data, colorpoint = "steelblue", colorline = "gray") {
   data <- round(data, 3)
   
   data |> e_charts(x) |> e_scatter(y, name = "QQplot", symbol_size = 8) |>
-    e_line(z, name = "QQline", symbol = 'none') |> e_x_axis(scale = T) |>
-    e_y_axis(scale = T) |> e_tooltip() |> e_datazoom(show = F) |> 
+    e_line(z, name = "QQline", symbol = 'none') |> e_x_axis(scale = TRUE) |>
+    e_y_axis(scale = TRUE) |> e_tooltip() |> e_datazoom(show = FALSE) |> 
     e_color(c(colorpoint, colorline)) |> e_show_loading()
 }
 
-#' Data.frame with normal test
+#' Data.frame with normal test values.
 #'
 #' @param data a data.frame object only with the numeric columns.
 #'
 #' @author Diego Jimenez <diego.jimenez@promidat.com>
-#' @return data.frame
+#' @return A data.frame.
 #' @export dfnormal
 #' @importFrom stats complete.cases pchisq pnorm shapiro.test
 #' @examples

@@ -5,7 +5,7 @@ code.disp.2d <- function(vars, color) {
     "datos.plot <- data.frame(x = datos[['", vars[1], "'], y = datos[['", vars[2], "']],\n",
     "                         id = row.names(datos))\n\n",
     "datos.plot %>% e_charts(x) %>% e_scatter(y, bind = id, symbol_size = 10) %>%\n",
-    "  e_x_axis(x) %>% e_y_axis(y) %>% e_datazoom(show = F) %>%\n",
+    "  e_x_axis(x) %>% e_y_axis(y) %>% e_datazoom(show = FALSE) %>%\n",
     "  e_color('", color, "') %>% e_axis_labels(x = '", vars[1], "', y = '", vars[2], "') %>%\n",
     "  e_tooltip(formatter = JS(\n",
     "    \"function(params) {\n",

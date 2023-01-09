@@ -5,13 +5,13 @@
 \title{Load data from text file.}
 \usage{
 carga.datos(
-  nombre.filas = T,
+  nombre.filas = TRUE,
   ruta = NULL,
   separador = ";",
   sep.decimal = ",",
-  encabezado = T,
-  deleteNA = T,
-  preview = F
+  encabezado = TRUE,
+  deleteNA = TRUE,
+  preview = FALSE
 )
 }
 \arguments{
@@ -30,7 +30,7 @@ carga.datos(
 \item{preview}{a logical value indicating if only load the first 10 rows.}
 }
 \value{
-data.frame
+A data.frame object with the information of a file.
 }
 \description{
 Load data from text file.

@@ -12,7 +12,7 @@ datos.disyuntivos(data, var)
 \item{var}{the column name to apply disjunctive code.}
 }
 \value{
-data.frame
+A data.frame object after apply disjunctive code.
 }
 \description{
 Create disjunctive columns to a data.frame.

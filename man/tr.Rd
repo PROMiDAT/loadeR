@@ -12,7 +12,7 @@ tr(text, idioma = "es")
 \item{idioma}{language to use. For example: "en".}
 }
 \value{
-text
+a translate text.
 }
 \description{
 Returns a translate text (user defined).

@@ -2,7 +2,7 @@
 % Please edit documentation in R/mod_carga_datos_utils.R
 \name{var.categoricas}
 \alias{var.categoricas}
-\title{Filter category variables of a data.frame}
+\title{Filter category variables of a data.frame.}
 \usage{
 var.categoricas(data)
 }
@@ -10,10 +10,10 @@ var.categoricas(data)
 \item{data}{a data.frame object.}
 }
 \value{
-data.frame
+A data.frame object only with its categoric variables.
 }
 \description{
-Filter category variables of a data.frame
+Filter category variables of a data.frame.
 }
 \examples{
 var.categoricas(iris)

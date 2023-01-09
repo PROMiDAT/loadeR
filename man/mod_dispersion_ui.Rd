@@ -10,7 +10,7 @@ mod_dispersion_ui(id)
 \item{id}{Internal parameters for {shiny}.}
 }
 \value{
-shiny ui
+shiny ui module.
 }
 \description{
 dispersion UI Function

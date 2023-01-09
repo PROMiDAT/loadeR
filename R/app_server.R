@@ -8,6 +8,8 @@ app_server <- function(input, output, session) {
   
   ##################################  Options  ################################
   
+  old <- options()
+  on.exit(options(old))
   options(shiny.maxRequestSize = 200*1024^2)
   options(
     DT.options = list(
@@ -57,7 +59,7 @@ app_server <- function(input, output, session) {
       'docrename', 'doctrans', 'doceliminar')
     
     for (k in keys) {
-      codigo <- gsub(k, tr(k, idioma = lg), codigo, fixed = T)
+      codigo <- gsub(k, tr(k, idioma = lg), codigo, fixed = TRUE)
     }
     
     codigo.completo <- paste0(

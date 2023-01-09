@@ -432,10 +432,10 @@ make_action_button <- function(tag, inputId = NULL) {
 #'   return(HTML(html))
 #' }
 
-#' Returns HTML for language
+#' HTML for language menu.
 #'
 #' @author Diego Jimenez <diego.jimenez@promidat.com>
-#' @return HTML
+#' @return An HTML element.
 #' @import shiny
 #' @export menu.idioma
 #' @examples
@@ -457,13 +457,13 @@ menu.idioma <- function() {
       tags$br()))
 }
 
-#' Returns HTML for code
+#' HTML for show code on shiny application.
 #' 
 #' @param id The input slot that will be used to access the value.
 #' @param height The height of the input, e.g. '400px', or '100vh'.
 #'
 #' @author Diego Jimenez <diego.jimenez@promidat.com>
-#' @return HTML
+#' @return An HTML element.
 #' @import shinyAce
 #' @export codigo.monokai
 #' @examples
@@ -472,18 +472,18 @@ menu.idioma <- function() {
 codigo.monokai <- function(id, height) {
   aceEditor(
     id, mode = "r", theme = "monokai", value = "", 
-    readOnly = T, height = height
+    readOnly = TRUE, height = height
   )
 }
 
-#' Returns infoBox with specific colors.
+#' Information box.
 #' 
 #' @param titulo Title text.
 #' @param valor The value to display in the box. Usually a number or short text.
 #' @param icono An icon tag, created by icon.
 #'
 #' @author Diego Jimenez <diego.jimenez@promidat.com>
-#' @return HTML
+#' @return An HTML element.
 #' @import shiny
 #' @export infoBoxPROMiDAT
 #' @examples
@@ -501,12 +501,12 @@ infoBoxPROMiDAT <- function(titulo, valor, icono) {
   )
 }
 
-#' Returns HTML for a Run button.
+#' Creates a button to use in a options menu. 
 #' 
 #' @param runid The input slot that will be used to access the value.
 #'
 #' @author Diego Jimenez <diego.jimenez@promidat.com>
-#' @return HTML
+#' @return An HTML element.
 #' @import shiny
 #' @export options.run
 #' @examples
@@ -522,7 +522,7 @@ options.run <- function(runid) {
       icon("play"), tags$a(labelInput("run"), style = "color:white")))
 }
 
-#' Returns a HTML tabset panel with more options.
+#' Tabset panel with options menu.
 #' 
 #' @param ... tabPanel() elements to include in the tabset.
 #' @param id If provided, you can use input$id in your server logic to determine which of the current tabs is active. The value will correspond to the value argument that is passed to tabPanel().
@@ -531,7 +531,7 @@ options.run <- function(runid) {
 #' @param open Class to assign first option, for example to start open.
 #'
 #' @author Diego Jimenez <diego.jimenez@promidat.com>
-#' @return HTML
+#' @return An HTML element.
 #' @import shiny
 #' @export tabBoxPrmdt
 #' @examples
@@ -557,7 +557,7 @@ tabBoxPrmdt <- function (..., id = NULL, title = NULL, opciones = NULL, open = N
   content
 }
 
-#' Returns a footer menu for tabBoxPrmdt (tabsetPanel).
+#' Options menu in footer for tabBoxPrmdt (tabsetPanel).
 #' 
 #' @param botones list of icons to each option of the menu. Minimum 1, maximum 5.
 #' @param widths vector of widths to each option of the menu. Minimum 1, maximum 5.
@@ -566,7 +566,7 @@ tabBoxPrmdt <- function (..., id = NULL, title = NULL, opciones = NULL, open = N
 #' @param id If provided, you can use input$id in your server logic to get the element.
 #'
 #' @author Diego Jimenez <diego.jimenez@promidat.com>
-#' @return HTML
+#' @return An HTML element.
 #' @import shiny
 #' @export tabsOptions
 #' @examples

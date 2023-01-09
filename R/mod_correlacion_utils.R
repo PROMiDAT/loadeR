@@ -4,7 +4,7 @@
 #' @param colors a vector of lenght 3 with color values.
 #' 
 #' @author Diego Jimenez <diego.jimenez@promidat.com>
-#' @return echarts4r plot
+#' @return echarts4r plot.
 #' @export e_cor
 #' @import echarts4r
 #' @examples
@@ -28,17 +28,17 @@ e_cor <- function(x, colors = c("#FF5733", "#F8F5F5", "#2E86C1")) {
       list(
         type = "heatmap", coordinateSystem = "cartesian2d",
         itemStyle = list(borderWidth = 2, borderColor = "#fff"),
-        label = list(show = T), data = data
+        label = list(show = TRUE), data = data
       )
     ),
     visualMap = list(
-      min = -1, max = 1, label = T, calculable = T, type = "continuous",
+      min = -1, max = 1, label = TRUE, calculable = TRUE, type = "continuous",
       inRange   = list(color = colors), left = "right",
       itemStyle = list(borderWidth = 2, borderColor = "#fff")
     )
   )
   
-  e_charts() |> e_list(opts) |> e_datazoom(show = F) |> e_show_loading() |> e_tooltip(
+  e_charts() |> e_list(opts) |> e_datazoom(show = FALSE) |> e_show_loading() |> e_tooltip(
     formatter = htmlwidgets::JS(paste0(
       "function(params) {\n",
       "  return(params.value[1] + ' ~ ' + params.value[0] + ': ' + params.value[2])\n", 

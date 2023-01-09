@@ -78,3 +78,11 @@
 # loadeR 1.0.8
 
 * The example of carga.datos.excel does not run.
+
+# loadeR 1.0.9
+
+* All uses of T and F are changed to TRUE and FALSE respectively.
+* Expanded package description.
+* dontrun was changed to donttest.
+* .GlobalEnv is no longer modified.
+* More information is added in the value of the exported functions.

@@ -31,12 +31,12 @@ includeRMarkdown <- function(path){
   
   return(HTML(html))
 }
-Returns HTML for language}
+HTML for language menu.}
 \usage{
 menu.idioma()
 }
 \value{
-HTML
+An HTML element.
 }
 \description{
 #' Include Content From a File
@@ -68,7 +68,7 @@ includeRMarkdown <- function(path){
   
   return(HTML(html))
 }
-Returns HTML for language
+HTML for language menu.
 }
 \examples{
 menu.idioma()

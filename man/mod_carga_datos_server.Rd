@@ -2,7 +2,7 @@
 % Please edit documentation in R/mod_carga_datos.R
 \name{mod_carga_datos_server}
 \alias{mod_carga_datos_server}
-\title{carga_datos Server Functions}
+\title{carga_datos Server Functions.}
 \usage{
 mod_carga_datos_server(
   id,
@@ -24,10 +24,10 @@ mod_carga_datos_server(
 \item{paquete}{indicates if the data is going to be used for exploratory, predictive, or regression analysis.}
 }
 \value{
-shiny server
+shiny server module.
 }
 \description{
-carga_datos Server Functions
+carga_datos Server Functions.
 }
 \author{
 Joseline Quiros <joseline.quiros@promidat.com>

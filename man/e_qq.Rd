@@ -14,7 +14,7 @@ e_qq(data, colorpoint = "steelblue", colorline = "gray")
 \item{colorline}{a color for the line.}
 }
 \value{
-echarts4r plot
+echarts4r plot.
 }
 \description{
 Qplot + Qline

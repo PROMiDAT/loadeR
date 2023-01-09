@@ -2,7 +2,7 @@
 % Please edit documentation in R/golem_utils_ui.R
 \name{infoBoxPROMiDAT}
 \alias{infoBoxPROMiDAT}
-\title{Returns infoBox with specific colors.}
+\title{Information box.}
 \usage{
 infoBoxPROMiDAT(titulo, valor, icono)
 }
@@ -14,10 +14,10 @@ infoBoxPROMiDAT(titulo, valor, icono)
 \item{icono}{An icon tag, created by icon.}
 }
 \value{
-HTML
+An HTML element.
 }
 \description{
-Returns infoBox with specific colors.
+Information box.
 }
 \examples{
 library(shiny)

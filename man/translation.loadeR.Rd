@@ -7,7 +7,7 @@
 translation.loadeR()
 }
 \value{
-list
+a list of sentences with their translation in different languages.
 }
 \description{
 Returns a list of sentences with their translation in different languages.

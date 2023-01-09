@@ -2,7 +2,7 @@
 % Please edit documentation in R/golem_utils_ui.R
 \name{options.run}
 \alias{options.run}
-\title{Returns HTML for a Run button.}
+\title{Creates a button to use in a options menu.}
 \usage{
 options.run(runid)
 }
@@ -10,10 +10,10 @@ options.run(runid)
 \item{runid}{The input slot that will be used to access the value.}
 }
 \value{
-HTML
+An HTML element.
 }
 \description{
-Returns HTML for a Run button.
+Creates a button to use in a options menu.
 }
 \examples{
 options.run("id")

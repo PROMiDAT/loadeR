@@ -10,7 +10,7 @@ mod_correlacion_ui(id)
 \item{id}{Internal parameters for {shiny}.}
 }
 \value{
-shiny ui
+shiny ui module.
 }
 \description{
 correlacion UI Function

@@ -14,7 +14,7 @@ mod_r_numerico_server(id, updateData, codedioma)
 \item{codedioma}{shiny reactive values.}
 }
 \value{
-shiny server
+shiny server module.
 }
 \description{
 r_numerico Server Function

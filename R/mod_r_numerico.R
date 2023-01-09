@@ -3,7 +3,7 @@
 #' @param id Internal parameters for {shiny}.
 #'
 #' @author Diego Jimenez <diego.jimenez@promidat.com>
-#' @return shiny ui
+#' @return shiny ui module.
 #' @export mod_r_numerico_ui
 #' @import shiny
 #' @import htmltools
@@ -37,7 +37,7 @@ mod_r_numerico_ui <- function(id) {
 #' @param codedioma shiny reactive values.
 #'
 #' @author Diego Jimenez <diego.jimenez@promidat.com>
-#' @return shiny server
+#' @return shiny server module.
 #' @import shiny
 #' @importFrom stats median
 #' @export mod_r_numerico_server
@@ -65,8 +65,8 @@ mod_r_numerico_server <- function(id, updateData, codedioma) {
           icon.name    <- "fa-font"
         }
         list(div(col_3(box(
-          title  = col.name, status = "primary", width  = 12, solidHeader = T,
-          collapsible = T, fluidRow(
+          title  = col.name, status = "primary", width  = 12, solidHeader = TRUE,
+          collapsible = TRUE, fluidRow(
             class = "summ-row", 
             col_12(
               tags$span(class = "wrapper-tag", style = "font-size: 11px;",

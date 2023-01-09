@@ -12,7 +12,7 @@ e_cor(x, colors = c("#FF5733", "#F8F5F5", "#2E86C1"))
 \item{colors}{a vector of lenght 3 with color values.}
 }
 \value{
-echarts4r plot
+echarts4r plot.
 }
 \description{
 Correlation plot

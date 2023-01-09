@@ -62,12 +62,12 @@ dropNulls <- function (x) {
 rv <- shiny::reactiveValues
 rvtl <- shiny::reactiveValuesToList
 
-########################################################
+###############################################################################
 
 #' Returns a list of sentences with their translation in different languages.
 #'
 #' @author Diego Jimenez <diego.jimenez@promidat.com>
-#' @return list
+#' @return a list of sentences with their translation in different languages.
 #' @export translation.loadeR
 #' @examples
 #' translation.loadeR()
@@ -87,7 +87,7 @@ translation <- translation.loadeR()
 #' @param idioma language to use. For example: "en".
 #'
 #' @author Diego Jimenez <diego.jimenez@promidat.com>
-#' @return text
+#' @return a translate text.
 #' @export tr
 #' @examples
 #' tr("data", "en")
@@ -100,13 +100,13 @@ tr <- function(text, idioma = "es") {
     Encoding(elem) <- "utf8"
     
     elem
-  }, USE.NAMES = F)
+  }, USE.NAMES = FALSE)
 }
 
 #' Returns a vector of keys to translate with tr.
 #'
 #' @author Diego Jimenez <diego.jimenez@promidat.com>
-#' @return text
+#' @return a vector of keys.
 #' @export labels_loadeR
 #' @examples
 #' labels_loadeR()

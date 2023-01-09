@@ -2,7 +2,7 @@
 % Please edit documentation in R/mod_normal_utils.R
 \name{dfnormal}
 \alias{dfnormal}
-\title{Data.frame with normal test}
+\title{Data.frame with normal test values.}
 \usage{
 dfnormal(data)
 }
@@ -10,10 +10,10 @@ dfnormal(data)
 \item{data}{a data.frame object only with the numeric columns.}
 }
 \value{
-data.frame
+A data.frame.
 }
 \description{
-Data.frame with normal test
+Data.frame with normal test values.
 }
 \examples{
 dfnormal(iris[, -5])

@@ -5,14 +5,14 @@
 \alias{loadeR}
 \title{Read Data System}
 \description{
-Provides a framework for a database through a 'shiny' graphical interface.
+Provides a framework to load text and excel files through a 'shiny' graphical interface. It allows renaming, transforming, ordering and removing variables. It includes basic exploratory methods such as the mean, median, mode, normality test, histogtram and correlation.
 }
 \details{
 \tabular{ll}{
 Package: \tab loadeR\cr
 Type: \tab Package\cr
-Version: \tab 1.0.8\cr
-Date: \tab 2022-12-20\cr
+Version: \tab 1.0.9\cr
+Date: \tab 2022-01-09\cr
 License: \tab GPL (>=2)\cr
 }
 }

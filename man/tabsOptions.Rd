@@ -2,7 +2,7 @@
 % Please edit documentation in R/golem_utils_ui.R
 \name{tabsOptions}
 \alias{tabsOptions}
-\title{Returns a footer menu for tabBoxPrmdt (tabsetPanel).}
+\title{Options menu in footer for tabBoxPrmdt (tabsetPanel).}
 \usage{
 tabsOptions(
   botones = list(icon("gear")),
@@ -24,10 +24,10 @@ tabsOptions(
 \item{id}{If provided, you can use input$id in your server logic to get the element.}
 }
 \value{
-HTML
+An HTML element.
 }
 \description{
-Returns a footer menu for tabBoxPrmdt (tabsetPanel).
+Options menu in footer for tabBoxPrmdt (tabsetPanel).
 }
 \examples{
 tabsOptions()

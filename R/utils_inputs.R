@@ -1,4 +1,4 @@
-radioSwitch <- function(id, label = NULL, names, values = NULL, val.def = T) {
+radioSwitch <- function(id, label = NULL, names, values = NULL, val.def = TRUE) {
   # declare dependencies
   shiny::addResourcePath(
     "radioSwitch-lib", system.file("assets", "radioSwitch", package = "loadeR"))
@@ -71,7 +71,7 @@ radioSwitch <- function(id, label = NULL, names, values = NULL, val.def = T) {
 #' @param value Initial value.
 #'
 #' @author Diego Jimenez <diego.jimenez@promidat.com>
-#' @return HTML
+#' @return An HTML element.
 #' @import shiny
 #' @import htmltools
 #' @export labelInput
@@ -103,7 +103,7 @@ labelInput <- function(inputId, value = "") {
 #' @param value Initial value.
 #'
 #' @author Diego Jimenez <diego.jimenez@promidat.com>
-#' @return HTML
+#' @return An HTML element.
 #' @import shiny
 #' @export updateLabelInput
 #'

@@ -14,7 +14,7 @@ mod_normal_server(id, updateData, codedioma)
 \item{codedioma}{shiny reactive values.}
 }
 \value{
-shiny server
+shiny server module.
 }
 \description{
 normal Server Function

@@ -3,7 +3,7 @@
 #' @param id Internal parameters for {shiny}.
 #'
 #' @author Diego Jimenez <diego.jimenez@promidat.com>
-#' @return shiny ui
+#' @return shiny ui module.
 #' @export mod_distribuciones_ui
 #' @import shiny
 #' @import shinydashboardPlus
@@ -32,12 +32,12 @@ mod_distribuciones_ui <- function(id){
             col_6(
               colourpicker::colourInput(
                 ns("col_dist_bar"), labelInput("selcolbar"), value = "steelblue", 
-                allowTransparent = T)
+                allowTransparent = TRUE)
             ),
             col_6(
               colourpicker::colourInput(
                 ns("col_dist_point"), labelInput("selcolpoint"), value = "red",
-                allowTransparent = T)
+                allowTransparent = TRUE)
             )
           )
         )
@@ -66,7 +66,7 @@ mod_distribuciones_ui <- function(id){
 #' @param codedioma shiny reactive values.
 #'
 #' @author Diego Jimenez <diego.jimenez@promidat.com>
-#' @return shiny server
+#' @return shiny server module.
 #' @import shiny
 #' @export mod_distribuciones_server
 #' 
@@ -117,8 +117,8 @@ mod_distribuciones_server <- function(id, updateData, codedioma) {
       datos <- updateData$datos
       var   <- input$sel_dya_num
       atipicos <- boxplot.stats(datos[, var])
-      datos <- datos[datos[, var] %in% atipicos$out, var, drop = F]
-      datos <- datos[order(datos[, var]), , drop = F]
+      datos <- datos[datos[, var] %in% atipicos$out, var, drop = FALSE]
+      datos <- datos[order(datos[, var]), , drop = FALSE]
       DT::datatable(datos, options = list(
         dom = 't', scrollX = TRUE, scrollY = "28vh", pageLength = nrow(datos)))|>
         formatStyle(1, color = "white", backgroundColor = "#CBB051", target = "row")
@@ -141,7 +141,7 @@ mod_distribuciones_server <- function(id, updateData, codedioma) {
         )
         
         datos.plot|> e_charts(label)|> e_bar(value, name = var)|>
-          e_tooltip()|> e_datazoom(show = F)|> e_show_loading()
+          e_tooltip()|> e_datazoom(show = FALSE)|> e_show_loading()
       }, error = function(e) {
         showNotification(paste0("ERROR: ", e), duration = 10, type = "error")
         return(NULL)

@@ -2,7 +2,7 @@
 % Please edit documentation in R/mod_carga_datos_utils.R
 \name{var.numericas}
 \alias{var.numericas}
-\title{Filter numeric variables of a data.frame}
+\title{Filter numeric variables of a data.frame.}
 \usage{
 var.numericas(data)
 }
@@ -10,10 +10,10 @@ var.numericas(data)
 \item{data}{a data.frame object.}
 }
 \value{
-data.frame
+A data.frame object only with its numeric variables.
 }
 \description{
-Filter numeric variables of a data.frame
+Filter numeric variables of a data.frame.
 }
 \examples{
 var.numericas(iris)

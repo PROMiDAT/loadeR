@@ -3,7 +3,7 @@
 #' @param id Internal parameters for {shiny}.
 #'
 #' @author Diego Jimenez <diego.jimenez@promidat.com>
-#' @return shiny ui
+#' @return shiny ui module.
 #' @export mod_dispersion_ui
 #' @import shiny
 #' @import shinydashboardPlus
@@ -14,7 +14,7 @@ mod_dispersion_ui <- function(id) {
   titulo_disp <- tags$div(
     class = "multiple-select-var",
     selectizeInput(
-      ns("sel_disp"), NULL, multiple = T, choices = c(""),
+      ns("sel_disp"), NULL, multiple = TRUE, choices = c(""),
       options = list(maxItems = 3))
   )
   
@@ -23,7 +23,7 @@ mod_dispersion_ui <- function(id) {
       list(options.run(ns("run_disp")), tags$hr(style = "margin-top: 0px;"),
            colourpicker::colourInput(
              ns("col_disp"), labelInput("selcolpoint"), value = "steelblue", 
-             allowTransparent = T))
+             allowTransparent = TRUE))
     )
   )
   
@@ -45,7 +45,7 @@ mod_dispersion_ui <- function(id) {
 #' @param codedioma shiny reactive values.
 #'
 #' @author Diego Jimenez <diego.jimenez@promidat.com>
-#' @return shiny server
+#' @return shiny server module.
 #' @import shiny
 #' @export mod_dispersion_server
 #' 
@@ -73,7 +73,7 @@ mod_dispersion_server <- function(id, updateData, codedioma) {
                             id = row.names(datos))
         
         datos |> e_charts(x) |> e_scatter(y, bind = id, symbol_size = 10) |>
-          e_x_axis(x) |> e_y_axis(y) |> e_datazoom(show = F) |>
+          e_x_axis(x) |> e_y_axis(y) |> e_datazoom(show = FALSE) |>
           e_color(color) |> e_axis_labels(x = vars[1], y = vars[2]) |>
           e_tooltip(formatter = htmlwidgets::JS(paste0(
             "function(params) {

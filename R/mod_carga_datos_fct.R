@@ -1,4 +1,4 @@
-accion.NAs <- function(datos, deleteNA = T) {
+accion.NAs <- function(datos, deleteNA = TRUE) {
   if(deleteNA) {
     return(na.omit(datos))
   } else {
@@ -7,7 +7,7 @@ accion.NAs <- function(datos, deleteNA = T) {
     for (var in colnames(datos)) {
       if(any(is.na(datos[, var]))) {
         if(class(datos[, var]) %in% c('numeric', 'integer')) {
-          datos[, var][is.na(datos[, var])] <- mean(datos[, var], na.rm = T)
+          datos[, var][is.na(datos[, var])] <- mean(datos[, var], na.rm = TRUE)
         } else {
           datos[, var][is.na(datos[, var])] <- moda(datos[, var])
         }
@@ -235,13 +235,13 @@ restaurar.segmentacion <- function(updateData) {
 }
 
 ############################### Generar Código ################################
-code.carga <- function(nombre.filas = T, ruta = NULL, separador = ";",
-                       sep.decimal = ",", encabezado = T, incluir.NA = F) {
+code.carga <- function(nombre.filas = TRUE, ruta = NULL, separador = ";",
+                       sep.decimal = ",", encabezado = TRUE, incluir.NA = FALSE) {
   res <- paste0(
     "# doccarga\n",
     "datos <- fread('", ruta, "', sep = '", separador, 
     "', dec = '", sep.decimal, "', header = ", encabezado, 
-    ", stringsAsFactors = T, data.table = F, check.names = T)\n")
+    ", stringsAsFactors = TRUE, data.table = FALSE, check.names = TRUE)\n")
   if(nombre.filas) {
     res <- paste0(res, "row.names(datos) <- datos[[1]]\n")
     res <- paste0(res, "datos[[1]] <- NULL\n")
@@ -251,8 +251,8 @@ code.carga <- function(nombre.filas = T, ruta = NULL, separador = ";",
 }
 
 code.carga.xlsx <- function(
-  ruta, sheet = 1, header = T, startRow = 0, startCol = 0, endRow = 0,
-  endCol = 0, nombre.filas = T, incluir.NA = F) {
+  ruta, sheet = 1, header = TRUE, startRow = 0, startCol = 0, endRow = 0,
+  endCol = 0, nombre.filas = TRUE, incluir.NA = FALSE) {
   res <- paste0(
     "# doccarga\n",
     "datos <- readWorksheetFromFile('", ruta, "', sheet = '", sheet, 
@@ -266,7 +266,7 @@ code.carga.xlsx <- function(
   return(res)
 }
 
-code.NA <- function(deleteNA = T) {
+code.NA <- function(deleteNA = TRUE) {
   res <- ifelse(
     deleteNA, "datos <- na.omit(datos)\n",
     paste0(
@@ -274,7 +274,7 @@ code.NA <- function(deleteNA = T) {
       "for (var in colnames(datos)) {\n",
       "  if(any(is.na(datos[, var]))){\n",
       "    if(class(datos[, var]) %in% c('numeric', 'integer')) {\n",
-      "      datos[, var][is.na(datos[, var])] <- mean(datos[, var], na.rm = T)\n",
+      "      datos[, var][is.na(datos[, var])] <- mean(datos[, var], na.rm = TRUE)\n",
       "    } else {\n",
       "      datos[, var][is.na(datos[, var])] <- Mode(datos[, var])\n",
       "    }\n  }\n}\n"))
@@ -296,7 +296,7 @@ code.trans <- function(var, nuevo.tipo) {
   }
 }
 
-code.segment.tt <- function(var, porcentaje = 30, semilla = 5, perm.semilla = F) {
+code.segment.tt <- function(var, porcentaje = 30, semilla = 5, perm.semilla = FALSE) {
   res <- "### doctt\n"
   
   if (perm.semilla) {
@@ -308,7 +308,7 @@ code.segment.tt <- function(var, porcentaje = 30, semilla = 5, perm.semilla = F)
   
   res <- paste0(
     res,
-    "particion <- createDataPartition(y = datos[, '", var, "'], p = ", porcentaje/100, ", list = F)\n",
+    "particion <- createDataPartition(y = datos[, '", var, "'], p = ", porcentaje/100, ", list = FALSE)\n",
     "indices <- particion[, 1]\n",
     "datos.prueba <- datos[-particion, ]\n",
     "datos.aprendizaje <- datos[particion, ]\n"

@@ -48,7 +48,7 @@ e_boxplot <- function (e, serie, name = NULL, outliers = TRUE, ...) {
                                          list(nm))
       e$x$opts$yAxis[[1]]$type <- "category"
       e$x$opts$yAxis[[1]]$show <- F
-      e$x$opts$xAxis[[1]]$splitLine <- list(show = F)
+      e$x$opts$xAxis[[1]]$splitLine <- list(show = FALSE)
     }
     else {
       e$x$opts$options[[i]]$series <- append(e$x$opts$options[[i]]$series, 
@@ -72,7 +72,7 @@ e_boxplot <- function (e, serie, name = NULL, outliers = TRUE, ...) {
 #' @param titulos a character vector of length 5 specifying the titles to use on legend.
 #'
 #' @author Diego Jimenez <diego.jimenez@promidat.com>
-#' @return echarts4r plot
+#' @return echarts4r plot.
 #' @export e_histboxplot
 #' @import echarts4r
 #' @examples
@@ -88,7 +88,7 @@ e_histboxplot <- function(data, var.name, colorBar = "steelblue", colorPoint = "
     e_histogram_(var.name, x_index = 1, y_index = 1) |> 
     e_grid(height = "50%") |> e_grid(height = "30%", top = "60%") |> 
     e_y_axis(gridIndex = 1) |> e_x_axis(gridIndex = 1) |> 
-    e_x_axis(scale = T) |> e_tooltip() |> e_datazoom(show = F) |> 
+    e_x_axis(scale = TRUE) |> e_tooltip() |> e_datazoom(show = FALSE) |> 
     e_color(c(colorPoint, colorBar, colorBar)) |> e_show_loading()
   
   r$x$opts$xAxis[[2]]$scale <- TRUE
@@ -105,6 +105,6 @@ code.dist.cat <- function(var) {
     "  maxsum = length(levels(datos[['", var, "']])))\n",
     ")\n\n",
     "datos.plot |> e_charts(label) |> e_bar(value, name = var) |>\n",
-    "  e_tooltip() |> e_datazoom(show = F) |> e_show_loading()\n"
+    "  e_tooltip() |> e_datazoom(show = FALSE) |> e_show_loading()\n"
   )
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/golem_utils_ui.R
 \name{tabBoxPrmdt}
 \alias{tabBoxPrmdt}
-\title{Returns a HTML tabset panel with more options.}
+\title{Tabset panel with options menu.}
 \usage{
 tabBoxPrmdt(..., id = NULL, title = NULL, opciones = NULL, open = NULL)
 }
@@ -18,10 +18,10 @@ tabBoxPrmdt(..., id = NULL, title = NULL, opciones = NULL, open = NULL)
 \item{open}{Class to assign first option, for example to start open.}
 }
 \value{
-HTML
+An HTML element.
 }
 \description{
-Returns a HTML tabset panel with more options.
+Tabset panel with options menu.
 }
 \examples{
 library(shiny)

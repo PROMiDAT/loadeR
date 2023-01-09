@@ -10,7 +10,7 @@ mod_normal_ui(id)
 \item{id}{Internal parameters for {shiny}.}
 }
 \value{
-shiny ui
+shiny ui module.
 }
 \description{
 normal UI Function

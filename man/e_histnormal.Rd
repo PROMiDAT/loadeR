@@ -21,7 +21,7 @@ e_histnormal(
 \item{nombres}{a character vector of length 2 specifying the titles to use on legend.}
 }
 \value{
-echarts4r plot
+echarts4r plot.
 }
 \description{
 Normal plot
