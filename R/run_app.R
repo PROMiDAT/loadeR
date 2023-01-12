@@ -3,6 +3,7 @@
 #' @param paquete indicates if the data is going to be used for exploratory, predictive, or regression analysis.
 #' @param ... A series of options to be used inside the app.
 #'
+#' @return No return value, run a shiny application.
 #' @export
 #' @importFrom shiny shinyApp
 #' @importFrom golem with_golem_options

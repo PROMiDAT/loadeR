@@ -11,6 +11,9 @@ run_app(paquete = "predictoR", ...)
 
 \item{...}{A series of options to be used inside the app.}
 }
+\value{
+No return value, run a shiny application.
+}
 \description{
 Run the Shiny Application
 }

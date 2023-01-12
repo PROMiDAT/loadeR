@@ -86,3 +86,12 @@
 * dontrun was changed to donttest.
 * .GlobalEnv is no longer modified.
 * More information is added in the value of the exported functions.
+
+# loadeR 1.1.0
+
+* Correct misspelled word.
+
+# loadeR 1.1.1
+
+* .GlobalEnv is no longer modified by module mod_carga_datos_utils.
+* Documentation for run_app function is updated.

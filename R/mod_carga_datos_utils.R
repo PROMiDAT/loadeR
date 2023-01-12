@@ -184,7 +184,7 @@ segmentar.datos <- function(datos, variable.predecir, porcentaje = 30, semilla =
   if (perm.semilla) {
     set.seed(semilla)
   } else {
-    rm(.Random.seed, envir = globalenv())
+    set.seed(NULL)
   }
   particion      <- createDataPartition(y = datos[, variable.predecir], p = porcentaje/100, list = FALSE)
   indices        <- particion[, 1]
