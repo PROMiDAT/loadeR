@@ -31,10 +31,11 @@ mod_carga_datos_ui <- function(id, title, paquete = "predictoR") {
       type = "tabs", id = ns("file_type"),
       tabPanel(
         labelInput("texf"),
-        fileInput(
+        col_11(fileInput(
           ns('archivo'), labelInput("selfile"), width = "100%",
           placeholder = "", buttonLabel = labelInput("subi"),
-          accept = c('text/csv', '.csv', '.txt')),
+          accept = c('text/csv', '.csv', '.txt'))),
+        col_1(actionButton(ns("prevfile"), NULL, icon = icon("eye"), style = "margin-top: 25px;")),
         col_6(checkboxInput(ns('header'), labelInput("selhead"), value = TRUE)),
         col_6(checkboxInput(ns('rowname'), labelInput("selrow"), value = TRUE)),
         col_6(
@@ -130,7 +131,8 @@ mod_carga_datos_ui <- function(id, title, paquete = "predictoR") {
     )
   )
   
-  iconos    <- list(icon("database"), icon("gear"))
+  iconos    <- list(paste(labelInput("doccarga"), icon("database")), 
+                    paste(labelInput("opts"), icon("gear")))
   widths    <- c(50, 50)
   heights   <- c(100, 100)
   contenido <- list(carga, particion)
@@ -192,6 +194,32 @@ mod_carga_datos_server <- function(id, updateData, modelos, codedioma, paquete =
         shinyjs::enable("seed")
       } else {
         shinyjs::disable("seed")
+      }
+    })
+    
+    # Habilitada o deshabilitada la semilla
+    observeEvent(input$prevfile, {
+      ruta <- isolate(input$archivo)
+      if(is.null(ruta)) {
+        showNotification("ERROR CD035: Debe cargar un archivo.", 
+                         type = "error")
+      } else {
+        con = file(ruta$datapath, "r")
+        prev <- ""
+        for (i in 1:10) {
+          line = readLines(con, n = 1)
+          if ( length(line) == 0 ) {
+            break
+          }
+          prev <- paste0(prev, line, "<br>")
+        }
+        close(con)
+        showModal(
+          modalDialog(
+            HTML(prev), style = "overflow: auto;", easyClose = TRUE,
+            title = tr("vfil", codedioma$idioma), footer = NULL, size = "xl"
+          )
+        )
       }
     })
     
@@ -473,7 +501,7 @@ mod_carga_datos_server <- function(id, updateData, modelos, codedioma, paquete =
           selection = 'none', container = prevsketch(preview, tipos)
         )
       }, error = function(e) {
-        stop("ERROR: ", e)
+        stop(e)
       })
     })
     

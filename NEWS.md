@@ -95,3 +95,9 @@
 
 * .GlobalEnv is no longer modified by module mod_carga_datos_utils.
 * Documentation for run_app function is updated.
+
+# loadeR 1.1.2
+
+* More tags are added.
+* More error messages are added.
+* Now you can preview the data file.

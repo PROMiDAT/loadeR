@@ -120,8 +120,12 @@ carga.datos <- function(
   }
   
   if(nombre.filas) {
-    row.names(res) <- res[[1]]
-    res[[1]] <- NULL
+    if(any(duplicated(res[[1]]))) {
+      stop("No se permiten duplicados en los nombres de fila.", call. = F)
+    } else {
+      row.names(res) <- res[[1]]
+      res[[1]] <- NULL
+    }
   }
   return(accion.NAs(res, deleteNA))
 }

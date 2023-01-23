@@ -151,13 +151,13 @@ selectInputGroup <- function(id, datos, var, idioma = "es", n, sel = 1) {
 prevsketch <- function(datos, tipos) {
   htmltools::withTags(table(thead(
     tr(
-      th("ID"),
+      th(""),
       lapply(1:length(colnames(datos)), function(i) {
         th(colnames(datos)[i])
       })
     ),
     tr(
-      th("ID"),
+      th(""),
       lapply(1:length(colnames(datos)), function(i) {
         res <- th(tipos[2])
         if(class(datos[[i]]) %in% c("numeric", "integer")) {

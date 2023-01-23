@@ -46,8 +46,9 @@
   display: block;
 }
 
-table.dataTable, table.dataTable th, table.dataTable td {
-    text-align: right;
+table.dataTable th, table.dataTable td, table.dataTable thead th, table.dataTable thead td, table.dataTable tfoot th, table.dataTable tfoot td {
+    text-align: right !important;
+    padding-right: 20px !important;
     position: relative;
 }
 
