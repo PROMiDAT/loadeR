@@ -137,7 +137,7 @@ mod_carga_datos_ui <- function(id, title, paquete = "predictoR") {
   heights   <- c(100, 100)
   contenido <- list(carga, particion)
   if(paquete == "discoveR") {
-    iconos  <- list(icon("database"))
+    iconos  <- list(paste(labelInput("doccarga"), icon("database")))
     widths  <- c(50)
     heights <- c(100)
     contenido <- list(carga)
