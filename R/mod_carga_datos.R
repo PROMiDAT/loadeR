@@ -31,11 +31,11 @@ mod_carga_datos_ui <- function(id, title, paquete = "predictoR") {
       type = "tabs", id = ns("file_type"),
       tabPanel(
         labelInput("texf"),
-        col_11(fileInput(
+        col_10(fileInput(
           ns('archivo'), labelInput("selfile"), width = "100%",
           placeholder = "", buttonLabel = labelInput("subi"),
           accept = c('text/csv', '.csv', '.txt'))),
-        col_1(actionButton(ns("prevfile"), NULL, icon = icon("eye"), style = "margin-top: 25px;")),
+        col_2(actionButton(ns("prevfile"), NULL, icon = icon("eye"), style = "margin-top: 25px;width: 100%;")),
         col_6(checkboxInput(ns('header'), labelInput("selhead"), value = TRUE)),
         col_6(checkboxInput(ns('rowname'), labelInput("selrow"), value = TRUE)),
         col_6(
