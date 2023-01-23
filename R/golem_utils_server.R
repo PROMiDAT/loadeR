@@ -112,19 +112,7 @@ tr <- function(text, idioma = "es") {
 #' labels_loadeR()
 #'
 labels_loadeR <- function() {
-  x <- c("acerca", "alfa", "asc", "asim", "basi", "carg", "cat", "cats", 
-         "code", "col", "copyright", "corr", "cros", "curva", "data", 
-         "desh", "dis", "disp", "dist", "doccarga", "doccor", "doccv", 
-         "docdisp", "docdistcat", "docdistnum", "doceliminar", "dochist", 
-         "docnormal", "docqq", "docrename", "docresumen", "doctrans", "doctt",
-         "ds", "dsc", "ecell", "elim", "espa", "habi", "hist", "idio", "impu",
-         "info", "max", "mean", "median", "min", "ngr", "nhoj", "no", "norm",
-         "nres", "num", "nums", "nvc", "opts", "orde", "part", "pnorm",
-         "pvalue", "q1", "q3", "rena", "resu", "row", "run", "scell",
-         "seed", "selcolbar", "selcolline", "selcolor", "selcolpoint",
-         "seldec", "selfile", "selhead", "selidioma", "selna", "selpred",
-         "selrow", "selsep", "si", "sigue", "subi", "tasim", "test", "texf",
-         "train", "tran", "tt", "vali", "version")
+  x <- attr(translation, "split_labels")$key
   return(x)
 }
 

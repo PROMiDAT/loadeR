@@ -11,7 +11,7 @@ Provides a framework to load text and excel files through a 'shiny' graphical in
 \tabular{ll}{
 Package: \tab loadeR\cr
 Type: \tab Package\cr
-Version: \tab 1.1.2\cr
+Version: \tab 1.1.3\cr
 Date: \tab 2022-01-23\cr
 License: \tab GPL (>=2)\cr
 }

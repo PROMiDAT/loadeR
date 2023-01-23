@@ -57,6 +57,7 @@
 "nvc";"Número de Validaciones";"Number of Cross Validations"
 "opts";"Opciones";"Options"
 "orde";"Ordenar";"Arrange"
+"outl";"Valores Atípicos";"Outliers"
 "part";"Partición";"Partition"
 "pnorm";"Gráfico Normalidad";"Normal Plot"
 "pvalue";"P-valor (Shapiro)";"P-value (Shapiro)"
