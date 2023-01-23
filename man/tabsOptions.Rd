@@ -5,7 +5,7 @@
 \title{Options menu in footer for tabBoxPrmdt (tabsetPanel).}
 \usage{
 tabsOptions(
-  botones = list(icon("gear")),
+  botones = list(paste(labelInput("opts"), icon("gear"))),
   widths = 100,
   heights = 50,
   tabs.content = list(""),
