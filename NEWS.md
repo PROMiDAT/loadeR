@@ -105,3 +105,7 @@
 # loadeR 1.1.3
 
 * Mispelled tags were fixed.
+
+# loadeR 1.1.4
+
+* More tags are added.
