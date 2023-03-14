@@ -394,44 +394,6 @@ make_action_button <- function(tag, inputId = NULL) {
   tag
 }
 
-
-# UNCOMMENT AND USE 
-# 
-# usethis::use_package("markdown")
-# usethis::use_package("rmarkdown")
-#   
-# To use this part of the UI
-#   
-#' #' Include Content From a File
-#' #' 
-#' #' Load rendered RMarkdown from a file and turn into HTML.
-#' #' 
-#' #' @rdname includeRMarkdown
-#' #' @export
-#' #' 
-#' #' @importFrom rmarkdown render
-#' #' @importFrom markdown markdownToHTML
-#' #' @importFrom shiny HTML
-#' includeRMarkdown <- function(path){
-#'   
-#'   md <- tempfile(fileext = '.md')
-#'   
-#'   on.exit(unlink(md),add = TRUE)
-#'   
-#'   rmarkdown::render(
-#'     path,
-#'     output_format = 'md_document',
-#'     output_dir = tempdir(),
-#'     output_file = md,quiet = TRUE
-#'     )
-#'   
-#'   html <- markdown::markdownToHTML(md, fragment.only = TRUE)
-#'   
-#'   Encoding(html) <- "UTF-8"
-#'   
-#'   return(HTML(html))
-#' }
-
 #' HTML for language menu.
 #'
 #' @author Diego Jimenez <diego.jimenez@promidat.com>
@@ -617,3 +579,40 @@ tabsOptions <- function(
   
   return(htmltools::attachDependencies(inputTag, deps))
 }
+
+# UNCOMMENT AND USE 
+# 
+# usethis::use_package("markdown")
+# usethis::use_package("rmarkdown")
+#   
+# To use this part of the UI
+#   
+# #' Include Content From a File
+# #' 
+# #' Load rendered RMarkdown from a file and turn into HTML.
+# #' 
+# #' @rdname includeRMarkdown
+# #' @export
+# #' 
+# #' @importFrom rmarkdown render
+# #' @importFrom markdown markdownToHTML
+# #' @importFrom shiny HTML
+# includeRMarkdown <- function(path){
+#   
+#   md <- tempfile(fileext = '.md')
+#   
+#   on.exit(unlink(md),add = TRUE)
+#   
+#   rmarkdown::render(
+#     path,
+#     output_format = 'md_document',
+#     output_dir = tempdir(),
+#     output_file = md,quiet = TRUE
+#     )
+#   
+#   html <- markdown::markdownToHTML(md, fragment.only = TRUE)
+#   
+#   Encoding(html) <- "UTF-8"
+#   
+#   return(HTML(html))
+# }

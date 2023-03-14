@@ -2,36 +2,7 @@
 % Please edit documentation in R/golem_utils_ui.R
 \name{menu.idioma}
 \alias{menu.idioma}
-\title{#' Include Content From a File
-#' 
-#' Load rendered RMarkdown from a file and turn into HTML.
-#' 
-#' @rdname includeRMarkdown
-#' @export
-#' 
-#' @importFrom rmarkdown render
-#' @importFrom markdown markdownToHTML
-#' @importFrom shiny HTML
-includeRMarkdown <- function(path){
-  
-  md <- tempfile(fileext = '.md')
-  
-  on.exit(unlink(md),add = TRUE)
-  
-  rmarkdown::render(
-    path,
-    output_format = 'md_document',
-    output_dir = tempdir(),
-    output_file = md,quiet = TRUE
-    )
-  
-  html <- markdown::markdownToHTML(md, fragment.only = TRUE)
-  
-  Encoding(html) <- "UTF-8"
-  
-  return(HTML(html))
-}
-HTML for language menu.}
+\title{HTML for language menu.}
 \usage{
 menu.idioma()
 }
@@ -39,35 +10,6 @@ menu.idioma()
 An HTML element.
 }
 \description{
-#' Include Content From a File
-#' 
-#' Load rendered RMarkdown from a file and turn into HTML.
-#' 
-#' @rdname includeRMarkdown
-#' @export
-#' 
-#' @importFrom rmarkdown render
-#' @importFrom markdown markdownToHTML
-#' @importFrom shiny HTML
-includeRMarkdown <- function(path){
-  
-  md <- tempfile(fileext = '.md')
-  
-  on.exit(unlink(md),add = TRUE)
-  
-  rmarkdown::render(
-    path,
-    output_format = 'md_document',
-    output_dir = tempdir(),
-    output_file = md,quiet = TRUE
-    )
-  
-  html <- markdown::markdownToHTML(md, fragment.only = TRUE)
-  
-  Encoding(html) <- "UTF-8"
-  
-  return(HTML(html))
-}
 HTML for language menu.
 }
 \examples{
