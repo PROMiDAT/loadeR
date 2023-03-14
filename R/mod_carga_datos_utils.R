@@ -143,7 +143,8 @@ carga.datos <- function(
 #' @param deleteNA a logical value indicating if rows with NA should be removed.
 #' @param preview a logical value indicating if only load the first 10 rows.
 #'
-#' @importFrom XLConnect writeWorksheetToFile readWorksheetFromFile
+#' @importFrom readxl read_excel cell_limits
+#' @importFrom writexl write_xlsx
 #'
 #' @author Diego Jimenez <diego.jimenez@promidat.com>
 #' @return A data.frame object with the information of a file on excel.
@@ -151,7 +152,7 @@ carga.datos <- function(
 #' @examples
 #' \donttest{
 #'   tf <- tempfile()
-#'   XLConnect::writeWorksheetToFile(paste0(tf, ".xlsx"), iris, "firstsheet")
+#'   writexl::write_xlsx(iris, paste0(tf, ".xlsx"), TRUE)
 #'   carga.datos.excel(ruta = paste0(tf, ".xlsx"), row_names = FALSE, preview = TRUE)
 #' }
 #' 
@@ -163,15 +164,21 @@ carga.datos.excel <- function(
   }
   
   if(preview) {
-    if(endRow < 10 & endRow > 0) {
+    diferencia <- endRow - startRow
+    if(diferencia < 10 & diferencia > 0) {
       endRow <- endRow
     } else {
-      endRow <- 10
+      endRow <- startRow + 10
     }
   }
-  res <- readWorksheetFromFile(
-    ruta, sheet = sheet, header = header, startRow = startRow,
-    startCol = startCol, endRow = endRow, endCol = endCol)
+  
+  startRow <- ifelse(startRow == 0, NA, startRow)
+  startCol <- ifelse(startCol == 0, NA, startCol)
+  endRow   <- ifelse(endRow == 0, NA, endRow)
+  endCol   <- ifelse(endCol == 0, NA, endCol)
+  
+  s   <- cell_limits(c(startRow, startCol), c(endRow, endCol))
+  res <- read_excel(ruta, sheet = sheet, col_names = header, range = s)
   res <- data.frame(unclass(res), stringsAsFactors = TRUE)
   
   if(row_names) {

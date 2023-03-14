@@ -250,14 +250,14 @@ code.carga <- function(nombre.filas = TRUE, ruta = NULL, separador = ";",
   return(res)
 }
 
-code.carga.xlsx <- function(
+code.carga.excel <- function(
   ruta, sheet = 1, header = TRUE, startRow = 0, startCol = 0, endRow = 0,
   endCol = 0, nombre.filas = TRUE, incluir.NA = FALSE) {
   res <- paste0(
     "# doccarga\n",
-    "datos <- readWorksheetFromFile('", ruta, "', sheet = '", sheet, 
-    "', header = '", header, "', startRow = ", startRow, ", startCol = ", 
-    startCol, ", endRow = ", endRow, ", endCol = ", endCol, ")\n")
+    "s   <- cell_limits(c(", startRow, ", ", startCol, "), c(", endRow, ", ", endCol, "))\n",
+    "datos <- read_excel('", ruta, "', sheet = '", sheet, 
+    "', header = '", header, "range = s)\n")
   if(nombre.filas) {
     res <- paste0(res, "row.names(datos) <- datos[[1]]\n")
     res <- paste0(res, "datos[[1]] <- NULL\n")

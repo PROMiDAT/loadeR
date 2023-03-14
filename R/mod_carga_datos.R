@@ -178,7 +178,6 @@ mod_carga_datos_ui <- function(id, title, paquete = "predictoR") {
 #' @author Joseline Quiros <joseline.quiros@promidat.com>
 #' @return shiny server module.
 #' @import caret
-#' @import XLConnect
 #' @import shiny
 #' @export mod_carga_datos_server
 #' 
@@ -454,7 +453,7 @@ mod_carga_datos_server <- function(id, updateData, modelos, codedioma, paquete =
             ruta$datapath, num_hoja, encabezado, fila_inicio, col_inicio, 
             fila_final, col_final, rowname, deleteNA)
           
-          cod <- code.carga.xlsx(
+          cod <- code.carga.excel(
             ruta$name, num_hoja, encabezado, fila_inicio, col_inicio, 
             fila_final, col_final, rowname, deleteNA)
           codedioma$code <- append(codedioma$code, cod)

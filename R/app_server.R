@@ -63,7 +63,7 @@ app_server <- function(input, output, session) {
     }
     
     codigo.completo <- paste0(
-      "library(XLConnect)\n", "library(caret)\n",
+      "library(readxl)\n", "library(caret)\n",
       "library(echarts4r)\n", "library(loadeR)\n\n"
     )
     for (cod in codigo) {

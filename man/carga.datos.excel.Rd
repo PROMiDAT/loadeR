@@ -47,7 +47,7 @@ Load data from excel.
 \examples{
 \donttest{
   tf <- tempfile()
-  XLConnect::writeWorksheetToFile(paste0(tf, ".xlsx"), iris, "firstsheet")
+  writexl::write_xlsx(iris, paste0(tf, ".xlsx"), TRUE)
   carga.datos.excel(ruta = paste0(tf, ".xlsx"), row_names = FALSE, preview = TRUE)
 }
 
