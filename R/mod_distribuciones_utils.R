@@ -84,12 +84,21 @@ e_histboxplot <- function(data, var.name, colorBar = "steelblue", colorPoint = "
   data <- data.frame(x = 1:length(data), y = data)
   colnames(data) <- c("x", var.name)
   
-  r <- data |> e_charts(x) |> e_boxplot(var.name) |> 
-    e_histogram_(var.name, x_index = 1, y_index = 1) |> 
+  colores <- c(colorBar, colorPoint, colorBar)
+  
+  r <- data |> e_charts(x) |> e_boxplot_(var.name)
+  
+  if(length(r$x$opts$series[[2]]$data) == 0) {
+    r$x$opts$series[[2]] <- NULL
+    colores <- c(colorBar, colorBar)
+  }
+  
+  r <- r |> e_flip_coords() |> 
+    e_histogram_(var.name, name = "", x_index = 1, y_index = 1) |> 
     e_grid(height = "50%") |> e_grid(height = "30%", top = "60%") |> 
     e_y_axis(gridIndex = 1) |> e_x_axis(gridIndex = 1) |> 
     e_x_axis(scale = TRUE) |> e_tooltip() |> e_datazoom(show = FALSE) |> 
-    e_color(c(colorPoint, colorBar, colorBar)) |> e_show_loading()
+    e_color(colores) |> e_show_loading()
   
   r$x$opts$xAxis[[2]]$scale <- TRUE
   

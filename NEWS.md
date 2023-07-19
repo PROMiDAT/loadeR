@@ -119,3 +119,7 @@
 
 * Update website on description.
 
+# loadeR 1.1.7
+
+* The e_histogram function is corrected for Windows.
+
