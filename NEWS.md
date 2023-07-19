@@ -115,3 +115,7 @@
 * Package XLConnect is replaced by readxl.
 * Github page of the package is added in description.
 
+# loadeR 1.1.6
+
+* Update website on description.
+
